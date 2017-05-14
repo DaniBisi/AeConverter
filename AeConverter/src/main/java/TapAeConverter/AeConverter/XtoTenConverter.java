@@ -19,7 +19,6 @@ public class XtoTenConverter extends Converter {
 
 	public String deConvert(String n) {
 		String number = n;
-		StringBuilder r = new StringBuilder();
 		int nLenght = number.length()-1;
 		int i = nLenght;
 		Integer sum = 0;
@@ -28,11 +27,9 @@ public class XtoTenConverter extends Converter {
 				throw new IllegalArgumentException();
 			}
 			int val = Character.getNumericValue(n.charAt(i));
-			System.out.println(i + " " + val);
 			sum = sum + val * IntMath.pow(base, nLenght - i);
 			i = i - 1;
 		}
-		System.out.println("questo è sum" + sum.toString());
 		return sum.toString();
 	}
 

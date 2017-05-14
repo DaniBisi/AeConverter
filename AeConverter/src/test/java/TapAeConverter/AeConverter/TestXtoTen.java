@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class TestBaseDeConverter {
+public class TestXtoTen {
 	private XtoTenConverter b1;
 
 	@Test
@@ -44,6 +44,19 @@ public class TestBaseDeConverter {
 		String n= "23";
 		assertEquals("13", b1.deConvert(n));
 	}
+
+	@Test
+	public void testBase16() {
+		setUpBaseConverter(16);
+		String n= "AF";
+		assertEquals("175", b1.deConvert(n));
+	}@Test
+	public void testBase13() {
+		setUpBaseConverter(13);
+		String n= "AB";
+		assertEquals("141", b1.deConvert(n));
+	}
+
 
 	public void setUpBaseConverter(int n) {
 		this.b1 = new XtoTenConverter(n);

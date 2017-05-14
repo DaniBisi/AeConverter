@@ -3,7 +3,7 @@ package TapAeConverter.AeConverter;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-public class TestBaseConverter {
+public class TestTenToX {
 
 	@Test
 	public void testConverter0(){
