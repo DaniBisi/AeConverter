@@ -30,12 +30,23 @@ public class TestGui {
 
 	@After
 	public void tearDown() throws Exception {
+		frameFix.cleanUp();
+
 	}
 
 	@Test
 	public void testBaseConverterButtonChangePanel() {
 		frameFix.button("base_converter").click();
 		frameFix.panel("baseConverter");
+	}
+	
+	//non worka capire perche....
+	@Test
+	public void testBase_ConverterCloseButton() {
+		frameFix.button("base_converter").click();
+		frameFix.panel("baseConverter");
+		frameFix.button("chiudi").click();
+		frameFix.button("chiudi").click();
 	}
 
 }
