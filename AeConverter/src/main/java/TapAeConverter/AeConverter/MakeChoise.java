@@ -37,7 +37,7 @@ public class MakeChoise extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frameP.getContentPane().removeAll();
-				baseConverter panelBaseConverter = new baseConverter();
+				BaseConverter panelBaseConverter = new BaseConverter();
 				panelBaseConverter.setParentFrame(frameP);
 				frameP.getContentPane().removeAll();
 				frameP.getContentPane().add(panelBaseConverter);

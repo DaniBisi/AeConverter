@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 
 import TapAeConverter.AeConverter.CheckSymbol;
 import TapAeConverter.AeConverter.ComponentInteract;
@@ -15,16 +14,14 @@ import TapAeConverter.AeConverter.XtoTenConverter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
-public class baseConverter extends JPanel {
+public class BaseConverter extends JPanel {
 
 	/**
 	 * 
@@ -34,11 +31,14 @@ public class baseConverter extends JPanel {
 	private int baseStart;
 	private int baseDest;
 	private JFrame frameP;
+	private XtoTenConverter conv;
+	private TenToXConverter conv1;
+	private CheckSymbol checkSymbol;
 
 	/**
 	 * Create the panel.
 	 */
-	public baseConverter() {
+	public BaseConverter() {
 		DictionarySym = new HashMap<String, Integer>();
 		DictionarySym.put("0", 0);
 		DictionarySym.put("1", 1);
@@ -57,26 +57,26 @@ public class baseConverter extends JPanel {
 		DictionarySym.put("E", 14);
 		DictionarySym.put("F", 15);
 
-		CheckSymbol c1 = new CheckSymbol(DictionarySym);
+		checkSymbol = new CheckSymbol(DictionarySym);
 		setName("baseConverter");
 		setLayout(null);
-		Integer[] BaseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-		JComboBox comboBox = new JComboBox(BaseAvailable);
+		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+		JComboBox <Integer>cbBaseStart = new JComboBox<>(baseAvailable);
 
-		comboBox.setSelectedIndex(0);
-		comboBox.setName("baseStart");
-		comboBox.setBounds(12, 37, 65, 24);
-		add(comboBox);
+		cbBaseStart.setSelectedIndex(0);
+		cbBaseStart.setName("baseStart");
+		cbBaseStart.setBounds(12, 37, 65, 24);
+		add(cbBaseStart);
 
-		JComboBox comboBox_1 = new JComboBox(BaseAvailable);
-		comboBox_1.setSelectedIndex(8);
-		comboBox_1.setBounds(373, 37, 65, 24);
-		add(comboBox_1);
+		JComboBox <Integer>cbBaseDest = new JComboBox<>(baseAvailable);
+		cbBaseDest.setSelectedIndex(8);
+		cbBaseDest.setBounds(373, 37, 65, 24);
+		add(cbBaseDest);
 
-		JTextPane textPane = new JTextPane();
-		textPane.setName("Number");
-		textPane.setBounds(89, 37, 272, 24);
-		add(textPane);
+		JTextPane tpNumber = new JTextPane();
+		tpNumber.setName("Number");
+		tpNumber.setBounds(89, 37, 272, 24);
+		add(tpNumber);
 
 		JButton btnCalcola = new JButton("Calcola");
 		btnCalcola.setName("Calcola");
@@ -88,9 +88,10 @@ public class baseConverter extends JPanel {
 		textPane_1.setBounds(141, 111, 168, 24);
 		add(textPane_1);
 
-		JButton btnNewButton = new JButton("StepByStep");
-		btnNewButton.setBounds(321, 110, 117, 25);
-		add(btnNewButton);
+		JButton btnStepByStep = new JButton("StepByStep");
+		btnStepByStep.setBounds(321, 110, 117, 25);
+		btnStepByStep.setEnabled(false);
+		add(btnStepByStep);
 
 		JButton btnIndietro = new JButton("Indietro");
 		
@@ -98,8 +99,6 @@ public class baseConverter extends JPanel {
 		btnIndietro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("sono qua"+frameP.toString());
-				System.out.println("sono qua1"+frameP.toString());
 				MakeChoise p1 = new MakeChoise();
 				p1.setFrameP(frameP);
 				frameP.getContentPane().removeAll();
@@ -124,14 +123,13 @@ public class baseConverter extends JPanel {
 		btnChiudi.setBounds(321, 235, 117, 25);
 		add(btnChiudi);
 		
-		
 		ComponentInteract InteractWithbtnCalcola = new ComponentInteract() {
 			@Override
-			public void ComponentInteract() {
-				if (!textPane.getText().equals("")) {
-					baseStart = (Integer) comboBox.getSelectedItem();
-					baseDest = (Integer) comboBox_1.getSelectedItem();
-					if (c1.checkSymbols(textPane.getText(), baseStart)) {
+			public void componentInteraction() {
+				if (!"".equals(tpNumber.getText())) {
+					baseStart = (Integer) cbBaseStart.getSelectedItem();
+					baseDest = (Integer) cbBaseDest.getSelectedItem();
+					if (checkSymbol.checkSymbols(tpNumber.getText().toUpperCase(), baseStart)) {
 						btnCalcola.setEnabled(true);
 					} else {
 						btnCalcola.setEnabled(false);
@@ -142,28 +140,29 @@ public class baseConverter extends JPanel {
 			}
 		};
 
-		textPane.addKeyListener(new KeyAdapter() {
+		tpNumber.addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				InteractWithbtnCalcola.ComponentInteract();
+				InteractWithbtnCalcola.componentInteraction();
 			}
 		});
-		comboBox.addItemListener(new ItemListener() {
+		cbBaseStart.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				InteractWithbtnCalcola.ComponentInteract();
+				InteractWithbtnCalcola.componentInteraction();
 			}
 		});
 		btnCalcola.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				baseStart = (Integer) comboBox.getSelectedItem();
-				baseDest = (Integer) comboBox_1.getSelectedItem();
-				String Number = textPane.getText();
-				XtoTenConverter conv = new XtoTenConverter(baseStart);
-				TenToXConverter conv1 = new TenToXConverter(baseDest);
+				baseStart = (Integer) cbBaseStart.getSelectedItem();
+				baseDest = (Integer) cbBaseDest.getSelectedItem();
+				String Number = tpNumber.getText().toUpperCase();
+				conv = new XtoTenConverter(baseStart,checkSymbol);
+				conv1 = new TenToXConverter(baseDest);
 				Number = conv.deConvert(Number);
 				Number = conv1.convert(Integer.parseInt(Number));
 				textPane_1.setText(Number);
+				btnStepByStep.setEnabled(true);
 			}
 		});
 	}
