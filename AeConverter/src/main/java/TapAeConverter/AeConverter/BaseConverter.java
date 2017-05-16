@@ -60,6 +60,8 @@ public class BaseConverter extends JPanel {
 		DictionarySym.put("E", 14);
 		DictionarySym.put("F", 15);
 
+
+		setBounds(100, 100, 450, 350);
 		checkSymbol = new CheckSymbol(DictionarySym);
 		this.setName("baseConverter");
 		setLayout(null);

@@ -1,12 +1,12 @@
 package TapAeConverter.AeConverter;
 
-import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 public class MakeChoise extends JPanel{
 
@@ -20,14 +20,25 @@ public class MakeChoise extends JPanel{
 	 */
 	public MakeChoise() {
 
+		setBounds(100, 100, 450, 330);
 		//################## PANEL CHOISE VIEW ########################
 		setName("makeChoise");
-		setLayout(new GridLayout(1, 2, 0, 0));
+		setLayout(null);
 		JButton base_converter = new JButton("base converter");
+		base_converter.setBounds(0, 0, 225, 232);
 		base_converter.setName("base_converter");
 		add(base_converter);
 		JButton btnNewButton_2 = new JButton("float converter");
+		btnNewButton_2.setBounds(225, 0, 225, 232);
 		add(btnNewButton_2);
+		JButton close = new JButton("Chiudi");
+		close.setBounds(0, 244, 225, 56);
+		close.setName("close");
+		add(close);
+		JButton Help = new JButton("Help");
+		Help.setBounds(225, 244, 225, 56);
+		close.setName("Help");
+		add(Help);
 		//################## END PANEL CHOISE VIEW ####################
 		
 		
@@ -36,7 +47,6 @@ public class MakeChoise extends JPanel{
 		base_converter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("ciao makechoise");
 				frameP.getContentPane().removeAll();
 				BaseConverter panelBaseConverter = new BaseConverter();
 				panelBaseConverter.setParentFrame(frameP);
