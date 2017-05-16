@@ -21,7 +21,7 @@ public class MakeChoise extends JPanel{
 	public MakeChoise() {
 
 		//################## PANEL CHOISE VIEW ########################
-		
+		setName("makeChoise");
 		setLayout(new GridLayout(1, 2, 0, 0));
 		JButton base_converter = new JButton("base converter");
 		base_converter.setName("base_converter");
@@ -36,6 +36,7 @@ public class MakeChoise extends JPanel{
 		base_converter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				System.out.println("ciao makechoise");
 				frameP.getContentPane().removeAll();
 				BaseConverter panelBaseConverter = new BaseConverter();
 				panelBaseConverter.setParentFrame(frameP);
@@ -43,12 +44,13 @@ public class MakeChoise extends JPanel{
 				frameP.getContentPane().add(panelBaseConverter);
 				frameP.getContentPane().setVisible(true);
 				frameP.revalidate();
-				frameP.repaint();
+//				frameP.repaint();
 			}
 		});
 		
 		
 	}
+	
 	public void setFrameP(JFrame frame){
 		frameP = frame;
 		

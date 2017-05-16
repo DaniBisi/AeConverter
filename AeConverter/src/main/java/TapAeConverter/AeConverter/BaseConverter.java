@@ -17,9 +17,12 @@ import java.util.HashMap;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class BaseConverter extends JPanel {
 
@@ -58,24 +61,24 @@ public class BaseConverter extends JPanel {
 		DictionarySym.put("F", 15);
 
 		checkSymbol = new CheckSymbol(DictionarySym);
-		setName("baseConverter");
+		this.setName("baseConverter");
 		setLayout(null);
 		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-		JComboBox <Integer>cbBaseStart = new JComboBox<>(baseAvailable);
+		JComboBox <Integer>cbBaseStart = new JComboBox(baseAvailable);
 
 		cbBaseStart.setSelectedIndex(0);
 		cbBaseStart.setName("baseStart");
 		cbBaseStart.setBounds(12, 37, 65, 24);
 		add(cbBaseStart);
 
-		JComboBox <Integer>cbBaseDest = new JComboBox<>(baseAvailable);
+		JComboBox <Integer>cbBaseDest = new JComboBox(baseAvailable);
 		cbBaseDest.setSelectedIndex(8);
 		cbBaseDest.setBounds(373, 37, 65, 24);
 		add(cbBaseDest);
 
 		JTextPane tpNumber = new JTextPane();
 		tpNumber.setName("Number");
-		tpNumber.setBounds(89, 37, 272, 24);
+		tpNumber.setBounds(99, 37, 248, 24);
 		add(tpNumber);
 
 		JButton btnCalcola = new JButton("Calcola");
@@ -84,33 +87,23 @@ public class BaseConverter extends JPanel {
 		btnCalcola.setBounds(12, 111, 117, 25);
 		add(btnCalcola);
 
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(141, 111, 168, 24);
-		add(textPane_1);
+		JTextPane tpResult = new JTextPane();
+		tpResult.setName("tpResult");
+		tpResult.setBounds(141, 111, 168, 24);
+		add(tpResult);
 
 		JButton btnStepByStep = new JButton("StepByStep");
 		btnStepByStep.setBounds(321, 110, 117, 25);
 		btnStepByStep.setEnabled(false);
 		add(btnStepByStep);
 
-		JButton btnIndietro = new JButton("Indietro");
+		JButton btnBack = new JButton("indietro");
 		
 		
-		btnIndietro.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				MakeChoise p1 = new MakeChoise();
-				p1.setFrameP(frameP);
-				frameP.getContentPane().removeAll();
-				frameP.getContentPane().add(p1);
-				frameP.getContentPane().setVisible(true);
-				frameP.revalidate();
-				frameP.repaint();
-			}
-		});
-		btnIndietro.setBounds(12, 235, 117, 25);
-		add(btnIndietro);
+		btnBack.setName("indietro1");
+		btnBack.setBounds(12, 235, 117, 25);
 
+		add(btnBack);
 		JButton btnChiudi = new JButton("Chiudi");
 		btnChiudi.setName("chiudi");
 		btnChiudi.addMouseListener(new MouseAdapter() {
@@ -123,6 +116,22 @@ public class BaseConverter extends JPanel {
 		btnChiudi.setBounds(321, 235, 117, 25);
 		add(btnChiudi);
 		
+		JLabel lblEnterTheNumber = new JLabel("Enter the number to convert");
+		lblEnterTheNumber.setName("enterTheNumber");
+		lblEnterTheNumber.setBounds(99, 12, 223, 25);
+		add(lblEnterTheNumber);
+		
+		JLabel lblBaseStart = new JLabel("Base Start");
+		lblBaseStart.setForeground(Color.BLACK);
+		lblBaseStart.setName("baseStart");
+		lblBaseStart.setBounds(12, 14, 81, 20);
+		add(lblBaseStart);
+		
+		JLabel lblBaseEnd = new JLabel("Base End");
+		lblBaseEnd.setName("baseEnd");
+		lblBaseEnd.setBounds(373, 14, 70, 20);
+		add(lblBaseEnd);
+		
 		ComponentInteract InteractWithbtnCalcola = new ComponentInteract() {
 			@Override
 			public void componentInteraction() {
@@ -131,10 +140,17 @@ public class BaseConverter extends JPanel {
 					baseDest = (Integer) cbBaseDest.getSelectedItem();
 					if (checkSymbol.checkSymbols(tpNumber.getText().toUpperCase(), baseStart)) {
 						btnCalcola.setEnabled(true);
+						lblEnterTheNumber.setForeground(new Color(0, 0, 0));
+						lblEnterTheNumber.setText("Click convert to continue...");
 					} else {
+
+						lblEnterTheNumber.setText("Number is not valid in selected base.");
+						lblEnterTheNumber.setForeground(new Color(255, 0, 0));
 						btnCalcola.setEnabled(false);
 					}
 				} else {
+					lblEnterTheNumber.setText("Enter the number to convert");
+					lblEnterTheNumber.setForeground(new Color(0, 0, 0));
 					btnCalcola.setEnabled(false);
 				}
 			}
@@ -152,8 +168,9 @@ public class BaseConverter extends JPanel {
 				InteractWithbtnCalcola.componentInteraction();
 			}
 		});
-		btnCalcola.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnCalcola.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("ciao");
 				baseStart = (Integer) cbBaseStart.getSelectedItem();
 				baseDest = (Integer) cbBaseDest.getSelectedItem();
 				String Number = tpNumber.getText().toUpperCase();
@@ -161,13 +178,24 @@ public class BaseConverter extends JPanel {
 				conv1 = new TenToXConverter(baseDest);
 				Number = conv.deConvert(Number);
 				Number = conv1.convert(Integer.parseInt(Number));
-				textPane_1.setText(Number);
+				tpResult.setText(Number);
 				btnStepByStep.setEnabled(true);
+			}
+		});
+		
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				MakeChoise p1 = new MakeChoise();
+				p1.setFrameP(frameP);
+				frameP.getContentPane().removeAll();
+				frameP.getContentPane().add(p1);
+				frameP.getContentPane().setVisible(true);
+				frameP.revalidate();
 			}
 		});
 	}
 	public void setParentFrame(JFrame fParent){
 		frameP = fParent;
 	}
-
 }
