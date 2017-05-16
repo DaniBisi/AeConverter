@@ -1,10 +1,13 @@
 package TapAeConverter.AeConverter;
 
 import javax.swing.JPanel;
+import javax.jws.soap.SOAPBinding.Style;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import TapAeConverter.AeConverter.CheckSymbol;
 import TapAeConverter.AeConverter.ComponentInteract;
@@ -84,16 +87,17 @@ public class BaseConverter extends JPanel {
 		JButton btnCalcola = new JButton("Calcola");
 		btnCalcola.setName("Calcola");
 		btnCalcola.setEnabled(false);
-		btnCalcola.setBounds(12, 111, 117, 25);
+		btnCalcola.setBounds(12, 88, 117, 25);
 		add(btnCalcola);
 
 		JTextPane tpResult = new JTextPane();
 		tpResult.setName("tpResult");
-		tpResult.setBounds(141, 111, 168, 24);
+		tpResult.setBounds(141, 88, 168, 24);
 		add(tpResult);
+		
 
 		JButton btnStepByStep = new JButton("StepByStep");
-		btnStepByStep.setBounds(321, 110, 117, 25);
+		btnStepByStep.setBounds(321, 88, 117, 25);
 		btnStepByStep.setEnabled(false);
 		add(btnStepByStep);
 
@@ -132,6 +136,18 @@ public class BaseConverter extends JPanel {
 		lblBaseEnd.setBounds(373, 14, 70, 20);
 		add(lblBaseEnd);
 		
+		JTextPane tpDebug = new JTextPane();
+		tpDebug.setName("tpDebug");
+		tpDebug.setBounds(12, 154, 426, 70);
+		add(tpDebug);
+		StyledDocument doc = tpDebug.getStyledDocument();
+		
+		javax.swing.text.Style style = tpDebug.addStyle("Text", null);
+		
+		JLabel lblDebugMessage = new JLabel("Debug Message:");
+		lblDebugMessage.setBounds(12, 135, 135, 15);
+		add(lblDebugMessage);
+		
 		ComponentInteract InteractWithbtnCalcola = new ComponentInteract() {
 			@Override
 			public void componentInteraction() {
@@ -139,18 +155,29 @@ public class BaseConverter extends JPanel {
 					baseStart = (Integer) cbBaseStart.getSelectedItem();
 					baseDest = (Integer) cbBaseDest.getSelectedItem();
 					if (checkSymbol.checkSymbols(tpNumber.getText().toUpperCase(), baseStart)) {
+						if(!btnCalcola.isEnabled()){
 						btnCalcola.setEnabled(true);
-						lblEnterTheNumber.setForeground(new Color(0, 0, 0));
-						lblEnterTheNumber.setText("Click convert to continue...");
+//						lblEnterTheNumber.setForeground(new Color(0, 0, 0));
+//						lblEnterTheNumber.setText("Click convert to continue...");
+
+				        StyleConstants.setForeground(style, Color.black);
+				        try { doc.insertString(0, "Click convert to continue...\n",style); }
+				        catch (Exception e){}
+						}
 					} else {
 
-						lblEnterTheNumber.setText("Number is not valid in selected base.");
-						lblEnterTheNumber.setForeground(new Color(255, 0, 0));
+//						lblEnterTheNumber.setText("Number is not valid in selected base.");
+//						lblEnterTheNumber.setForeground(new Color(255, 0, 0));
+						if(btnCalcola.isEnabled()){
+						 StyleConstants.setForeground(style, Color.red);
+					        try { doc.insertString(0, "Number is not valid in selected base.\n",style); }
+					        catch (Exception e){}
 						btnCalcola.setEnabled(false);
+						}
 					}
 				} else {
-					lblEnterTheNumber.setText("Enter the number to convert");
-					lblEnterTheNumber.setForeground(new Color(0, 0, 0));
+//					lblEnterTheNumber.setText("Enter the number to convert");
+//					lblEnterTheNumber.setForeground(new Color(0, 0, 0));
 					btnCalcola.setEnabled(false);
 				}
 			}
