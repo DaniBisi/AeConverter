@@ -33,10 +33,7 @@ public class StepByStep extends JPanel {
 		btnBackX.setBounds(12, 33, 117, 25);
 		
 		JButton btnForward = new JButton("Forward");
-		btnForward.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		
 
 		btnForward.setBounds(141, 33, 117, 25);
 		btnForward.setName("btnForward");
@@ -54,21 +51,21 @@ public class StepByStep extends JPanel {
 		 jsp.setVisible(true);
 	        
 		add(jsp);
-		btnForward.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		 btnForward.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
 
-				String msg=textPane.getText();
-				
-				msg = (msg +xToTen.getStepByStep().get(contStepByStep) +"\n");
-				contStepByStep+=1;
-				if(contStepByStep == xToTen.getStepByStep().size()-1){
-					btnForward.setEnabled(false);
+					String msg=textPane.getText();
+					
+					msg = (msg +xToTen.getStepByStep().get(contStepByStep) +"\n");
+					contStepByStep+=1;
+					if(contStepByStep == xToTen.getStepByStep().size()){
+						btnForward.setEnabled(false);
+					}
+					textPane.setText(msg);
+					btnBackX.setEnabled(true);
 				}
-				textPane.setText(msg);
-				btnBackX.setEnabled(true);
-			}
-		});
+			});
+
 		
 
 		add(btnAllSteps);

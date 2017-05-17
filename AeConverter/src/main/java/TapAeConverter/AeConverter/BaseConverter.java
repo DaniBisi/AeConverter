@@ -96,9 +96,8 @@ public class BaseConverter extends JPanel {
 		add(tpResult);
 
 		JButton btnStepByStep = new JButton("StepByStep");
-		btnStepByStep.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		btnStepByStep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				StepByStep p1 = new StepByStep(conv,conv1);
 				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnStepByStep);
 				ancestor.getContentPane().removeAll();
@@ -184,9 +183,8 @@ public class BaseConverter extends JPanel {
 		});
 		
 		//################### I LISTENERE LI DEVO AGGIUNGERE QUANOD È ABILITATO ALTRIMENTI ERRORE
-		btnCalcola.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("ciao");
+		btnCalcola.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				baseStart = (Integer) cbBaseStart.getSelectedItem();
 				baseDest = (Integer) cbBaseDest.getSelectedItem();
 				String Number = tpNumber.getText().toUpperCase();
@@ -199,9 +197,8 @@ public class BaseConverter extends JPanel {
 			}
 		});
 		
-		btnBack.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				MakeChoise p1 = new MakeChoise();
 				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnBack);
 				ancestor.getContentPane().removeAll();
