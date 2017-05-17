@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+
 public class TestXtoTen {
 	private XtoTenConverter b1;
 	private CheckSymbol c1;
@@ -69,18 +71,22 @@ public class TestXtoTen {
 	@Test
 	public void testStepByStepZero(){
 		setUpBaseConverter(13,true);
-		String results = "0*(10^0)";
+		ArrayList<String> steps= new ArrayList<String>();
+		steps.add("0*(10^0)");
 		String n = "0";
 		b1.deConvert(n);
-		assertEquals(results, b1.getStepByStep());
+		assertEquals(steps, b1.getStepByStep());
 	}
 	@Test
-	public void testStepByStepComplex(){
+	public void testStepByStepMoreDigitNumber(){
 		setUpBaseConverter(13,true);
-		String results = "11*(10^0)+10*(10^1)";
+		setUpBaseConverter(13,true);
+		ArrayList<String> steps= new ArrayList<String>();
+		steps.add("11*(10^0)");
+		steps.add("10*(10^1)");
 		String n = "AB";
 		b1.deConvert(n);
-		assertEquals(results, b1.getStepByStep());
+		assertEquals(steps, b1.getStepByStep());
 		
 	}
 }

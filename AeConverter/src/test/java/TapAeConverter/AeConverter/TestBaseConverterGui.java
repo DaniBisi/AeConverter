@@ -27,9 +27,10 @@ public class TestBaseConverterGui {
 	public void setUp() throws Exception {
 		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame());
 		this.frameFix = new FrameFixture(frame);
-		frameFix.show();
-		frameFix.button("base_converter").click(leftButton().times(3));
+		//frameFix.show();
+		frameFix.button("base_converter").click();
 		//frameFix.textBox("Number").deleteText();
+		frameFix.show();
 
 	}
 
@@ -60,8 +61,8 @@ public class TestBaseConverterGui {
 	}
 	@Test
 	public void TestBase_ConverterConversion() {
-		frameFix.panel("baseConverter");
 		frameFix.show();
+		frameFix.panel("baseConverter");
 		frameFix.textBox("Number").enterText("101");
 		frameFix.button("Calcola").requireEnabled();
 		frameFix.button("Calcola").focus();
@@ -92,11 +93,17 @@ public class TestBaseConverterGui {
 		frameFix.comboBox("baseStart").selectItem(14);
 		frameFix.button("Calcola").requireEnabled();
 	}
+	@Test
+	public void TestBase_ConverterUpperCase() {
+		frameFix.panel("baseConverter");
+		frameFix.textBox("Number").enterText("ff");
+		frameFix.comboBox("baseStart").selectItem(14);
+		frameFix.button("Calcola").requireEnabled();
+	}
 	
 	@Test
 	public void TestBase_ConverterBase() {
 
-		frameFix.show();
 		frameFix.panel("baseConverter");
 		frameFix.textBox("Number").enterText("10");
 		frameFix.button("Calcola").requireEnabled();

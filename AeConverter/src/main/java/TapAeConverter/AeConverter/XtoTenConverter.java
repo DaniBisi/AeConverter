@@ -1,5 +1,7 @@
 package TapAeConverter.AeConverter;
 
+import java.util.ArrayList;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -8,11 +10,13 @@ import com.google.common.math.*;
 public class XtoTenConverter extends Converter {
 
 	private static final Logger LOGGER = LogManager.getLogger(XtoTenConverter.class);
-	private String results;
+	private StringBuilder resultsB;
+	private ArrayList<String> steps;
 	private CheckSymbol checkSymbol;
 	public XtoTenConverter(int base,CheckSymbol cSymbol) {
 		super(base);
-		results ="";
+		resultsB= new StringBuilder();
+		steps=new ArrayList<String>();
 		checkSymbol = cSymbol;
 		BasicConfigurator.resetConfiguration();
 		BasicConfigurator.configure();
@@ -23,7 +27,6 @@ public class XtoTenConverter extends Converter {
 	}
 
 	public String deConvert(String n) {
-		StringBuilder resultsB= new StringBuilder();
 		int nLenght = n.length()-1;
 		int i = nLenght;
 		Integer sum = 0;
@@ -32,23 +35,21 @@ public class XtoTenConverter extends Converter {
 			throw new IllegalArgumentException();
 		}
 		while (i >= 0) {
+			resultsB.setLength(0);
 			int val = Character.getNumericValue(n.charAt(i));
-			if(i!=nLenght){
-				resultsB.append("+");
-			}
 			resultsB.append(val);
 			resultsB.append("*(10^");
 			resultsB.append( nLenght - i);
 			resultsB.append(")");
+			steps.add(resultsB.toString());
 			sum = sum + val * IntMath.pow(base, nLenght - i);
 			i = i - 1;
 		}
-		results = resultsB.toString();
 		return sum.toString();
 	}
 
-	public String getStepByStep() {
-		return results;
+	public ArrayList<String> getStepByStep() {
+		return steps;
 	}
 
 }

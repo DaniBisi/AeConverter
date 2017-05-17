@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 
 public class MakeChoise extends JPanel{
@@ -14,7 +15,6 @@ public class MakeChoise extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected JFrame frameP;
 	/**
 	 * Create the frame.
 	 */
@@ -47,22 +47,18 @@ public class MakeChoise extends JPanel{
 		base_converter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frameP.getContentPane().removeAll();
+				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(base_converter);
+				ancestor.getContentPane().removeAll();
 				BaseConverter panelBaseConverter = new BaseConverter();
-				panelBaseConverter.setParentFrame(frameP);
-				frameP.getContentPane().removeAll();
-				frameP.getContentPane().add(panelBaseConverter);
-				frameP.getContentPane().setVisible(true);
-				frameP.revalidate();
+				panelBaseConverter.setParentFrame(ancestor);
+				ancestor.getContentPane().removeAll();
+				ancestor.getContentPane().add(panelBaseConverter);
+				ancestor.getContentPane().setVisible(true);
+				ancestor.revalidate();
 //				frameP.repaint();
 			}
 		});
 		
-		
-	}
-	
-	public void setFrameP(JFrame frame){
-		frameP = frame;
 		
 	}
 

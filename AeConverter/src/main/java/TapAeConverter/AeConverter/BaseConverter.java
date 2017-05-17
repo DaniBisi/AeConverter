@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 
 import TapAeConverter.AeConverter.CheckSymbol;
 import TapAeConverter.AeConverter.ComponentInteract;
@@ -95,6 +96,17 @@ public class BaseConverter extends JPanel {
 		add(tpResult);
 
 		JButton btnStepByStep = new JButton("StepByStep");
+		btnStepByStep.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				StepByStep p1 = new StepByStep(conv,conv1);
+				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnStepByStep);
+				ancestor.getContentPane().removeAll();
+				ancestor.getContentPane().add(p1);
+				ancestor.getContentPane().setVisible(true);
+				ancestor.revalidate();
+			}
+		});
 		btnStepByStep.setBounds(321, 110, 117, 25);
 		btnStepByStep.setEnabled(false);
 		add(btnStepByStep);
@@ -170,6 +182,8 @@ public class BaseConverter extends JPanel {
 				InteractWithbtnCalcola.componentInteraction();
 			}
 		});
+		
+		//################### I LISTENERE LI DEVO AGGIUNGERE QUANOD È ABILITATO ALTRIMENTI ERRORE
 		btnCalcola.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("ciao");
@@ -189,11 +203,11 @@ public class BaseConverter extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				MakeChoise p1 = new MakeChoise();
-				p1.setFrameP(frameP);
-				frameP.getContentPane().removeAll();
-				frameP.getContentPane().add(p1);
-				frameP.getContentPane().setVisible(true);
-				frameP.revalidate();
+				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnBack);
+				ancestor.getContentPane().removeAll();
+				ancestor.getContentPane().add(p1);
+				ancestor.getContentPane().setVisible(true);
+				ancestor.revalidate();
 			}
 		});
 	}
