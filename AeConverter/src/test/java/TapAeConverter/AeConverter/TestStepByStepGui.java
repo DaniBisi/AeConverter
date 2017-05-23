@@ -2,8 +2,6 @@ package TapAeConverter.AeConverter;
 
 
 import org.assertj.swing.core.Settings;
-
-
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
@@ -13,11 +11,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
-import static org.assertj.swing.core.MouseClickInfo.leftButton;
 
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 public class TestStepByStepGui{
 
 	private FrameFixture frameFix;
@@ -32,15 +28,13 @@ public class TestStepByStepGui{
 	}
 	@BeforeClass
 	  public static void setUpOnce() {
-	    //FailOnThreadViolationRepaintManager.install();
-	    Settings s1 = new Settings();
-	    s1.delayBetweenEvents(75); //default change this to change time between events
-	  }
+	    FailOnThreadViolationRepaintManager.install();
+	}
 
 	@Before
 	public void setUp() throws Exception {
-		StepByStep sbs = new StepByStep(x1,t1);
-		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(sbs));
+//		StepByStep sbs = new StepByStep(x1,t1);
+		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(new StepByStep(x1,t1)));
 		frameFix = new FrameFixture(frame);
 		//frameFix.show();
 	}
@@ -58,9 +52,11 @@ public class TestStepByStepGui{
 	}
 	@Test
 	public void testF() {
+		r1.add("boh");
+	when(x1.getStepByStep()).thenReturn(r1);
 		frameFix.panel("stepByStep");
 		frameFix.button("btnForward").click();
-		frameFix.textBox("dividend").requireText("boh");
+		frameFix.textBox("dividend").requireText("boh\n");
 	}
 	@Test
 	public void testForwarButtonChangeBackButtonState(){
@@ -72,7 +68,7 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
 		frameFix.button("btnForward").click();
-		frameFix.textBox("dividend").requireText("simple text");
+		frameFix.textBox("dividend").requireText("simple text\n");
 	}
 	@Test
 	public void testForwarXButtonChangeTextPaneDividendStateTwoString(){

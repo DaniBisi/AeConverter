@@ -1,10 +1,8 @@
 package TapAeConverter.AeConverter;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import java.awt.GridLayout;
+import javax.swing.SwingUtilities;
 
 public class GuiFrame extends JFrame {
 
@@ -19,25 +17,27 @@ public class GuiFrame extends JFrame {
 	 */
 	public GuiFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 330);
+		
 		MakeChoise p1 = new MakeChoise();
 		getContentPane().add(p1);
-//		setContentPane(p1);
-		setVisible(true);
-		revalidate();
-		repaint();
-	}
-	
-	public GuiFrame(JPanel p1){
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 330);
-		getContentPane().add(p1);
-//		setContentPane(p1);
+		// setContentPane(p1);
 		setVisible(true);
 		revalidate();
 		repaint();
-		
 	}
-	
+
+	public GuiFrame(JPanel p1) {
+
+		// setContentPane(p1);
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().add(p1);
+		setBounds(100, 100, 450, 330);
+		setVisible(true);
+		revalidate();
+		repaint();
+
+	}
 
 }

@@ -4,16 +4,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class StepByStep extends JPanel {
 
-	private XtoTenConverter xToTen;
-	private TenToXConverter tenToX;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private transient XtoTenConverter xToTen;
+	private transient TenToXConverter tenToX;
 	protected int contStepByStep;
 
 	/**
@@ -51,20 +51,17 @@ public class StepByStep extends JPanel {
 		 jsp.setVisible(true);
 	        
 		add(jsp);
-		 btnForward.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-
-					String msg=textPane.getText();
-					
-					msg = (msg +xToTen.getStepByStep().get(contStepByStep) +"\n");
-					contStepByStep+=1;
-					if(contStepByStep == xToTen.getStepByStep().size()){
-						btnForward.setEnabled(false);
-					}
-					textPane.setText(msg);
-					btnBackX.setEnabled(true);
-				}
-			});
+		
+		 btnForward.addActionListener(arg0 -> {
+			String msg=textPane.getText();
+			msg = (msg +xToTen.getStepByStep().get(contStepByStep) +"\n");
+			contStepByStep+=1;
+			if(contStepByStep == xToTen.getStepByStep().size()){
+				btnForward.setEnabled(false);
+			}//thread ui.
+			textPane.setText(msg);
+			btnBackX.setEnabled(true);
+		});
 
 		
 

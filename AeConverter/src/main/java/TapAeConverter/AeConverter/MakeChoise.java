@@ -10,16 +10,14 @@ import javax.swing.SwingUtilities;
 
 
 public class MakeChoise extends JPanel{
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	/**
 	 * Create the frame.
 	 */
 	public MakeChoise() {
-
 		setBounds(100, 100, 450, 330);
 		//################## PANEL CHOISE VIEW ########################
 		setName("makeChoise");
@@ -50,7 +48,6 @@ public class MakeChoise extends JPanel{
 				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(base_converter);
 				ancestor.getContentPane().removeAll();
 				BaseConverter panelBaseConverter = new BaseConverter();
-				panelBaseConverter.setParentFrame(ancestor);
 				ancestor.getContentPane().removeAll();
 				ancestor.getContentPane().add(panelBaseConverter);
 				ancestor.getContentPane().setVisible(true);

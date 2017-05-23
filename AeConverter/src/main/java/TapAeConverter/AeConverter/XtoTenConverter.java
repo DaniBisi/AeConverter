@@ -38,7 +38,9 @@ public class XtoTenConverter extends Converter {
 			resultsB.setLength(0);
 			int val = Character.getNumericValue(n.charAt(i));
 			resultsB.append(val);
-			resultsB.append("*(10^");
+			resultsB.append("*(");
+			resultsB.append(this.base);
+			resultsB.append("^");
 			resultsB.append( nLenght - i);
 			resultsB.append(")");
 			steps.add(resultsB.toString());
