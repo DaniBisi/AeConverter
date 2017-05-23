@@ -1,6 +1,9 @@
 package TapAeConverter.AeConverter;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class TestTenToX {
@@ -27,6 +30,13 @@ public class TestTenToX {
 		assertEquals("30", b1.convert(n));
 	}
 	@Test
+	public void testConverterBaseDestBigger(){
+		int n = 12;
+		int base = 12;
+		TenToXConverter b1 = new TenToXConverter(base);
+		assertEquals("10", b1.convert(n));
+	}
+	@Test
 	public void testConverterA(){
 		int n = 15;
 		int base = 16;
@@ -46,5 +56,17 @@ public class TestTenToX {
 		int base = -1;
 		TenToXConverter b1 = new TenToXConverter(base);
 		b1.convert(n);
+	}
+	@Test
+	public void testStep(){
+		int n = 12;
+		int base = 12;
+		TenToXConverter b1= new TenToXConverter(base);
+		ArrayList<String> steps= new ArrayList<String>();
+		steps.add("12%12 = 0");
+		steps.add("1%12 = 1");
+		b1.convert(n);
+		assertEquals(steps, b1.getStepByStep());
+		
 	}
 }

@@ -20,8 +20,8 @@ public class BaseConverter extends JPanel {
 	private HashMap<String, Integer> DictionarySym;
 	private int baseStart;
 	private int baseDest;
-	private transient XtoTenConverter conv;
-	private transient TenToXConverter conv1;
+	private transient XtoTenConverter xToTenConverter;
+	private transient TenToXConverter tenToXConverter;
 	private transient CheckSymbol checkSymbol;
 
 	/**
@@ -79,7 +79,7 @@ public class BaseConverter extends JPanel {
 
 		JButton btnStepByStep = new JButton("StepByStep");
 		btnStepByStep.addActionListener(arg0 -> {
-			StepByStep p1 = new StepByStep(conv,conv1);
+			StepByStep p1 = new StepByStep(xToTenConverter,tenToXConverter);
 			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnStepByStep);
 			ancestor.getContentPane().removeAll();
 			ancestor.getContentPane().add(p1);
@@ -148,24 +148,21 @@ public class BaseConverter extends JPanel {
 			baseStart = (Integer) cbBaseStart.getSelectedItem();
 			baseDest = (Integer) cbBaseDest.getSelectedItem();
 			String Number = tpNumber.getText().toUpperCase();
-			conv = new XtoTenConverter(baseStart,checkSymbol);
-			conv1 = new TenToXConverter(baseDest);
-			Number = conv.deConvert(Number);
-			Number = conv1.convert(Integer.parseInt(Number));
+			xToTenConverter = new XtoTenConverter(baseStart,checkSymbol);
+			tenToXConverter = new TenToXConverter(baseDest);
+			Number = xToTenConverter.deConvert(Number);
+			Number = tenToXConverter.convert(Integer.parseInt(Number));
 			tpResult.setText(Number);
 			btnStepByStep.setEnabled(true);
 		});
 		
 		btnBack.addActionListener(arg0 -> {
-			System.out.println("stampa");
-			//SwingUtilities.invokeLater(() -> {
 				MakeChoise p1 = new MakeChoise();
 				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnBack);
 				ancestor.getContentPane().removeAll();
 				ancestor.getContentPane().add(p1);
 				ancestor.getContentPane().setVisible(true);
 				ancestor.revalidate();
-			//});
 		});
 		
 		add(lblBaseEnd);

@@ -15,12 +15,14 @@ public class StepByStep extends JPanel {
 	private transient XtoTenConverter xToTen;
 	private transient TenToXConverter tenToX;
 	protected int contStepByStep;
+	protected int contStepByStep2;
 
 	/**
 	 * Create the panel.
 	 */
 	public StepByStep(XtoTenConverter x1,TenToXConverter t1) {
 		contStepByStep = 0;
+		contStepByStep2 = 0;
 		this.xToTen = x1;
 		this.tenToX = t1;
 		setBounds(100, 100, 450, 330);
@@ -42,7 +44,7 @@ public class StepByStep extends JPanel {
 		btnAllSteps.setBounds(321, 33, 117, 25);
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setName("dividend");
+		textPane.setName("textPaneXtoTenResult");
 		textPane.setBounds(12, 70, 426, 91);
 		textPane.setAutoscrolls(true);
 		 JScrollPane jsp= new JScrollPane();
@@ -80,16 +82,33 @@ public class StepByStep extends JPanel {
 		add(btnBackT);
 		
 		JButton btnForward_1 = new JButton("Forward");
+		btnForward_1.setName("btnForward_1");
 		btnForward_1.setBounds(141, 188, 117, 25);
-		add(btnForward_1);
+		
 		
 		JButton btnAllSteps_1 = new JButton("All Steps");
 		btnAllSteps_1.setBounds(321, 188, 117, 25);
 		add(btnAllSteps_1);
 		
 		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setName("textPaneTenToXResult");
 		textPane_1.setBounds(12, 225, 426, 93);
 		add(textPane_1);
+		
+
+		btnForward_1.addActionListener(arg0 -> {
+			String msg=textPane_1.getText();
+			msg = (msg +tenToX.getStepByStep().get(contStepByStep2) +"\n");
+			contStepByStep2+=1;
+			if(contStepByStep2 == tenToX.getStepByStep().size()){
+				btnForward_1.setEnabled(false);
+			}//thread ui.
+			textPane_1.setText(msg);
+			btnBackT.setEnabled(true);
+		});
+
+		
+		add(btnForward_1);
 		
 		JLabel lblSecondStepConvert = new JLabel("Second step: Convert Number in Destination Base");
 		lblSecondStepConvert.setBounds(12, 161, 426, 25);

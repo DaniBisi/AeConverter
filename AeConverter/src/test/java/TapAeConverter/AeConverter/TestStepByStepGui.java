@@ -56,7 +56,7 @@ public class TestStepByStepGui{
 	when(x1.getStepByStep()).thenReturn(r1);
 		frameFix.panel("stepByStep");
 		frameFix.button("btnForward").click();
-		frameFix.textBox("dividend").requireText("boh\n");
+		frameFix.textBox("textPaneXtoTenResult").requireText("boh\n");
 	}
 	@Test
 	public void testForwarButtonChangeBackButtonState(){
@@ -64,38 +64,52 @@ public class TestStepByStepGui{
 		frameFix.button("btnBack").requireEnabled();
 	}
 	@Test
-	public void testForwarXButtonChangeTextPaneDividendState(){
+	public void testForwarXButtonChangeTextPanetextPaneXtoTenResultState(){
 		r1.add("simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
 		frameFix.button("btnForward").click();
-		frameFix.textBox("dividend").requireText("simple text\n");
+		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\n");
 	}
 	@Test
-	public void testForwarXButtonChangeTextPaneDividendStateTwoString(){
+	public void testForwarXButtonDisabledAfterShowAllSteps(){
+		r1.add("simple text");
+		when(x1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward").click();
+		frameFix.button("btnForward").requireDisabled();
+	}
+	@Test
+	public void testForwarXButtonChangeTextPanetextPaneXtoTenResultStateTwoString(){
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
 		frameFix.button("btnForward").click();
 		frameFix.button("btnForward").click();
-		frameFix.textBox("dividend").requireText("simple text\nsecond simple text\n");
+		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\nsecond simple text\n");
 	}
 	@Test
-	public void testForwarXButtonChangeTextPaneDividendStateMoreClickThanStep(){
+	public void testForwarXButtonChangeTextPanetextPaneXtoTenResultStateMoreClickThanStep(){
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
 		frameFix.button("btnForward").click();
 		frameFix.button("btnForward").click();
 		frameFix.button("btnForward").click();
-		frameFix.textBox("dividend").requireText("simple text\nsecond simple text\n");
+		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\nsecond simple text\n");
 	}
 	@Test
-	public void testForwarTButtonChangeTextPaneDividendStateTwoString(){
+	public void testForwarTButtonDisabledAfterShowAllSteps(){
+		r1.add("simple text");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").requireDisabled();
+	}
+	@Test
+	public void testForwarTButtonChangeTextPanetextPaneXtoTenResultStateTwoString(){
 		r1.add("simple text");
 		r1.add("second simple text");
-		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").click();
-		frameFix.textBox("dividend").requireText("simple text\nsecond simple text\n");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").click();
+		frameFix.textBox("textPaneTenToXResult").requireText("simple text\nsecond simple text\n");
 	}
 }

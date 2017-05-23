@@ -11,12 +11,10 @@ public class XtoTenConverter extends Converter {
 
 	private static final Logger LOGGER = LogManager.getLogger(XtoTenConverter.class);
 	private StringBuilder resultsB;
-	private ArrayList<String> steps;
 	private CheckSymbol checkSymbol;
 	public XtoTenConverter(int base,CheckSymbol cSymbol) {
 		super(base);
 		resultsB= new StringBuilder();
-		steps=new ArrayList<String>();
 		checkSymbol = cSymbol;
 		BasicConfigurator.resetConfiguration();
 		BasicConfigurator.configure();
@@ -50,8 +48,6 @@ public class XtoTenConverter extends Converter {
 		return sum.toString();
 	}
 
-	public ArrayList<String> getStepByStep() {
-		return steps;
-	}
+	
 
 }
