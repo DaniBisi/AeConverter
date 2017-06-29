@@ -48,6 +48,4 @@ public class XtoTenConverter extends Converter {
 		return sum.toString();
 	}
 
-	
-
 }

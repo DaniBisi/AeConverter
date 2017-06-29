@@ -5,6 +5,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class StepByStep extends JPanel {
 
@@ -30,7 +32,8 @@ public class StepByStep extends JPanel {
 		setLayout(null);
 		
 		JButton btnBackX = new JButton("Back");
-		btnBackX.setName("btnBack");
+		
+		btnBackX.setName("btnBackX");
 		btnBackX.setEnabled(false);
 		btnBackX.setBounds(12, 33, 117, 25);
 		
@@ -56,7 +59,7 @@ public class StepByStep extends JPanel {
 		
 		 btnForward.addActionListener(arg0 -> {
 			String msg=textPane.getText();
-			msg = (msg +xToTen.getStepByStep().get(contStepByStep) +"\n");
+			msg = (msg +xToTen.getStepByStep().get(contStepByStep) +'\n');
 			contStepByStep+=1;
 			if(contStepByStep == xToTen.getStepByStep().size()){
 				btnForward.setEnabled(false);
@@ -77,6 +80,7 @@ public class StepByStep extends JPanel {
 		add(lblFirstStepConvert);
 		
 		JButton btnBackT = new JButton("Back");
+		btnBackT.setName("btnBackT");
 		btnBackT.setBounds(12, 188, 117, 25);
 		btnBackT.setEnabled(false);
 		add(btnBackT);
@@ -95,7 +99,23 @@ public class StepByStep extends JPanel {
 		textPane_1.setBounds(12, 225, 426, 93);
 		add(textPane_1);
 		
-
+		btnBackX.addActionListener(arg0 ->  {
+				String msg=textPane.getText();
+				int k = msg.lastIndexOf('\n', msg.length()-2);
+				if(k==-1){
+					k=0;
+				}
+				textPane.setText(msg.substring(0,k+1 ));
+				contStepByStep = contStepByStep-1;
+				if(!btnForward.isEnabled()){
+					btnForward.setEnabled(true);
+				}
+				if(textPane.getText().isEmpty()){
+					btnBackX.setEnabled(false);
+				}
+			
+		});
+		
 		btnForward_1.addActionListener(arg0 -> {
 			String msg=textPane_1.getText();
 			msg = (msg +tenToX.getStepByStep().get(contStepByStep2) +"\n");
@@ -106,6 +126,8 @@ public class StepByStep extends JPanel {
 			textPane_1.setText(msg);
 			btnBackT.setEnabled(true);
 		});
+		
+		
 
 		
 		add(btnForward_1);

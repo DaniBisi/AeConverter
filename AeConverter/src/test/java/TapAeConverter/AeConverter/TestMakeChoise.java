@@ -27,7 +27,7 @@ public class TestMakeChoise {
 	public void setUp() throws Exception {
 		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(new MakeChoise()));
 		frameFix = new FrameFixture(frame);
-    	frameFix.show();
+    	//frameFix.show();
 		//frameFix.button("base_converter").click();
 		//frameFix.textBox("Number").deleteText();
 		//frameFix.show();
@@ -35,18 +35,23 @@ public class TestMakeChoise {
 	}
 	@After
 	public void tearDown() throws Exception {
-		//frameFix.cleanUp();
+		frameFix.cleanUp();
 
 	}
 
+	@Test public void testMakeChoiseVisibility() {
+		frameFix.panel("makeChoise").requireVisible();	
+	}
 	@Test
-	public void testBaseConverterButtonChangePanel() {
-		//MakeChoise m1 = ;
-		//GuiFrame frame1 = new GuiFrame(m1);
-		
-		frameFix.panel("makeChoise");
+	public void testBaseConvmakeChoiseerterButtonChangePanel() {
+		frameFix.button("base_converter").click();
+		frameFix.panel("baseConverter").requireVisible();
 	}
 
-
+	@Test(expected = org.assertj.swing.exception.ComponentLookupException.class)
+	public void testCloseButton() {
+		frameFix.button("chiudi").click();
+		frameFix.panel("makeChoise").requireVisible();
+	}
 	
 }

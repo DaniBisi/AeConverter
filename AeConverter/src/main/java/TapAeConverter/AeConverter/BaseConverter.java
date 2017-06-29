@@ -46,40 +46,38 @@ public class BaseConverter extends JPanel {
 		DictionarySym.put("E", 14);
 		DictionarySym.put("F", 15);
 
-
 		setBounds(100, 100, 450, 350);
 		checkSymbol = new CheckSymbol(DictionarySym);
 		this.setName("baseConverter");
 		setLayout(null);
 		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-		JComboBox <Integer>cbBaseStart = new JComboBox<>(baseAvailable);
+		JComboBox<Integer> cbBaseStart = new JComboBox<>(baseAvailable);
 
 		cbBaseStart.setSelectedIndex(0);
 		cbBaseStart.setName("baseStart");
 		cbBaseStart.setBounds(12, 37, 65, 24);
 
-		JComboBox <Integer>cbBaseDest = new JComboBox<>(baseAvailable);
+		JComboBox<Integer> cbBaseDest = new JComboBox<>(baseAvailable);
 		cbBaseDest.setSelectedIndex(8);
 		cbBaseDest.setBounds(373, 37, 65, 24);
 
 		JTextPane tpNumber = new JTextPane();
 		tpNumber.setName("Number");
 		tpNumber.setBounds(99, 37, 248, 24);
-		
-		
+
 		JButton btnCalcola = new JButton("Calcola");
 		btnCalcola.setName("Calcola");
 		btnCalcola.setEnabled(false);
 		btnCalcola.setBounds(12, 111, 117, 25);
-
 
 		JTextPane tpResult = new JTextPane();
 		tpResult.setName("tpResult");
 		tpResult.setBounds(141, 111, 168, 24);
 
 		JButton btnStepByStep = new JButton("StepByStep");
+		btnStepByStep.setName("btnStepByStep");
 		btnStepByStep.addActionListener(arg0 -> {
-			StepByStep p1 = new StepByStep(xToTenConverter,tenToXConverter);
+			StepByStep p1 = new StepByStep(xToTenConverter, tenToXConverter);
 			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnStepByStep);
 			ancestor.getContentPane().removeAll();
 			ancestor.getContentPane().add(p1);
@@ -90,8 +88,7 @@ public class BaseConverter extends JPanel {
 		btnStepByStep.setEnabled(false);
 
 		JButton btnBack = new JButton("indietro");
-		
-		
+
 		btnBack.setName("indietro1");
 		btnBack.setBounds(12, 235, 117, 25);
 
@@ -100,20 +97,20 @@ public class BaseConverter extends JPanel {
 		btnChiudi.setName("chiudi");
 		btnChiudi.addActionListener(arg0 -> System.exit(0));
 		btnChiudi.setBounds(321, 235, 117, 25);
-		
+
 		JLabel lblEnterTheNumber = new JLabel("Enter the number to convert");
 		lblEnterTheNumber.setName("enterTheNumber");
 		lblEnterTheNumber.setBounds(99, 12, 223, 25);
-		
+
 		JLabel lblBaseStart = new JLabel("Base Start");
 		lblBaseStart.setForeground(Color.BLACK);
 		lblBaseStart.setName("baseStart");
 		lblBaseStart.setBounds(12, 14, 81, 20);
-		
+
 		JLabel lblBaseEnd = new JLabel("Base End");
 		lblBaseEnd.setName("baseEnd");
 		lblBaseEnd.setBounds(373, 14, 70, 20);
-		
+
 		ComponentInteract InteractWithbtnCalcola = () -> {
 			if (!"".equals(tpNumber.getText())) {
 				baseStart = (Integer) cbBaseStart.getSelectedItem();
@@ -143,28 +140,28 @@ public class BaseConverter extends JPanel {
 			}
 		});
 		cbBaseStart.addItemListener(arg0 -> InteractWithbtnCalcola.componentInteraction());
-		
+
 		btnCalcola.addActionListener(arg0 -> {
 			baseStart = (Integer) cbBaseStart.getSelectedItem();
 			baseDest = (Integer) cbBaseDest.getSelectedItem();
 			String Number = tpNumber.getText().toUpperCase();
-			xToTenConverter = new XtoTenConverter(baseStart,checkSymbol);
+			xToTenConverter = new XtoTenConverter(baseStart, checkSymbol);
 			tenToXConverter = new TenToXConverter(baseDest);
 			Number = xToTenConverter.deConvert(Number);
 			Number = tenToXConverter.convert(Integer.parseInt(Number));
 			tpResult.setText(Number);
 			btnStepByStep.setEnabled(true);
 		});
-		
+
 		btnBack.addActionListener(arg0 -> {
-				MakeChoise p1 = new MakeChoise();
-				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnBack);
-				ancestor.getContentPane().removeAll();
-				ancestor.getContentPane().add(p1);
-				ancestor.getContentPane().setVisible(true);
-				ancestor.revalidate();
+			MakeChoise p1 = new MakeChoise();
+			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnBack);
+			ancestor.getContentPane().removeAll();
+			ancestor.getContentPane().add(p1);
+			ancestor.getContentPane().setVisible(true);
+			ancestor.revalidate();
 		});
-		
+
 		add(lblBaseEnd);
 		add(lblBaseStart);
 		add(lblEnterTheNumber);
@@ -175,7 +172,7 @@ public class BaseConverter extends JPanel {
 		add(tpNumber);
 		add(cbBaseDest);
 		add(cbBaseStart);
-		
+
 		revalidate();
 		repaint();
 	}

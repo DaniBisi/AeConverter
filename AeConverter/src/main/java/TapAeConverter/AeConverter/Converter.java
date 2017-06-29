@@ -7,7 +7,7 @@ public abstract class Converter {
 	protected ArrayList<String> steps;
 	public Converter(int base) {
 		steps=new ArrayList<String>();
-		if (base <= 0) {
+		if (base <= 1) {
 			throw new IllegalArgumentException();
 		}
 		this.base = base;

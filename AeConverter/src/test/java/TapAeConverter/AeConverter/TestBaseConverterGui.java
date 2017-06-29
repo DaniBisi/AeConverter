@@ -14,10 +14,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 public class TestBaseConverterGui {
-
+	@Rule
+	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 	private FrameFixture frameFix;
 
 	@BeforeClass
@@ -28,13 +31,13 @@ public class TestBaseConverterGui {
 	@Before
 	public void setUp() throws Exception {
 		Robot robot = BasicRobot.robotWithNewAwtHierarchy();
-		robot.settings().delayBetweenEvents(150);
+		robot.settings().delayBetweenEvents(100);
 		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(new BaseConverter()));
 		frameFix = new FrameFixture(robot, frame);
 
-
 		// frameFix.button("base_converter").click();
 		// frameFix.textBox("Number").deleteText();
+		// frameFix.show();
 		// frameFix.show();
 
 	}
@@ -126,6 +129,16 @@ public class TestBaseConverterGui {
 	}
 
 	@Test
+	public void TestStepByStepButtonChangePanel() {
+		frameFix.textBox("Number").enterText("10");
+		frameFix.button("Calcola").requireEnabled();
+		frameFix.button("Calcola").click();
+		frameFix.button("btnStepByStep").click();
+		frameFix.panel("stepByStep");
+
+	}
+
+	@Test
 	public void TestBase_converterBackButton() {
 		// System.out.println(frameFix.panel("baseConverter").getClass());
 		// System.out.println(frameFix.panel("baseConverter"));
@@ -133,4 +146,10 @@ public class TestBaseConverterGui {
 		frameFix.panel("makeChoise");
 	}
 
+	@Test
+	public void TestBase_converterChiudiButton() {
+		exit.expectSystemExit();
+		frameFix.button("chiudi").click();
+		//frameFix.panel("baseConverter");
+	}
 }

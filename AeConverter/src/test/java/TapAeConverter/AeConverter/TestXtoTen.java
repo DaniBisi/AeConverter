@@ -13,7 +13,7 @@ public class TestXtoTen {
 	public TestXtoTen() {
 		this.c1 = mock(CheckSymbol.class);
 	}
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testConstructor() {
 		setUpBaseConverter(1,true);
 		assertEquals(1, b1.getBase());
@@ -72,7 +72,7 @@ public class TestXtoTen {
 	public void testStepByStepZero(){
 		setUpBaseConverter(13,true);
 		ArrayList<String> steps= new ArrayList<String>();
-		steps.add("0*(10^0)");
+		steps.add("0*(13^0)");
 		String n = "0";
 		b1.deConvert(n);
 		assertEquals(steps, b1.getStepByStep());
@@ -82,8 +82,8 @@ public class TestXtoTen {
 		setUpBaseConverter(13,true);
 		setUpBaseConverter(13,true);
 		ArrayList<String> steps= new ArrayList<String>();
-		steps.add("11*(10^0)");
-		steps.add("10*(10^1)");
+		steps.add("11*(13^0)");
+		steps.add("10*(13^1)");
 		String n = "AB";
 		b1.deConvert(n);
 		assertEquals(steps, b1.getStepByStep());

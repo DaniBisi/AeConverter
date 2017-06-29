@@ -1,7 +1,6 @@
 package TapAeConverter.AeConverter;
 
 
-import org.assertj.swing.core.Settings;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
@@ -22,7 +21,7 @@ public class TestStepByStepGui{
 	private ArrayList <String> r1;
 	
 	public TestStepByStepGui() {
-		r1 = new ArrayList<String>();
+		
 		x1 = mock(XtoTenConverter.class);
 		t1 = mock(TenToXConverter.class);
 	}
@@ -36,13 +35,13 @@ public class TestStepByStepGui{
 //		StepByStep sbs = new StepByStep(x1,t1);
 		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(new StepByStep(x1,t1)));
 		frameFix = new FrameFixture(frame);
+		r1 = new ArrayList<String>();
 		//frameFix.show();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		frameFix.cleanUp();
-
 	}
 
 	@Test
@@ -60,6 +59,8 @@ public class TestStepByStepGui{
 	}
 	@Test
 	public void testForwarButtonChangeBackButtonState(){
+		r1.add("boh");
+		when(x1.getStepByStep()).thenReturn(r1);
 		frameFix.button("btnForward").click();
 		frameFix.button("btnBack").requireEnabled();
 	}
@@ -111,5 +112,16 @@ public class TestStepByStepGui{
 		frameFix.button("btnForward_1").click();
 		frameFix.button("btnForward_1").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("simple text\nsecond simple text\n");
+	}
+	@Test
+	public void testBackButtonChangeTextPane(){
+		r1.add("simple text");
+		r1.add("second simple text");
+		when(x1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward").click();
+		frameFix.button("btnForward").click();
+		frameFix.button("btnBackX").click();
+		frameFix.textBox("textPaneXtoTenResult").requireText("simple text"+'\n');
+		
 	}
 }
