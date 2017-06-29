@@ -1,18 +1,19 @@
 package TapAeConverter.AeConverter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Converter {
 	protected int base;
-	protected ArrayList<String> steps;
+	protected List<String> steps;
 	public Converter(int base) {
-		steps=new ArrayList<String>();
+		steps=new ArrayList<>();
 		if (base <= 1) {
 			throw new IllegalArgumentException();
 		}
 		this.base = base;
 	}
-	public ArrayList<String> getStepByStep() {
+	public List<String> getStepByStep() {
 		return steps;
 	}
 }

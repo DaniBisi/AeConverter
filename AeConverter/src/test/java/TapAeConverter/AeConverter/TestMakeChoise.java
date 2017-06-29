@@ -50,7 +50,7 @@ public class TestMakeChoise {
 
 	@Test(expected = org.assertj.swing.exception.ComponentLookupException.class)
 	public void testCloseButton() {
-		frameFix.button("chiudi").click();
+		frameFix.button("btnClose").click();
 		frameFix.panel("makeChoise").requireVisible();
 	}
 	

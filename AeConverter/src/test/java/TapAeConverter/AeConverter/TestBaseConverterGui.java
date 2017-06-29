@@ -19,8 +19,8 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
 public class TestBaseConverterGui {
-	@Rule
-	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+//	@Rule
+//	public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 	private FrameFixture frameFix;
 
 	@BeforeClass
@@ -30,10 +30,11 @@ public class TestBaseConverterGui {
 
 	@Before
 	public void setUp() throws Exception {
-		Robot robot = BasicRobot.robotWithNewAwtHierarchy();
-		robot.settings().delayBetweenEvents(100);
+//		Robot robot = BasicRobot.robotWithNewAwtHierarchy();
+//		robot.settings().delayBetweenEvents(100);
 		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(new BaseConverter()));
-		frameFix = new FrameFixture(robot, frame);
+		//frameFix = new FrameFixture(robot, frame);
+		frameFix = new FrameFixture(frame);
 
 		// frameFix.button("base_converter").click();
 		// frameFix.textBox("Number").deleteText();
@@ -53,13 +54,7 @@ public class TestBaseConverterGui {
 		frameFix.panel("baseConverter");
 	}
 
-	// non worka non so perchè dovrebbe generare errore o fallire....
-	@Ignore
-	public void testBase_ConverterCloseButton() {
-		frameFix.panel("baseConverter");
-		frameFix.button("chiudi").click();
-	}
-
+	
 	@Test
 	public void TestBase_ConverterDisabledButtonText() {
 		frameFix.panel("baseConverter");
@@ -148,8 +143,8 @@ public class TestBaseConverterGui {
 
 	@Test
 	public void TestBase_converterChiudiButton() {
-		exit.expectSystemExit();
 		frameFix.button("chiudi").click();
+		frameFix.panel("baseConverter").requireVisible();
 		//frameFix.panel("baseConverter");
 	}
 }

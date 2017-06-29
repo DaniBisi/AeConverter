@@ -7,19 +7,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-
-public class MakeChoise extends JPanel{
+public class MakeChoise extends JPanel {
 	/**
 	 * 
 	 */
-	//private static final long serialVersionUID = 1L;
+	// private static final long serialVersionUID = 1L;
 	/**
 	 * Create the frame.
 	 */
 	public MakeChoise() {
 		setBounds(100, 100, 450, 330);
-		//################## PANEL CHOISE VIEW ########################
+		// ################## PANEL CHOISE VIEW ########################
 		setName("makeChoise");
 		setLayout(null);
 		JButton base_converter = new JButton("base converter");
@@ -29,18 +30,18 @@ public class MakeChoise extends JPanel{
 		JButton btnNewButton_2 = new JButton("float converter");
 		btnNewButton_2.setBounds(225, 0, 225, 232);
 		add(btnNewButton_2);
-		JButton close = new JButton("Chiudi");
-		close.setBounds(0, 244, 225, 56);
-		close.setName("close");
-		add(close);
-		JButton Help = new JButton("Help");
-		Help.setBounds(225, 244, 225, 56);
-		close.setName("Help");
-		add(Help);
-		//################## END PANEL CHOISE VIEW ####################
-		
-		
-		//################## EVENT LISTENER #########################
+		JButton btnClose = new JButton("Chiudi");
+		btnClose.setName("btnClose");
+		btnClose.setBounds(0, 244, 225, 56);
+		add(btnClose);
+		JButton btnHelp = new JButton("Help");
+		btnHelp.setBounds(225, 244, 225, 56);
+		btnHelp.setName("btnHelp");
+		add(btnHelp);
+		// ################## END PANEL CHOISE VIEW ####################
+
+		// ################## EVENT LISTENER #########################
+		btnClose.addActionListener(arg0 -> System.exit(0));
 		
 		base_converter.addMouseListener(new MouseAdapter() {
 			@Override
@@ -52,11 +53,10 @@ public class MakeChoise extends JPanel{
 				ancestor.getContentPane().add(panelBaseConverter);
 				ancestor.getContentPane().setVisible(true);
 				ancestor.revalidate();
-//				frameP.repaint();
+				// frameP.repaint();
 			}
 		});
-		
-		
+
 	}
 
 }
