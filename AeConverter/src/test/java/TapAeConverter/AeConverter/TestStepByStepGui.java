@@ -91,6 +91,36 @@ public class TestStepByStepGui{
 		
 	}
 	@Test
+	public void testForwardXButtonDisabledMoreStep(){
+		r1.add("simple text");
+		r1.add("simple text2");
+		when(x1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward").click();
+		frameFix.button("btnForward").click();
+		frameFix.button("btnForward").requireDisabled();		
+	}
+	@Test
+	public void testForwardXButtonAfterBackButtonx(){
+		r1.add("simple text");
+		r1.add("simple text2");
+		when(x1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward").click();
+		frameFix.button("btnForward").click();
+		frameFix.button("btnBackX").click();
+		frameFix.button("btnForward").click();
+		frameFix.button("btnForward").requireDisabled();		
+	}
+	@Test
+	public void testBackXButtonEnabledAfterOneStep(){
+		r1.add("simple text");
+		r1.add("simple text2");
+		when(x1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward").click();
+		frameFix.button("btnForward").click();
+		frameFix.button("btnBackX").click();
+		frameFix.button("btnBackX").requireEnabled();
+}
+	@Test
 	public void testBackButtonChangeTextPaneTwoString(){
 		r1.add("simple text");
 		r1.add("second simple text");

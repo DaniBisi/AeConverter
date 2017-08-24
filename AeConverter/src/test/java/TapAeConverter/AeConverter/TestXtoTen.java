@@ -80,13 +80,18 @@ public class TestXtoTen {
 	@Test
 	public void testStepByStepMoreDigitNumber(){
 		setUpBaseConverter(13,true);
-		setUpBaseConverter(13,true);
 		ArrayList<String> steps= new ArrayList<String>();
 		steps.add("11*(13^0)");
 		steps.add("10*(13^1)");
 		String n = "AB";
 		b1.deConvert(n);
 		assertEquals(steps, b1.getStepByStep());
+	}
+	@Test
+	public void testGetBase(){
+		setUpBaseConverter(13,true);
+		assertEquals(13, b1.getBase());
+		
 		
 	}
 }

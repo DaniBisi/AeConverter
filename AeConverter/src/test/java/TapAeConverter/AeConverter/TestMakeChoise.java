@@ -48,10 +48,10 @@ public class TestMakeChoise {
 		frameFix.panel("baseConverter").requireVisible();
 	}
 
-	@Test(expected = org.assertj.swing.exception.ComponentLookupException.class)
-	public void testCloseButton() {
-		frameFix.button("btnClose").click();
-		frameFix.panel("makeChoise").requireVisible();
+	@Test
+	public void TestBase_converterChiudiButton() {
+		frameFix.button("Chiudi").click();
+		frameFix.requireNotVisible();
 	}
 	
 }

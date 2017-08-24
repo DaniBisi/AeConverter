@@ -15,6 +15,20 @@ public class TestTenToX {
 		TenToXConverter b1 = new TenToXConverter(base);
 		assertEquals("0", b1.convert(n));
 	}
+	@Test(expected=IllegalArgumentException.class)
+	public void testBase0(){
+		int n = 0;
+		int base = 0;
+		TenToXConverter b1 = new TenToXConverter(base);
+		assertEquals("0", b1.convert(n));
+	}
+	@Test(expected=IllegalArgumentException.class)
+	public void testBase1(){
+		int n = 0;
+		int base = 1;
+		TenToXConverter b1 = new TenToXConverter(base);
+		assertEquals("0", b1.convert(n));
+	}
 	@Test
 	public void testConverter1(){
 		int n = 1;
@@ -30,12 +44,41 @@ public class TestTenToX {
 		assertEquals("30", b1.convert(n));
 	}
 	@Test
+	public void testNumberEqual0(){
+		int n = 0;
+		int base = 4;
+		TenToXConverter b1 = new TenToXConverter(base);
+		assertEquals("0", b1.convert(n));
+	}
+	@Test
+	public void testCharAddiction(){
+		int n = 100;
+		int base = 15;
+		TenToXConverter b1 = new TenToXConverter(base);
+		assertEquals("6A", b1.convert(n));
+	}
+	@Test
+	public void testModulusNine(){
+		int n = 117;
+		int base = 12;
+		TenToXConverter b1 = new TenToXConverter(base);
+		assertEquals("99", b1.convert(n));
+	}
+	@Test
+	public void testNegative(){
+		int n = -1;
+		int base = 4;
+		TenToXConverter b1 = new TenToXConverter(base);
+		assertEquals("-1", b1.convert(n));
+	}
+	@Test
 	public void testConverterBaseDestBigger(){
 		int n = 12;
 		int base = 12;
 		TenToXConverter b1 = new TenToXConverter(base);
 		assertEquals("10", b1.convert(n));
 	}
+	
 	@Test
 	public void testConverterA(){
 		int n = 15;

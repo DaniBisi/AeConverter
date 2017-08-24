@@ -3,38 +3,56 @@ package TapAeConverter.AeConverter;
 import java.util.ArrayList;
 
 public class TenToXConverter extends Converter {
-	
+	StringBuilder r;
+	StringBuilder stepsB;
+	int startIndex;
 	public TenToXConverter(int base) {
 		super(base);
+		r= new StringBuilder();
+		stepsB= new StringBuilder();
+		startIndex = 0;
 	}
 
 	public String convert(int n) {
 		int number = n;
-		StringBuilder r = new StringBuilder();
-		StringBuilder stepsB = new StringBuilder();
+
+		if(number<0){
+				r.insert(0,"-");
+				number = -number ;
+				startIndex = 1;
+			}
+		if (n == 0) {
+			r.insert(0, 0);
+		}
+		else {
+			
+			convertNotNullNotZero(number);
+		}
 		
-		while (number > 0) {
+		return r.toString();
+	}
+	
+	private void convertNotNullNotZero(int number){
+		int n = number;
+		while (n > 0) {
 			stepsB.setLength(0);
-			int val = number % base;
-			stepsB.append(number);
+			int val = n % base;
+			stepsB.append(n);
 			stepsB.append("%");
 			stepsB.append(base);
 			stepsB.append(" = ");
 			if(val>9){ 	
-				r.insert(0, (char)(val+55));
-				stepsB.append((char)(val+55));
+				val = val + 55;
+				r.insert(startIndex, (char)(val));
+				stepsB.append((char)(val));
 			}
 			else{
-				r.insert(0, val);
+				r.insert(startIndex, val);
 				stepsB.append(val);
 			}
-			number = number / base;
+			n = n / base;
 			steps.add(stepsB.toString());
 		}
-		if (r.length() == 0) {
-			r.insert(0, 0);
-		}
-		return r.toString();
 	}
 
 }

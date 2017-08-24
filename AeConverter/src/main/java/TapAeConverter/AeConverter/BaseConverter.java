@@ -93,10 +93,13 @@ public class BaseConverter extends JPanel {
 		btnBack.setBounds(12, 235, 117, 25);
 
 		add(btnBack);
-		JButton btnChiudi = new JButton("Chiudi");
-		btnChiudi.setName("chiudi");
-		btnChiudi.addActionListener(arg0 -> System.exit(0));
-		btnChiudi.setBounds(321, 235, 117, 25);
+		JButton btnClose = new JButton("Chiudi");
+		btnClose.setName("Chiudi");
+		btnClose.addActionListener(arg0 -> {
+			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
+			ancestor.dispose();
+		});
+		btnClose.setBounds(321, 235, 117, 25);
 
 		JLabel lblEnterTheNumber = new JLabel("Enter the number to convert");
 		lblEnterTheNumber.setName("enterTheNumber");
@@ -165,7 +168,7 @@ public class BaseConverter extends JPanel {
 		add(lblBaseEnd);
 		add(lblBaseStart);
 		add(lblEnterTheNumber);
-		add(btnChiudi);
+		add(btnClose);
 		add(btnStepByStep);
 		add(tpResult);
 		add(btnCalcola);

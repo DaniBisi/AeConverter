@@ -31,7 +31,7 @@ public class MakeChoise extends JPanel {
 		btnNewButton_2.setBounds(225, 0, 225, 232);
 		add(btnNewButton_2);
 		JButton btnClose = new JButton("Chiudi");
-		btnClose.setName("btnClose");
+		btnClose.setName("Chiudi");
 		btnClose.setBounds(0, 244, 225, 56);
 		add(btnClose);
 		JButton btnHelp = new JButton("Help");
@@ -41,7 +41,10 @@ public class MakeChoise extends JPanel {
 		// ################## END PANEL CHOISE VIEW ####################
 
 		// ################## EVENT LISTENER #########################
-		btnClose.addActionListener(arg0 -> System.exit(0));
+		btnClose.addActionListener(arg0 -> {
+			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
+			ancestor.dispose();
+		});
 		
 		base_converter.addMouseListener(new MouseAdapter() {
 			@Override
