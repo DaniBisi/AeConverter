@@ -1,4 +1,4 @@
-package TapAeConverter.AeConverter;
+package tapaeconverter.aeconverter;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,10 @@ import org.junit.Test;
 
 import com.google.common.collect.MapMaker;
 
-public class TestMakeChoise {
+import tapaeconverter.aeconverter.FrameGui;
+import tapaeconverter.aeconverter.MakeChoiseGui;
+
+public class TestMakeChoiseGui {
 
 	private FrameFixture frameFix;
 
@@ -25,7 +28,7 @@ public class TestMakeChoise {
 
 	@Before
 	public void setUp() throws Exception {
-		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(new MakeChoise()));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new MakeChoiseGui()));
 		frameFix = new FrameFixture(frame);
     	//frameFix.show();
 		//frameFix.button("base_converter").click();

@@ -1,18 +1,16 @@
-package TapAeConverter.AeConverter;
-
-import java.util.ArrayList;
+package tapaeconverter.aeconverter;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import com.google.common.math.*;
 
-public class XtoTenConverter extends Converter {
+public class XtoTenConverterCore extends ConverterCore {
 
-	private static final Logger LOGGER = LogManager.getLogger(XtoTenConverter.class);
+	private static final Logger LOGGER = LogManager.getLogger(XtoTenConverterCore.class);
 	private StringBuilder resultsB;
-	private CheckSymbol checkSymbol;
-	public XtoTenConverter(int base,CheckSymbol cSymbol) {
+	private CheckSymbolCore checkSymbol;
+	public XtoTenConverterCore(int base,CheckSymbolCore cSymbol) {
 		super(base);
 		resultsB= new StringBuilder();
 		checkSymbol = cSymbol;

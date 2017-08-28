@@ -1,8 +1,10 @@
-package TapAeConverter.AeConverter;
+package tapaeconverter.aeconverter;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import tapaeconverter.aeconverter.BinaryFloatConverter;
 
 public class TestFloatConverter {
 

@@ -1,0 +1,33 @@
+package tapaeconverter.aeconverter;
+
+import java.util.Map;
+
+public class CheckSymbolCore {
+
+	private Map<String, Integer> dictionarySym;
+
+	public CheckSymbolCore(Map<String, Integer> dictionarySym) {
+		this.dictionarySym = dictionarySym;
+	}
+
+	public boolean checkSymbols(String strToCheck, int base) {
+		return checkBase(base) && checkDigit(strToCheck, base);
+	}
+
+	protected boolean checkDigit(String strToCheck, int base) {
+		String digit;
+		for (int i = 0; i < strToCheck.length(); i++) {
+			digit = strToCheck.substring(i, i + 1);
+			Integer result = dictionarySym.get(digit);
+			if ((/* (!"0".equals(digit)) && */ result == null) || result >= base) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	protected boolean checkBase(int base) {
+		return base > 0 && base < 17;
+	}
+
+}

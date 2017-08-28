@@ -1,4 +1,4 @@
-package TapAeConverter.AeConverter;
+package tapaeconverter.aeconverter;
 
 import org.assertj.swing.*;
 
@@ -22,6 +22,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
+import tapaeconverter.aeconverter.BaseConverterGui;
+import tapaeconverter.aeconverter.FrameGui;
+
 import static org.junit.Assert.assertEquals;
 
 public class TestBaseConverterGui{
@@ -40,7 +43,7 @@ public class TestBaseConverterGui{
 	public void setUp() throws Exception {
 		// Robot robot = BasicRobot.robotWithNewAwtHierarchy();
 		// robot.settings().delayBetweenEvents(100);
-		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(new BaseConverter()));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui()));
 		// frameFix = new FrameFixture(robot, frame);
 		frameFix = new FrameFixture(frame);
 

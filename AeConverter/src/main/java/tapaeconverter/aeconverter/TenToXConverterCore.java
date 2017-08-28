@@ -1,12 +1,10 @@
-package TapAeConverter.AeConverter;
+package tapaeconverter.aeconverter;
 
-import java.util.ArrayList;
-
-public class TenToXConverter extends Converter {
+public class TenToXConverterCore extends ConverterCore {
 	StringBuilder r;
 	StringBuilder stepsB;
 	int startIndex;
-	public TenToXConverter(int base) {
+	public TenToXConverterCore(int base) {
 		super(base);
 		r= new StringBuilder();
 		stepsB= new StringBuilder();

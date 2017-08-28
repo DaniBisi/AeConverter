@@ -1,4 +1,4 @@
-package TapAeConverter.AeConverter;
+package tapaeconverter.aeconverter;
 
 public class BinaryFloatConverter {
 

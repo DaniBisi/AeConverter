@@ -1,4 +1,4 @@
-package TapAeConverter.AeConverter;
+package tapaeconverter.aeconverter;
 
 
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
@@ -8,6 +8,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import tapaeconverter.aeconverter.FrameGui;
+import tapaeconverter.aeconverter.StepByStepGui;
+import tapaeconverter.aeconverter.TenToXConverterCore;
+import tapaeconverter.aeconverter.XtoTenConverterCore;
+
 import static org.mockito.Mockito.*;
 
 
@@ -16,14 +22,14 @@ import java.util.ArrayList;
 public class TestStepByStepGui{
 
 	private FrameFixture frameFix;
-	private XtoTenConverter x1;
-	private TenToXConverter t1;
+	private XtoTenConverterCore x1;
+	private TenToXConverterCore t1;
 	private ArrayList <String> r1;
 	
 	public TestStepByStepGui() {
 		
-		x1 = mock(XtoTenConverter.class);
-		t1 = mock(TenToXConverter.class);
+		x1 = mock(XtoTenConverterCore.class);
+		t1 = mock(TenToXConverterCore.class);
 	}
 	@BeforeClass
 	  public static void setUpOnce() {
@@ -33,7 +39,7 @@ public class TestStepByStepGui{
 	@Before
 	public void setUp() throws Exception {
 //		StepByStep sbs = new StepByStep(x1,t1);
-		GuiFrame frame = GuiActionRunner.execute(() -> new GuiFrame(new StepByStep(x1,t1)));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1,t1)));
 		frameFix = new FrameFixture(frame);
 		r1 = new ArrayList<String>();
 		//frameFix.show();

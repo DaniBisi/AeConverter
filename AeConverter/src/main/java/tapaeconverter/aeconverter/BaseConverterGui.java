@@ -1,4 +1,4 @@
-package TapAeConverter.AeConverter;
+package tapaeconverter.aeconverter;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -14,40 +14,40 @@ import javax.swing.SwingUtilities;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class BaseConverter extends JPanel {
+public class BaseConverterGui extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private HashMap<String, Integer> DictionarySym;
+	private HashMap<String, Integer> dictionarySym;
 	private int baseStart;
 	private int baseDest;
-	private transient XtoTenConverter xToTenConverter;
-	private transient TenToXConverter tenToXConverter;
-	private transient CheckSymbol checkSymbol;
+	private transient XtoTenConverterCore xToTenConverter;
+	private transient TenToXConverterCore tenToXConverter;
+	private transient CheckSymbolCore checkSymbol;
 
 	/**
 	 * Create the panel.
 	 */
-	public BaseConverter() {
-		DictionarySym = new HashMap<>();
-		DictionarySym.put("0", 0);
-		DictionarySym.put("1", 1);
-		DictionarySym.put("2", 2);
-		DictionarySym.put("3", 3);
-		DictionarySym.put("4", 4);
-		DictionarySym.put("5", 5);
-		DictionarySym.put("6", 6);
-		DictionarySym.put("7", 7);
-		DictionarySym.put("8", 8);
-		DictionarySym.put("9", 9);
-		DictionarySym.put("A", 10);
-		DictionarySym.put("B", 11);
-		DictionarySym.put("C", 12);
-		DictionarySym.put("D", 13);
-		DictionarySym.put("E", 14);
-		DictionarySym.put("F", 15);
+	public BaseConverterGui() {
+		dictionarySym = new HashMap<>();
+		dictionarySym.put("0", 0);
+		dictionarySym.put("1", 1);
+		dictionarySym.put("2", 2);
+		dictionarySym.put("3", 3);
+		dictionarySym.put("4", 4);
+		dictionarySym.put("5", 5);
+		dictionarySym.put("6", 6);
+		dictionarySym.put("7", 7);
+		dictionarySym.put("8", 8);
+		dictionarySym.put("9", 9);
+		dictionarySym.put("A", 10);
+		dictionarySym.put("B", 11);
+		dictionarySym.put("C", 12);
+		dictionarySym.put("D", 13);
+		dictionarySym.put("E", 14);
+		dictionarySym.put("F", 15);
 
 		setBounds(100, 100, 450, 350);
-		checkSymbol = new CheckSymbol(DictionarySym);
+		checkSymbol = new CheckSymbolCore(dictionarySym);
 		this.setName("baseConverter");
 		setLayout(null);
 		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
@@ -77,7 +77,7 @@ public class BaseConverter extends JPanel {
 		JButton btnStepByStep = new JButton("StepByStep");
 		btnStepByStep.setName("btnStepByStep");
 		btnStepByStep.addActionListener(arg0 -> {
-			StepByStep p1 = new StepByStep(xToTenConverter, tenToXConverter);
+			StepByStepGui p1 = new StepByStepGui(xToTenConverter, tenToXConverter);
 			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnStepByStep);
 			ancestor.getContentPane().removeAll();
 			ancestor.getContentPane().add(p1);
@@ -114,7 +114,7 @@ public class BaseConverter extends JPanel {
 		lblBaseEnd.setName("baseEnd");
 		lblBaseEnd.setBounds(373, 14, 70, 20);
 
-		ComponentInteract InteractWithbtnCalcola = () -> {
+		ComponentInteract interactWithbtnCalcola = () -> {
 			if (!"".equals(tpNumber.getText())) {
 				baseStart = (Integer) cbBaseStart.getSelectedItem();
 				baseDest = (Integer) cbBaseDest.getSelectedItem();
@@ -139,25 +139,25 @@ public class BaseConverter extends JPanel {
 
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				InteractWithbtnCalcola.componentInteraction();
+				interactWithbtnCalcola.componentInteraction();
 			}
 		});
-		cbBaseStart.addItemListener(arg0 -> InteractWithbtnCalcola.componentInteraction());
+		cbBaseStart.addItemListener(arg0 -> interactWithbtnCalcola.componentInteraction());
 
 		btnCalcola.addActionListener(arg0 -> {
 			baseStart = (Integer) cbBaseStart.getSelectedItem();
 			baseDest = (Integer) cbBaseDest.getSelectedItem();
-			String Number = tpNumber.getText().toUpperCase();
-			xToTenConverter = new XtoTenConverter(baseStart, checkSymbol);
-			tenToXConverter = new TenToXConverter(baseDest);
-			Number = xToTenConverter.deConvert(Number);
-			Number = tenToXConverter.convert(Integer.parseInt(Number));
-			tpResult.setText(Number);
+			String number = tpNumber.getText().toUpperCase();
+			xToTenConverter = new XtoTenConverterCore(baseStart, checkSymbol);
+			tenToXConverter = new TenToXConverterCore(baseDest);
+			number = xToTenConverter.deConvert(number);
+			number = tenToXConverter.convert(Integer.parseInt(number));
+			tpResult.setText(number);
 			btnStepByStep.setEnabled(true);
 		});
 
 		btnBack.addActionListener(arg0 -> {
-			MakeChoise p1 = new MakeChoise();
+			MakeChoiseGui p1 = new MakeChoiseGui();
 			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnBack);
 			ancestor.getContentPane().removeAll();
 			ancestor.getContentPane().add(p1);

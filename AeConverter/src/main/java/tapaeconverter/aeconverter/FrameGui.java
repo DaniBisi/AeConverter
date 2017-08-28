@@ -1,10 +1,9 @@
-package TapAeConverter.AeConverter;
+package tapaeconverter.aeconverter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
-public class GuiFrame extends JFrame {
+public class FrameGui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,21 +14,18 @@ public class GuiFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GuiFrame() {
+	public FrameGui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		MakeChoise p1 = new MakeChoise();
+		MakeChoiseGui p1 = new MakeChoiseGui();
 		getContentPane().add(p1);
 		setBounds(100, 100, 450, 330);
-		// setContentPane(p1);
 		setVisible(true);
 		revalidate();
 		repaint();
 	}
 
-	public GuiFrame(JPanel p1) {
-
-		// setContentPane(p1);
+	public FrameGui(JPanel p1) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().add(p1);
