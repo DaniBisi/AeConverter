@@ -155,7 +155,7 @@ public class TestStepByStepGui{
 		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\nsecond simple text\n");
 	}
 	@Test
-	public void TestAllStepChangeBtnBackStatus(){
+	public void TestAllXStepChangeBtnBackStatus(){
 		frameFix.button("allStep").click();
 		frameFix.button("btnBackX").requireEnabled();
 	}
@@ -169,15 +169,28 @@ public class TestStepByStepGui{
 	//###################### END XtoTen Part ############################
 	
 	//####################### TenToX Part ###############################
+
 	@Test
-	public void testForwardTButtonDisabledAfterShowAllSteps(){
+	public void testBtnBackTDisabletAtStart() {
+		frameFix.button("btnBackT").requireDisabled();
+	}
+	@Test
+	public void testForwardTButtonChangeBackButtonState(){
+		r1.add("boh");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnBackT").requireEnabled();
+	}
+	@Test
+	public void testForwardTButtonChangeTextPane(){
 		r1.add("simple text");
 		when(t1.getStepByStep()).thenReturn(r1);
 		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").requireDisabled();
+		frameFix.textBox("textPaneTenToXResult").requireText("simple text\n");
 	}
+
 	@Test
-	public void testForwardTButtonChangeTextPanetextPaneXtoTenResultStateTwoString(){
+	public void testForwardTButtonChangeTextPaneTwoString(){
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(t1.getStepByStep()).thenReturn(r1);
@@ -185,6 +198,92 @@ public class TestStepByStepGui{
 		frameFix.button("btnForward_1").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("simple text\nsecond simple text\n");
 	}
+	@Test
+	public void testForwardTButtonDisabledAfterShowAllSteps(){
+		r1.add("simple text");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").requireDisabled();
+	}
+	
+	@Test
+	public void testBackTButtonChangeTextPane(){
+		r1.add("simple text");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnBackT").click();
+		frameFix.textBox("textPaneTenToXResult").requireText("");
+		
+	}
+	@Test
+	public void testForwardTButtonDisabledMoreStep(){
+		r1.add("simple text");
+		r1.add("simple text2");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").requireDisabled();		
+	}
+	@Test
+	public void testForwardTButtonAfterBackButtonx(){
+		r1.add("simple text");
+		r1.add("simple text2");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnBackT").click();
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").requireDisabled();		
+	}
+	@Test
+	public void testBackTButtonEnabledAfterOneStep(){
+		r1.add("simple text");
+		r1.add("simple text2");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnBackT").click();
+		frameFix.button("btnBackT").requireEnabled();
+}
+	@Test
+	public void testBackTButtonChangeTextPaneTwoString(){
+		r1.add("simple text");
+		r1.add("second simple text");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnBackT").click();
+		frameFix.textBox("textPaneTenToXResult").requireText("simple text\n");
+	}
+	@Test 
+	public void testBackTButtonChangeForwardStatus(){
+		r1.add("simple text");
+		r1.add("second simple text");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForward_1").click();
+		frameFix.button("btnBackT").click();
+		frameFix.button("btnForward_1").requireEnabled();
+	}
+	@Test
+	public void testAllStepT(){
+		r1.add("simple text");
+		r1.add("second simple text");
+		when(t1.getStepByStep()).thenReturn(r1);
+		frameFix.button("allStepT").click();
+		frameFix.textBox("textPaneTenToXResult").requireText("simple text\nsecond simple text\n");
+	}
+	@Test
+	public void TestAllTStepChangeBtnBackStatus(){
+		frameFix.button("allStepT").click();
+		frameFix.button("btnBackT").requireEnabled();
+	}
+	@Test
+	public void TestAllStepChangebtnForward_1Status(){
+		frameFix.button("allStepT").click();
+		frameFix.button("btnForward_1").requireDisabled();
+	}
+	
 	
 	
 	

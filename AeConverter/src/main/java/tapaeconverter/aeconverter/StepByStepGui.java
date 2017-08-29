@@ -5,6 +5,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StepByStepGui extends JPanel {
 
@@ -72,6 +74,7 @@ public class StepByStepGui extends JPanel {
 		add(lblFirstStepConvert);
 
 		JButton btnBackT = new JButton("Back");
+		
 		btnBackT.setName("btnBackT");
 		btnBackT.setBounds(12, 188, 117, 25);
 		btnBackT.setEnabled(false);
@@ -82,7 +85,9 @@ public class StepByStepGui extends JPanel {
 		btnForwardTtX.setBounds(141, 188, 117, 25);
 
 		JButton btnAllStepsTtX = new JButton("All Steps");
+		
 		btnAllStepsTtX.setBounds(321, 188, 117, 25);
+		btnAllStepsTtX.setName("allStepT");
 		add(btnAllStepsTtX);
 
 		JTextPane textPaneTtX = new JTextPane();
@@ -90,6 +95,19 @@ public class StepByStepGui extends JPanel {
 		textPaneTtX.setBounds(12, 225, 426, 93);
 		add(textPaneTtX);
 
+		btnBackT.addActionListener(arg0 -> {
+			String msg = textPaneTtX.getText();
+			int k = msg.lastIndexOf('\n', msg.length() - 2);
+			k = k + 1;
+			textPaneTtX.setText(msg.substring(0, k));
+			contStepByStep2 = contStepByStep2 - 1;
+			btnForwardTtX.setEnabled(true);
+
+			if (textPaneTtX.getText().isEmpty()) {
+				btnBackT.setEnabled(false);
+			}
+
+		});
 		btnBackX.addActionListener(arg0 -> {
 			String msg = textPaneXtT.getText();
 			int k = msg.lastIndexOf('\n', msg.length() - 2);
@@ -128,7 +146,18 @@ public class StepByStepGui extends JPanel {
 		});
 
 		add(btnForwardTtX);
-
+		btnAllStepsTtX.addActionListener(arg0 -> {
+			StringBuilder s1 = new StringBuilder();
+			for (int i = 0; i < t1.getStepByStep().size(); i++) {
+				s1 = s1.append(t1.getStepByStep().get(i));
+				s1.append("\n");
+			}
+			contStepByStep2 = t1.getStepByStep().size();
+			textPaneTtX.setText(s1.toString());
+			btnBackT.setEnabled(true);
+			btnForwardTtX.setEnabled(false);
+		});
+		
 		JLabel lblSecondStepConvert = new JLabel("Second step: Convert Number in Destination Base");
 		lblSecondStepConvert.setBounds(12, 161, 426, 25);
 		add(lblSecondStepConvert);
