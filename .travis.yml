@@ -8,4 +8,4 @@ before_script:
 
 install: true
 script:
-- bash initDisplay.sh - mvn -f AeConverter/pom.xml clean verify coveralls:report
+- bash initDisplay.sh mvn -f AeConverter/pom.xml clean verify coveralls:report
