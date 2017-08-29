@@ -1,5 +1,11 @@
+
 language: java
 # skip installation step
+sudo: true
+before_script:
+- sudo apt-get install tightvncserver
+- sudo apt-get install expect
+
 install: true
 script:
-- mvn -f com.examples.myproject/pom.xml clean verify
+- bash initDisplay.sh mvn -f com.example.assertj.swing/pom.xml clean verify
