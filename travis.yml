@@ -8,4 +8,5 @@ before_script:
 
 install: true
 script:
-- bash initDisplay.sh mvn -f com.example.assertj.swing/pom.xml clean verify
+- bash initDisplay.sh - mvn -f com.examples.myproject/pom.xml clean verify -Pjacoco-report
+coveralls:report
