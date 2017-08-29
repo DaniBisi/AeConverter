@@ -16,7 +16,6 @@ public class FrameGui extends JFrame {
 	 */
 	public FrameGui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		MakeChoiseGui p1 = new MakeChoiseGui();
 		getContentPane().add(p1);
 		setBounds(100, 100, 450, 330);
