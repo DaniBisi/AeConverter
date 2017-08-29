@@ -26,5 +26,15 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/.travis.yml</locationURI>
 		</link>
+		<link>
+			<name>initDisplay.sh</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/initDisplay.sh</locationURI>
+		</link>
+		<link>
+			<name>passwdVNC.sh</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/passwdVNC.sh</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
