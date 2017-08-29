@@ -1,7 +1,5 @@
 package tapaeconverter.aeconverter;
 
-import static org.junit.Assert.*;
-
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
@@ -9,8 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.google.common.collect.MapMaker;
 
 import tapaeconverter.aeconverter.FrameGui;
 import tapaeconverter.aeconverter.MakeChoiseGui;

@@ -1,31 +1,29 @@
 package tapaeconverter.aeconverter;
 
-import org.assertj.swing.*;
-
-import javax.swing.SwingUtilities;
-
-import org.assertj.swing.core.BasicRobot;
-import org.assertj.swing.core.Robot;
-import org.assertj.swing.core.Settings;
+//import org.assertj.swing.*;
+//
+//import javax.swing.SwingUtilities;
+//
+//import org.assertj.swing.core.BasicRobot;
+//import org.assertj.swing.core.Robot;
+//import org.assertj.swing.core.Settings;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
-import org.assertj.swing.security.ExitCallHook;
-import org.assertj.swing.security.NoExitSecurityManager;
-import org.assertj.swing.security.NoExitSecurityManagerInstaller;
+//import org.assertj.swing.security.ExitCallHook;
+//import org.assertj.swing.security.NoExitSecurityManager;
+//import org.assertj.swing.security.NoExitSecurityManagerInstaller;
 import org.junit.After;
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Rule;
+//import org.junit.Ignore;
+//import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.ExpectedSystemExit;
-
 import tapaeconverter.aeconverter.BaseConverterGui;
 import tapaeconverter.aeconverter.FrameGui;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
 public class TestBaseConverterGui{
 	//private static NoExitSecurityManagerInstaller noExitSecurityManagerInstaller;
