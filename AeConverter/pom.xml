@@ -10,12 +10,10 @@
 	<name>AeConverter</name>
 	<url>http://maven.apache.org</url>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- For Unit tests -->
 		<jacoco.data.file>${project.build.directory}/coveragereports/jacoco.exec</jacoco.data.file>
-		<jacoco.report.path>${project.reporting.outputDirectory}/jacocout</jacoco.report.path>
-		<!-- For Integration tests -->
-		<jacoco.data.it.file>${project.build.directory}/coverage-reports/jacocoit.exec</jacoco.data.it.file>
-		<jacoco.report.it.path>${project.reporting.outputDirectory}/jacocoit</jacoco.report.it.path>
+		<jacoco.report.path>${project.build.directory}/jacocout</jacoco.report.path>
 		<sonar.language>java</sonar.language>
 		<sonar.jacoco.reportPath>${jacoco.data.file}</sonar.jacoco.reportPath>
 		<sonar.jacoco.itReportPath>${jacoco.data.it.file}</sonar.jacoco.itReportPath>
@@ -33,9 +31,11 @@
 					<artifactId>coveralls-maven-plugin</artifactId>
 					<version>4.3.0</version>
 					<configuration>
+						<repoToken>bwzGtaNbvOtAnNdsHF4EuWSnWftX0ktof</repoToken>
 						<jacocoReports>
 							<jacocoReport>${jacoco.report.path}/jacoco.xml</jacocoReport>
 						</jacocoReports>
+						<sourceEncoding>UTF8</sourceEncoding>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -136,29 +136,7 @@
 							<outputDirectory>${jacoco.report.path}</outputDirectory>
 						</configuration>
 					</execution>
-					<!-- For Integration tests -->
-					<execution>
-						<id>jacoco-pre-integration-test</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>prepare-agent-integration</goal>
-						</goals>
-						<configuration>
-							<destFile>${jacoco.data.it.file}</destFile>
-							<propertyName>failsafeArgLine</propertyName>
-						</configuration>
-					</execution>
-					<execution>
-						<id>jacoco-post-integration-test</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>report-integration</goal>
-						</goals>
-						<configuration>
-							<dataFile>${jacoco.data.it.file}</dataFile>
-							<outputDirectory>${jacoco.report.it.path}</outputDirectory>
-						</configuration>
-					</execution>
+					<!-- meeti qua -->
 				</executions>
 			</plugin>
 			<plugin>
