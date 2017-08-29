@@ -8,5 +8,4 @@ before_script:
 
 install: true
 script:
-- bash initDisplay.sh - mvn -f com.examples.myproject/pom.xml clean verify -Pjacoco-report
-coveralls:report
+- bash initDisplay.sh - mvn -f AeConverter/pom.xml clean verify coveralls:report
