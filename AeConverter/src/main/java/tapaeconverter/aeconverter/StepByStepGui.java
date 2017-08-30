@@ -1,14 +1,13 @@
 package tapaeconverter.aeconverter;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class StepByStepGui extends JPanel {
+public class StepByStepGui extends BasePanel {
 
 	private static final long serialVersionUID = 1L;
 	private transient XtoTenConverterCore xToTen;
@@ -24,20 +23,20 @@ public class StepByStepGui extends JPanel {
 		contStepByStep2 = 0;
 		this.xToTen = x1;
 		this.tenToX = t1;
-		setBounds(100, 100, 450, 330);
+		setSize(450, 390);
 		setName("stepByStep");
 		setLayout(null);
 
-		JButton btnBackX = new JButton("Back");
+		JButton btnBackX = new JButton("<<");
 
 		btnBackX.setName("btnBackX");
 		btnBackX.setEnabled(false);
 		btnBackX.setBounds(12, 33, 117, 25);
 
-		JButton btnForwardXtT = new JButton("Forward");
+		JButton btnForwardXtT = new JButton(">>");
 
 		btnForwardXtT.setBounds(141, 33, 117, 25);
-		btnForwardXtT.setName("btnForward");
+		btnForwardXtT.setName("btnForwardX");
 
 		JButton btnAllStepsXtT = new JButton("All Steps");
 		btnAllStepsXtT.setBounds(321, 33, 117, 25);
@@ -73,19 +72,19 @@ public class StepByStepGui extends JPanel {
 		lblFirstStepConvert.setBounds(12, 6, 291, 25);
 		add(lblFirstStepConvert);
 
-		JButton btnBackT = new JButton("Back");
-		
+		JButton btnBackT = new JButton("<<");
+
 		btnBackT.setName("btnBackT");
 		btnBackT.setBounds(12, 188, 117, 25);
 		btnBackT.setEnabled(false);
 		add(btnBackT);
 
-		JButton btnForwardTtX = new JButton("Forward");
-		btnForwardTtX.setName("btnForward_1");
+		JButton btnForwardTtX = new JButton(">>");
+		btnForwardTtX.setName("btnForwardT");
 		btnForwardTtX.setBounds(141, 188, 117, 25);
 
 		JButton btnAllStepsTtX = new JButton("All Steps");
-		
+
 		btnAllStepsTtX.setBounds(321, 188, 117, 25);
 		btnAllStepsTtX.setName("allStepT");
 		add(btnAllStepsTtX);
@@ -157,10 +156,28 @@ public class StepByStepGui extends JPanel {
 			btnBackT.setEnabled(true);
 			btnForwardTtX.setEnabled(false);
 		});
-		
+
 		JLabel lblSecondStepConvert = new JLabel("Second step: Convert Number in Destination Base");
 		lblSecondStepConvert.setBounds(12, 161, 426, 25);
 		add(lblSecondStepConvert);
+
+		JButton btnBack = new JButton("Back");
+		btnBack.setName("back");
+		btnBack.addActionListener(arg0 -> {
+			BaseConverterGui p1 = new BaseConverterGui();
+			setAncestorPanel(btnBack, p1, new int[] { 450, 330 });
+		});
+		btnBack.setBounds(12, 330, 137, 35);
+		add(btnBack);
+
+		JButton btnClose = new JButton("Close");
+		btnClose.setName("close");
+		btnClose.addActionListener(arg0 -> {
+			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
+			ancestor.dispose();
+		});
+		btnClose.setBounds(301, 330, 137, 35);
+		add(btnClose);
 		setVisible(true);
 	}
 }

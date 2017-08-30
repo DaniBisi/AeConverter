@@ -63,27 +63,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.5.0</version>
-				<executions>
-					<execution>
-						<id>runJarWithDependencies</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<executable>java</executable>
-					<arguments>
-						<argument>-jar</argument>
-						<argument>${project.build.directory}/${project.artifactId}-${project.version}-jar-with-dependencies.jar</argument>
-					</arguments>
-				</configuration>
-			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -134,9 +113,11 @@
 						<configuration>
 							<dataFile>${jacoco.data.file}</dataFile>
 							<outputDirectory>${jacoco.report.path}</outputDirectory>
+							<excludes>
+								<exclude>AeConverterGui.java</exclude>
+							</excludes>
 						</configuration>
 					</execution>
-					<!-- meeti qua -->
 				</executions>
 			</plugin>
 			<plugin>
@@ -147,22 +128,6 @@
 					<argLine>${surefireArgLine}</argLine>
 				</configuration>
 			</plugin>
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.19.1</version>
-				<configuration>
-					<argLine>${failsafeArgLine}</argLine>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin> -->
 		</plugins>
 	</build>
 	<dependencies>

@@ -2,7 +2,6 @@ package tapaeconverter.aeconverter;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.apache.log4j.LogManager;
@@ -11,7 +10,7 @@ import org.apache.log4j.Logger;
 public class AeConverterGui {
 	private static final Logger LOGGER = LogManager.getLogger(XtoTenConverterCore.class);
 
-	private JFrame frame;
+	private FrameGui frame;
 	JPanel panelBaseConverter;
 
 	/**
@@ -42,7 +41,8 @@ public class AeConverterGui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new FrameGui();
+		int []bounds = {100, 100, 450, 330};
+		frame = new FrameGui(new MakeChoiseGui(),bounds,true);
 	}
 
 }

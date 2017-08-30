@@ -24,7 +24,8 @@ public class TestMakeChoiseGui {
 
 	@Before
 	public void setUp() throws Exception {
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new MakeChoiseGui()));
+		int bounds[] = new int[] {100,100,450,330};
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new MakeChoiseGui(),bounds, true));
 		frameFix = new FrameFixture(frame);
     	//frameFix.show();
 		//frameFix.button("base_converter").click();
@@ -43,13 +44,13 @@ public class TestMakeChoiseGui {
 	}
 	@Test
 	public void testBaseConvmakeChoiseerterButtonChangePanel() {
-		frameFix.button("base_converter").click();
+		frameFix.button("baseConverter").click();
 		frameFix.panel("baseConverter").requireVisible();
 	}
 
 	@Test
 	public void TestBase_converterChiudiButton() {
-		frameFix.button("Chiudi").click();
+		frameFix.button("close").click();
 		frameFix.requireNotVisible();
 	}
 	

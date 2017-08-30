@@ -39,7 +39,9 @@ public class TestStepByStepGui{
 	@Before
 	public void setUp() throws Exception {
 //		StepByStep sbs = new StepByStep(x1,t1);
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1,t1)));
+		int bounds[] = new int[] {100,180,450,410};
+		
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1,t1),bounds,true));
 		frameFix = new FrameFixture(frame);
 		r1 = new ArrayList<String>();
 		//frameFix.show();
@@ -50,6 +52,16 @@ public class TestStepByStepGui{
 		frameFix.cleanUp();
 	}
 
+	@Test
+	public void TestStepByStepBackButton() {
+		frameFix.button("back").click();
+		frameFix.panel("baseConverter").requireEnabled();
+	}
+	@Test
+	public void TestStepByStepCloseButton() {
+		frameFix.button("close").click();
+		frameFix.requireNotVisible();
+	}
 	//###################### XtoTen Part ############################
 	@Test
 	public void testBtnBackDisabletAtStart() {
@@ -59,14 +71,14 @@ public class TestStepByStepGui{
 	public void testForwardButtonChangeBackButtonState(){
 		r1.add("boh");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
+		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").requireEnabled();
 	}
 	@Test
 	public void testForwardXButtonChangeTextPane(){
 		r1.add("simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
+		frameFix.button("btnForwardX").click();
 		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\n");
 	}
 
@@ -75,23 +87,23 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").click();
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").click();
 		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\nsecond simple text\n");
 	}
 	@Test
 	public void testForwardXButtonDisabledAfterShowAllSteps(){
 		r1.add("simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").requireDisabled();
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").requireDisabled();
 	}
 	
 	@Test
 	public void testBackButtonChangeTextPane(){
 		r1.add("simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
+		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
 		frameFix.textBox("textPaneXtoTenResult").requireText("");
 		
@@ -101,28 +113,28 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		r1.add("simple text2");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").requireDisabled();		
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").requireDisabled();		
 	}
 	@Test
 	public void testForwardXButtonAfterBackButtonx(){
 		r1.add("simple text");
 		r1.add("simple text2");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").click();
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").requireDisabled();		
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").requireDisabled();		
 	}
 	@Test
 	public void testBackXButtonEnabledAfterOneStep(){
 		r1.add("simple text");
 		r1.add("simple text2");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").click();
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
 		frameFix.button("btnBackX").requireEnabled();
 }
@@ -131,8 +143,8 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").click();
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
 		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\n");
 	}
@@ -141,10 +153,10 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(x1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward").click();
-		frameFix.button("btnForward").click();
+		frameFix.button("btnForwardX").click();
+		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
-		frameFix.button("btnForward").requireEnabled();
+		frameFix.button("btnForwardX").requireEnabled();
 	}
 	@Test
 	public void testAllStep(){
@@ -162,7 +174,7 @@ public class TestStepByStepGui{
 	@Test
 	public void TestAllStepChangeBtnForwardStatus(){
 		frameFix.button("allStep").click();
-		frameFix.button("btnForward").requireDisabled();
+		frameFix.button("btnForwardX").requireDisabled();
 	}
 	
 	
@@ -178,14 +190,14 @@ public class TestStepByStepGui{
 	public void testForwardTButtonChangeBackButtonState(){
 		r1.add("boh");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").requireEnabled();
 	}
 	@Test
 	public void testForwardTButtonChangeTextPane(){
 		r1.add("simple text");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForwardT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("simple text\n");
 	}
 
@@ -194,23 +206,23 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("simple text\nsecond simple text\n");
 	}
 	@Test
 	public void testForwardTButtonDisabledAfterShowAllSteps(){
 		r1.add("simple text");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").requireDisabled();
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").requireDisabled();
 	}
 	
 	@Test
 	public void testBackTButtonChangeTextPane(){
 		r1.add("simple text");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("");
 		
@@ -220,28 +232,28 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		r1.add("simple text2");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").requireDisabled();		
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").requireDisabled();		
 	}
 	@Test
 	public void testForwardTButtonAfterBackButtonx(){
 		r1.add("simple text");
 		r1.add("simple text2");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").requireDisabled();		
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").requireDisabled();		
 	}
 	@Test
 	public void testBackTButtonEnabledAfterOneStep(){
 		r1.add("simple text");
 		r1.add("simple text2");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
 		frameFix.button("btnBackT").requireEnabled();
 }
@@ -250,8 +262,8 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("simple text\n");
 	}
@@ -260,10 +272,10 @@ public class TestStepByStepGui{
 		r1.add("simple text");
 		r1.add("second simple text");
 		when(t1.getStepByStep()).thenReturn(r1);
-		frameFix.button("btnForward_1").click();
-		frameFix.button("btnForward_1").click();
+		frameFix.button("btnForwardT").click();
+		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
-		frameFix.button("btnForward_1").requireEnabled();
+		frameFix.button("btnForwardT").requireEnabled();
 	}
 	@Test
 	public void testAllStepT(){
@@ -279,9 +291,9 @@ public class TestStepByStepGui{
 		frameFix.button("btnBackT").requireEnabled();
 	}
 	@Test
-	public void TestAllStepChangebtnForward_1Status(){
+	public void TestAllStepChangebtnForwardTStatus(){
 		frameFix.button("allStepT").click();
-		frameFix.button("btnForward_1").requireDisabled();
+		frameFix.button("btnForwardT").requireDisabled();
 	}
 	
 	

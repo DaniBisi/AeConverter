@@ -5,10 +5,9 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class MakeChoiseGui extends JPanel {
+public class MakeChoiseGui extends BasePanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -20,15 +19,15 @@ public class MakeChoiseGui extends JPanel {
 		// ################## PANEL CHOISE VIEW ########################
 		setName("makeChoise");
 		setLayout(null);
-		JButton baseConverter = new JButton("base converter");
+		JButton baseConverter = new JButton("Base Converter");
 		baseConverter.setBounds(0, 0, 225, 232);
-		baseConverter.setName("base_converter");
+		baseConverter.setName("baseConverter");
 		add(baseConverter);
-		JButton floatConverter = new JButton("float converter");
+		JButton floatConverter = new JButton("Float Converter");
 		floatConverter.setBounds(225, 0, 225, 232);
 		add(floatConverter);
-		JButton btnClose = new JButton("Chiudi");
-		btnClose.setName("Chiudi");
+		JButton btnClose = new JButton("Close");
+		btnClose.setName("close");
 		btnClose.setBounds(0, 244, 225, 56);
 		add(btnClose);
 		JButton btnHelp = new JButton("Help");
@@ -46,13 +45,8 @@ public class MakeChoiseGui extends JPanel {
 		baseConverter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(baseConverter);
-				ancestor.getContentPane().removeAll();
 				BaseConverterGui panelBaseConverter = new BaseConverterGui();
-				ancestor.getContentPane().removeAll();
-				ancestor.getContentPane().add(panelBaseConverter);
-				ancestor.getContentPane().setVisible(true);
-				ancestor.revalidate();
+				setAncestorPanel(baseConverter, panelBaseConverter, null);
 			}
 		});
 

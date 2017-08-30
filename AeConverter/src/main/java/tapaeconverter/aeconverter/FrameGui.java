@@ -14,25 +14,16 @@ public class FrameGui extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrameGui() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		MakeChoiseGui p1 = new MakeChoiseGui();
-		getContentPane().add(p1);
-		setBounds(100, 100, 450, 330);
-		setVisible(true);
-		revalidate();
-		repaint();
-	}
+	
 
-	public FrameGui(JPanel p1) {
+	public FrameGui(JPanel p1,int []bounds,boolean visibility ) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().add(p1);
-		setBounds(100, 100, 450, 330);
-		setVisible(true);
+		setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
+		setVisible(visibility);
 		revalidate();
 		repaint();
 
 	}
-
 }

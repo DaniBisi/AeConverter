@@ -7,14 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class BaseConverterGui extends JPanel {
+public class BaseConverterGui extends BasePanel {
 
 	private static final long serialVersionUID = 1L;
 	private HashMap<String, Integer> dictionarySym;
@@ -51,24 +50,24 @@ public class BaseConverterGui extends JPanel {
 		this.setName("baseConverter");
 		setLayout(null);
 		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-		JComboBox<Integer> cbBaseStart = new JComboBox<>(baseAvailable);
+		JComboBox<Integer> bcBaseStart = new JComboBox<>(baseAvailable);
 
-		cbBaseStart.setSelectedIndex(0);
-		cbBaseStart.setName("baseStart");
-		cbBaseStart.setBounds(12, 37, 65, 24);
+		bcBaseStart.setSelectedIndex(0);
+		bcBaseStart.setName("baseStart");
+		bcBaseStart.setBounds(12, 37, 65, 24);
 
-		JComboBox<Integer> cbBaseDest = new JComboBox<>(baseAvailable);
-		cbBaseDest.setSelectedIndex(8);
-		cbBaseDest.setBounds(373, 37, 65, 24);
+		JComboBox<Integer> bcBaseDest = new JComboBox<>(baseAvailable);
+		bcBaseDest.setSelectedIndex(8);
+		bcBaseDest.setBounds(373, 37, 65, 24);
 
 		JTextPane tpNumber = new JTextPane();
-		tpNumber.setName("Number");
+		tpNumber.setName("number");
 		tpNumber.setBounds(99, 37, 248, 24);
 
-		JButton btnCalcola = new JButton("Calcola");
-		btnCalcola.setName("Calcola");
-		btnCalcola.setEnabled(false);
-		btnCalcola.setBounds(12, 111, 117, 25);
+		JButton btnCalc = new JButton("Calculate");
+		btnCalc.setName("calc");
+		btnCalc.setEnabled(false);
+		btnCalc.setBounds(12, 111, 117, 25);
 
 		JTextPane tpResult = new JTextPane();
 		tpResult.setName("tpResult");
@@ -78,23 +77,19 @@ public class BaseConverterGui extends JPanel {
 		btnStepByStep.setName("btnStepByStep");
 		btnStepByStep.addActionListener(arg0 -> {
 			StepByStepGui p1 = new StepByStepGui(xToTenConverter, tenToXConverter);
-			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnStepByStep);
-			ancestor.getContentPane().removeAll();
-			ancestor.getContentPane().add(p1);
-			ancestor.getContentPane().setVisible(true);
-			ancestor.revalidate();
+			setAncestorPanel(btnStepByStep,p1, new int[]{450,390});
 		});
 		btnStepByStep.setBounds(321, 110, 117, 25);
 		btnStepByStep.setEnabled(false);
 
-		JButton btnBack = new JButton("indietro");
+		JButton btnBack = new JButton("Back");
 
-		btnBack.setName("indietro1");
+		btnBack.setName("back");
 		btnBack.setBounds(12, 235, 117, 25);
 
 		add(btnBack);
-		JButton btnClose = new JButton("Chiudi");
-		btnClose.setName("Chiudi");
+		JButton btnClose = new JButton("Close");
+		btnClose.setName("close");
 		btnClose.addActionListener(arg0 -> {
 			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
 			ancestor.dispose();
@@ -116,22 +111,22 @@ public class BaseConverterGui extends JPanel {
 
 		ComponentInteract interactWithbtnCalcola = () -> {
 			if (!"".equals(tpNumber.getText())) {
-				baseStart = (Integer) cbBaseStart.getSelectedItem();
-				baseDest = (Integer) cbBaseDest.getSelectedItem();
+				baseStart = (Integer) bcBaseStart.getSelectedItem();
+				baseDest = (Integer) bcBaseDest.getSelectedItem();
 				if (checkSymbol.checkSymbols(tpNumber.getText().toUpperCase(), baseStart)) {
-					btnCalcola.setEnabled(true);
+					btnCalc.setEnabled(true);
 					lblEnterTheNumber.setForeground(new Color(0, 0, 0));
 					lblEnterTheNumber.setText("Click convert to continue...");
 				} else {
 
 					lblEnterTheNumber.setText("Number is not valid in selected base.");
 					lblEnterTheNumber.setForeground(new Color(255, 0, 0));
-					btnCalcola.setEnabled(false);
+					btnCalc.setEnabled(false);
 				}
 			} else {
 				lblEnterTheNumber.setText("Enter the number to convert");
 				lblEnterTheNumber.setForeground(new Color(0, 0, 0));
-				btnCalcola.setEnabled(false);
+				btnCalc.setEnabled(false);
 			}
 		};
 
@@ -142,11 +137,11 @@ public class BaseConverterGui extends JPanel {
 				interactWithbtnCalcola.componentInteraction();
 			}
 		});
-		cbBaseStart.addItemListener(arg0 -> interactWithbtnCalcola.componentInteraction());
+		bcBaseStart.addItemListener(arg0 -> interactWithbtnCalcola.componentInteraction());
 
-		btnCalcola.addActionListener(arg0 -> {
-			baseStart = (Integer) cbBaseStart.getSelectedItem();
-			baseDest = (Integer) cbBaseDest.getSelectedItem();
+		btnCalc.addActionListener(arg0 -> {
+			baseStart = (Integer) bcBaseStart.getSelectedItem();
+			baseDest = (Integer) bcBaseDest.getSelectedItem();
 			String number = tpNumber.getText().toUpperCase();
 			xToTenConverter = new XtoTenConverterCore(baseStart, checkSymbol);
 			tenToXConverter = new TenToXConverterCore(baseDest);
@@ -158,11 +153,8 @@ public class BaseConverterGui extends JPanel {
 
 		btnBack.addActionListener(arg0 -> {
 			MakeChoiseGui p1 = new MakeChoiseGui();
-			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnBack);
-			ancestor.getContentPane().removeAll();
-			ancestor.getContentPane().add(p1);
-			ancestor.getContentPane().setVisible(true);
-			ancestor.revalidate();
+			setAncestorPanel(btnBack,p1,null);
+			
 		});
 
 		add(lblBaseEnd);
@@ -171,10 +163,10 @@ public class BaseConverterGui extends JPanel {
 		add(btnClose);
 		add(btnStepByStep);
 		add(tpResult);
-		add(btnCalcola);
+		add(btnCalc);
 		add(tpNumber);
-		add(cbBaseDest);
-		add(cbBaseStart);
+		add(bcBaseDest);
+		add(bcBaseStart);
 
 		revalidate();
 		repaint();

@@ -41,12 +41,13 @@ public class TestBaseConverterGui{
 	public void setUp() throws Exception {
 		// Robot robot = BasicRobot.robotWithNewAwtHierarchy();
 		// robot.settings().delayBetweenEvents(100);
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui()));
+		int bounds[] = new int[] {100,180,450,330};
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(),bounds,true));
 		// frameFix = new FrameFixture(robot, frame);
 		frameFix = new FrameFixture(frame);
 
 		// frameFix.button("base_converter").click();
-		// frameFix.textBox("Number").deleteText();
+		// frameFix.textBox("number").deleteText();
 		// frameFix.show();
 		// frameFix.show();
 
@@ -66,23 +67,23 @@ public class TestBaseConverterGui{
 	@Test
 	public void TestBase_ConverterDisabledButtonText() {
 		frameFix.panel("baseConverter");
-		frameFix.textBox("Number").enterText("103");
-		frameFix.button("Calcola").requireDisabled();
+		frameFix.textBox("number").enterText("103");
+		frameFix.button("calc").requireDisabled();
 	}
 
 	@Test
 	public void TestBase_ConverterConversionRequireEnabled() {
 		frameFix.panel("baseConverter");
-		frameFix.textBox("Number").enterText("101");
-		frameFix.button("Calcola").requireEnabled();
+		frameFix.textBox("number").enterText("101");
+		frameFix.button("calc").requireEnabled();
 	}
 
 	@Test
 	public void TestBase_ConverterConversion() {
 		// frameFix.show();
 		frameFix.panel("baseConverter");
-		frameFix.textBox("Number").enterText("101");
-		frameFix.button("Calcola").click();
+		frameFix.textBox("number").enterText("101");
+		frameFix.button("calc").click();
 		frameFix.show();
 		frameFix.textBox("tpResult").requireText("5");
 	}
@@ -90,52 +91,52 @@ public class TestBaseConverterGui{
 	@Test
 	public void TestBase_ConverterClearTextPaneDisabledButton() {
 		frameFix.panel("baseConverter");
-		frameFix.textBox("Number").enterText("103");
-		frameFix.textBox("Number").pressAndReleaseKeys(8, 8, 8);
-		frameFix.textBox("Number").requireText("");
-		frameFix.button("Calcola").requireDisabled();
+		frameFix.textBox("number").enterText("103");
+		frameFix.textBox("number").pressAndReleaseKeys(8, 8, 8);
+		frameFix.textBox("number").requireText("");
+		frameFix.button("calc").requireDisabled();
 	}
 
 	@Test
 	public void TestBase_ConverterEnabledButtonText() {
 		frameFix.panel("baseConverter");
-		frameFix.textBox("Number").enterText("101");
-		frameFix.button("Calcola").requireEnabled();
+		frameFix.textBox("number").enterText("101");
+		frameFix.button("calc").requireEnabled();
 
 	}
 
 	@Test
 	public void TestBase_ConverterEnabledButtonTextAfterChangeBase() {
 		frameFix.panel("baseConverter");
-		frameFix.textBox("Number").enterText("FFFF");
+		frameFix.textBox("number").enterText("FFFF");
 		frameFix.comboBox("baseStart").selectItem(14);
-		frameFix.button("Calcola").requireEnabled();
+		frameFix.button("calc").requireEnabled();
 	}
 
 	@Test
 	public void TestBase_ConverterUpperCase() {
 		frameFix.panel("baseConverter");
-		frameFix.textBox("Number").enterText("ff");
+		frameFix.textBox("number").enterText("ff");
 		frameFix.comboBox("baseStart").selectItem(14);
-		frameFix.button("Calcola").requireEnabled();
+		frameFix.button("calc").requireEnabled();
 	}
 
 	@Test
 	public void TestBase_ConverterBase() {
 
 		// frameFix.panel("baseConverter");
-		frameFix.textBox("Number").enterText("10");
-		frameFix.button("Calcola").requireEnabled();
-		frameFix.button("Calcola").click();
+		frameFix.textBox("number").enterText("10");
+		frameFix.button("calc").requireEnabled();
+		frameFix.button("calc").click();
 		frameFix.textBox("tpResult").requireText("2");
 
 	}
 
 	@Test
 	public void TestStepByStepButtonChangePanel() {
-		frameFix.textBox("Number").enterText("10");
-		frameFix.button("Calcola").requireEnabled();
-		frameFix.button("Calcola").click();
+		frameFix.textBox("number").enterText("10");
+		frameFix.button("calc").requireEnabled();
+		frameFix.button("calc").click();
 		frameFix.button("btnStepByStep").click();
 		frameFix.panel("stepByStep").requireEnabled();
 
@@ -145,13 +146,13 @@ public class TestBaseConverterGui{
 	public void TestBase_converterBackButton() {
 		// System.out.println(frameFix.panel("baseConverter").getClass());
 		// System.out.println(frameFix.panel("baseConverter"));
-		frameFix.button("indietro1").click();
+		frameFix.button("back").click();
 		frameFix.panel("makeChoise").requireEnabled();
 	}
 //
 	@Test//(expected=org.junit.contrib.java.lang.system.internal.CheckExitCalled.class)
 	public void TestBase_converterChiudiButton() {
-		frameFix.button("Chiudi").click();
+		frameFix.button("close").click();
 		frameFix.requireNotVisible();
 	}
 }
