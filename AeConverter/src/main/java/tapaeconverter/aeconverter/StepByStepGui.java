@@ -165,7 +165,7 @@ public class StepByStepGui extends BasePanel {
 		btnBack.setName("back");
 		btnBack.addActionListener(arg0 -> {
 			BaseConverterGui p1 = new BaseConverterGui();
-			setAncestorPanel(btnBack, p1, new int[] { 450, 330 });
+			setAncestorPanel(btnBack, p1, new int[] { 450, 360 });
 		});
 		btnBack.setBounds(12, 330, 137, 35);
 		add(btnBack);

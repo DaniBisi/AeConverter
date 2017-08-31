@@ -2,6 +2,7 @@ package tapaeconverter.aeconverter;
 
 import java.awt.Color;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -45,7 +46,7 @@ public class BaseConverterGui extends BasePanel {
 		dictionarySym.put("E", 14);
 		dictionarySym.put("F", 15);
 
-		setBounds(100, 100, 450, 350);
+		setBounds(100, 100, 450, 390);
 		checkSymbol = new CheckSymbolCore(dictionarySym);
 		this.setName("baseConverter");
 		setLayout(null);
@@ -67,11 +68,11 @@ public class BaseConverterGui extends BasePanel {
 		JButton btnCalc = new JButton("Calculate");
 		btnCalc.setName("calc");
 		btnCalc.setEnabled(false);
-		btnCalc.setBounds(12, 111, 117, 25);
+		btnCalc.setBounds(0, 85, 450, 51);
 
 		JTextPane tpResult = new JTextPane();
 		tpResult.setName("tpResult");
-		tpResult.setBounds(141, 111, 168, 24);
+		tpResult.setBounds(0, 148, 450, 45);
 
 		JButton btnStepByStep = new JButton("StepByStep");
 		btnStepByStep.setName("btnStepByStep");
@@ -79,13 +80,13 @@ public class BaseConverterGui extends BasePanel {
 			StepByStepGui p1 = new StepByStepGui(xToTenConverter, tenToXConverter);
 			setAncestorPanel(btnStepByStep,p1, new int[]{450,390});
 		});
-		btnStepByStep.setBounds(321, 110, 117, 25);
+		btnStepByStep.setBounds(0, 205, 450, 53);
 		btnStepByStep.setEnabled(false);
 
 		JButton btnBack = new JButton("Back");
 
 		btnBack.setName("back");
-		btnBack.setBounds(12, 235, 117, 25);
+		btnBack.setBounds(0, 270, 223, 58);
 
 		add(btnBack);
 		JButton btnClose = new JButton("Close");
@@ -94,7 +95,7 @@ public class BaseConverterGui extends BasePanel {
 			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
 			ancestor.dispose();
 		});
-		btnClose.setBounds(321, 235, 117, 25);
+		btnClose.setBounds(225, 270, 223, 58);
 
 		JLabel lblEnterTheNumber = new JLabel("Enter the number to convert");
 		lblEnterTheNumber.setName("enterTheNumber");

@@ -21,6 +21,7 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
@@ -75,17 +76,18 @@
 			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
-				<version>1.1.10</version>
+				<version>1.2.2</version>
 				<configuration>
 					<targetClasses>
-						<param>${project.build.OutputDirectory}/*Core.java</param>
+						<param>tapaeconverter.aeconverter.*</param>
 					</targetClasses>
 					<targetTests>
-						<param>${project.build.testOutputDirectory}/Test*Core.java</param>
+						<param>tapaeconverter.aeconverter.*</param>
 					</targetTests>
-					<mutators>
-						<mutator>ALL</mutator>
-					</mutators>
+					<excludedClasses>
+						<param>*Gui</param>
+
+					</excludedClasses>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -135,6 +137,12 @@
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
 			<version>1.16.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.pitest</groupId>
+			<artifactId>pitest</artifactId>
+			<version>1.2.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

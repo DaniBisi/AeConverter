@@ -46,6 +46,14 @@ public class TestTenToXCore extends TestConverterCore {
 		assertEquals("0", b1.convert(n));
 	}
 	@Test
+	public void testNumberEqual0Size(){
+		int n = 0;
+		int base = 4;
+		TenToXConverterCore b1 = new TenToXConverterCore(base);
+		b1.convert(n);
+		assertEquals(1, b1.getStepByStep().size());
+	}
+	@Test
 	public void testCharAddiction(){
 		int n = 100;
 		int base = 15;

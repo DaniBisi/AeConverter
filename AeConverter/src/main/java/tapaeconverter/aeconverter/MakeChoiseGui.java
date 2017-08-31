@@ -46,7 +46,7 @@ public class MakeChoiseGui extends BasePanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				BaseConverterGui panelBaseConverter = new BaseConverterGui();
-				setAncestorPanel(baseConverter, panelBaseConverter, null);
+				setAncestorPanel(baseConverter, panelBaseConverter, new int[] { 450, 360 });
 			}
 		});
 

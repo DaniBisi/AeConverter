@@ -21,6 +21,13 @@ public class TenToXConverterCore extends ConverterCore {
 			}
 		if (n == 0) {
 			r.insert(0, 0);
+			stepsB.setLength(0);
+			stepsB.append(n);
+			stepsB.append("%");
+			stepsB.append(base);
+			stepsB.append(" = ");
+			stepsB.append("0");
+			steps.add(stepsB.toString());
 		}
 		else {
 			
