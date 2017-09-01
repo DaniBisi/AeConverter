@@ -41,7 +41,7 @@ public class TestBaseConverterGui{
 	public void setUp() throws Exception {
 		// Robot robot = BasicRobot.robotWithNewAwtHierarchy();
 		// robot.settings().delayBetweenEvents(100);
-		int bounds[] = new int[] {100,180,450,330};
+		int bounds[] = new int[] {100,180,450,390};
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(),bounds,true));
 		// frameFix = new FrameFixture(robot, frame);
 		frameFix = new FrameFixture(frame);
@@ -62,6 +62,11 @@ public class TestBaseConverterGui{
 	@Test
 	public void testBaseConverterButtonChangePanel() {
 		frameFix.panel("baseConverter");
+	}
+	
+	@Test
+	public void testBaseConverterCalcDisabledDefault() {
+		frameFix.button("calc").requireDisabled();
 	}
 
 	@Test
@@ -100,9 +105,8 @@ public class TestBaseConverterGui{
 	@Test
 	public void TestBase_ConverterEnabledButtonText() {
 		frameFix.panel("baseConverter");
-		frameFix.textBox("number").enterText("101");
+		frameFix.textBox("number").pressAndReleaseKeys(48);
 		frameFix.button("calc").requireEnabled();
-
 	}
 
 	@Test

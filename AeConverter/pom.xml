@@ -84,10 +84,14 @@
 					<targetTests>
 						<param>tapaeconverter.aeconverter.*</param>
 					</targetTests>
-					<excludedClasses>
+					<!-- <excludedClasses>
 						<param>*Gui</param>
-
-					</excludedClasses>
+					</excludedClasses> -->
+					<skip>false</skip>
+					<reportsDirectory>${project.build.directory}/pit-custom-output-dir</reportsDirectory>
+					<sourceDataFormats>
+						<sourceDataFormat>HTML</sourceDataFormat>
+					</sourceDataFormats>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -115,9 +119,10 @@
 						<configuration>
 							<dataFile>${jacoco.data.file}</dataFile>
 							<outputDirectory>${jacoco.report.path}</outputDirectory>
-							<excludes>
+							<exclude>**/AeConverter.java</exclude>
+							<!-- <excludes>
 								<exclude>AeConverterGui.java</exclude>
-							</excludes>
+							</excludes> -->
 						</configuration>
 					</execution>
 				</executions>

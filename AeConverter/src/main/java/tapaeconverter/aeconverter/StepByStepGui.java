@@ -19,39 +19,32 @@ public class StepByStepGui extends BasePanel {
 	 * Create the panel.
 	 */
 	public StepByStepGui(XtoTenConverterCore x1, TenToXConverterCore t1) {
+		super();
 		contStepByStep = 0;
 		contStepByStep2 = 0;
 		this.xToTen = x1;
 		this.tenToX = t1;
-		setSize(450, 390);
 		setName("stepByStep");
 		setLayout(null);
 
 		JButton btnBackX = new JButton("<<");
-
 		btnBackX.setName("btnBackX");
 		btnBackX.setEnabled(false);
-		btnBackX.setBounds(12, 33, 117, 25);
+		btnBackX.setBounds(0, 33, 129, 25);
 
 		JButton btnForwardXtT = new JButton(">>");
-
-		btnForwardXtT.setBounds(141, 33, 117, 25);
+		btnForwardXtT.setBounds(157, 33, 129, 25);
 		btnForwardXtT.setName("btnForwardX");
 
 		JButton btnAllStepsXtT = new JButton("All Steps");
-		btnAllStepsXtT.setBounds(321, 33, 117, 25);
+		btnAllStepsXtT.setBounds(315, 33, 129, 25);
 		btnAllStepsXtT.setName("allStep");
 
 		JTextPane textPaneXtT = new JTextPane();
+		add(textPaneXtT);
 		textPaneXtT.setName("textPaneXtoTenResult");
-		textPaneXtT.setBounds(12, 70, 426, 91);
+		textPaneXtT.setBounds(0, 61, 445, 82);
 		textPaneXtT.setAutoscrolls(true);
-		JScrollPane jsp = new JScrollPane();
-		jsp.setViewportView(textPaneXtT);
-		jsp.setBounds(12, 70, 426, 91);
-		jsp.setVisible(true);
-
-		add(jsp);
 
 		btnForwardXtT.addActionListener(arg0 -> {
 			String msg = textPaneXtT.getText();
@@ -69,29 +62,29 @@ public class StepByStepGui extends BasePanel {
 		add(btnForwardXtT);
 
 		JLabel lblFirstStepConvert = new JLabel("First step: Convert Number in base 10");
-		lblFirstStepConvert.setBounds(12, 6, 291, 25);
+		lblFirstStepConvert.setBounds(10, 0, 291, 25);
 		add(lblFirstStepConvert);
 
 		JButton btnBackT = new JButton("<<");
 
 		btnBackT.setName("btnBackT");
-		btnBackT.setBounds(12, 188, 117, 25);
+		btnBackT.setBounds(0, 169, 129, 25);
 		btnBackT.setEnabled(false);
 		add(btnBackT);
 
 		JButton btnForwardTtX = new JButton(">>");
 		btnForwardTtX.setName("btnForwardT");
-		btnForwardTtX.setBounds(141, 188, 117, 25);
+		btnForwardTtX.setBounds(157, 169, 129, 25);
 
 		JButton btnAllStepsTtX = new JButton("All Steps");
 
-		btnAllStepsTtX.setBounds(321, 188, 117, 25);
+		btnAllStepsTtX.setBounds(315, 169, 129, 25);
 		btnAllStepsTtX.setName("allStepT");
 		add(btnAllStepsTtX);
 
 		JTextPane textPaneTtX = new JTextPane();
 		textPaneTtX.setName("textPaneTenToXResult");
-		textPaneTtX.setBounds(12, 225, 426, 93);
+		textPaneTtX.setBounds(0, 198, 444, 82);
 		add(textPaneTtX);
 
 		btnBackT.addActionListener(arg0 -> {
@@ -158,16 +151,16 @@ public class StepByStepGui extends BasePanel {
 		});
 
 		JLabel lblSecondStepConvert = new JLabel("Second step: Convert Number in Destination Base");
-		lblSecondStepConvert.setBounds(12, 161, 426, 25);
+		lblSecondStepConvert.setBounds(10, 138, 426, 25);
 		add(lblSecondStepConvert);
 
 		JButton btnBack = new JButton("Back");
 		btnBack.setName("back");
 		btnBack.addActionListener(arg0 -> {
 			BaseConverterGui p1 = new BaseConverterGui();
-			setAncestorPanel(btnBack, p1, new int[] { 450, 360 });
+			setAncestorPanel(btnBack, p1);
 		});
-		btnBack.setBounds(12, 330, 137, 35);
+		btnBack.setBounds(0, 283, 220, 77);
 		add(btnBack);
 
 		JButton btnClose = new JButton("Close");
@@ -176,7 +169,7 @@ public class StepByStepGui extends BasePanel {
 			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
 			ancestor.dispose();
 		});
-		btnClose.setBounds(301, 330, 137, 35);
+		btnClose.setBounds(224, 283, 220, 77);
 		add(btnClose);
 		setVisible(true);
 	}

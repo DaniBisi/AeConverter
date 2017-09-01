@@ -24,7 +24,7 @@ public class TestMakeChoiseGui {
 
 	@Before
 	public void setUp() throws Exception {
-		int bounds[] = new int[] {100,100,450,330};
+		int bounds[] = new int[] {100,100,450,410};
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new MakeChoiseGui(),bounds, true));
 		frameFix = new FrameFixture(frame);
     	//frameFix.show();

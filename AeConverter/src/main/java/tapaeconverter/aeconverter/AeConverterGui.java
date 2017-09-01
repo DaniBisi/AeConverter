@@ -41,7 +41,7 @@ public class AeConverterGui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		int []bounds = {100, 100, 450, 330};
+		int []bounds = {100, 100, 450, 390};
 		frame = new FrameGui(new MakeChoiseGui(),bounds,true);
 	}
 

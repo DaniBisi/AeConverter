@@ -15,23 +15,24 @@ public class MakeChoiseGui extends BasePanel {
 	 * Create the frame.
 	 */
 	public MakeChoiseGui() {
-		setBounds(100, 100, 450, 330);
+		super();
+		
 		// ################## PANEL CHOISE VIEW ########################
 		setName("makeChoise");
 		setLayout(null);
 		JButton baseConverter = new JButton("Base Converter");
-		baseConverter.setBounds(0, 0, 225, 232);
+		baseConverter.setBounds(0, 0, 225, 265);
 		baseConverter.setName("baseConverter");
 		add(baseConverter);
 		JButton floatConverter = new JButton("Float Converter");
-		floatConverter.setBounds(225, 0, 225, 232);
+		floatConverter.setBounds(225, 0, 225, 265);
 		add(floatConverter);
 		JButton btnClose = new JButton("Close");
 		btnClose.setName("close");
-		btnClose.setBounds(0, 244, 225, 56);
+		btnClose.setBounds(225, 270, 223, 90);
 		add(btnClose);
 		JButton btnHelp = new JButton("Help");
-		btnHelp.setBounds(225, 244, 225, 56);
+		btnHelp.setBounds(0, 270, 223, 90);
 		btnHelp.setName("btnHelp");
 		add(btnHelp);
 		// ################## END PANEL CHOISE VIEW ####################
@@ -46,7 +47,7 @@ public class MakeChoiseGui extends BasePanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				BaseConverterGui panelBaseConverter = new BaseConverterGui();
-				setAncestorPanel(baseConverter, panelBaseConverter, new int[] { 450, 360 });
+				setAncestorPanel(baseConverter, panelBaseConverter);
 			}
 		});
 

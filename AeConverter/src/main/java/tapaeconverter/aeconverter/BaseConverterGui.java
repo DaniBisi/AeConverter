@@ -28,6 +28,9 @@ public class BaseConverterGui extends BasePanel {
 	 * Create the panel.
 	 */
 	public BaseConverterGui() {
+
+
+		setBounds(100, 100, 450, 430);
 		dictionarySym = new HashMap<>();
 		dictionarySym.put("0", 0);
 		dictionarySym.put("1", 1);
@@ -46,7 +49,6 @@ public class BaseConverterGui extends BasePanel {
 		dictionarySym.put("E", 14);
 		dictionarySym.put("F", 15);
 
-		setBounds(100, 100, 450, 390);
 		checkSymbol = new CheckSymbolCore(dictionarySym);
 		this.setName("baseConverter");
 		setLayout(null);
@@ -78,7 +80,7 @@ public class BaseConverterGui extends BasePanel {
 		btnStepByStep.setName("btnStepByStep");
 		btnStepByStep.addActionListener(arg0 -> {
 			StepByStepGui p1 = new StepByStepGui(xToTenConverter, tenToXConverter);
-			setAncestorPanel(btnStepByStep,p1, new int[]{450,390});
+			setAncestorPanel(btnStepByStep,p1);
 		});
 		btnStepByStep.setBounds(0, 205, 450, 53);
 		btnStepByStep.setEnabled(false);
@@ -86,7 +88,7 @@ public class BaseConverterGui extends BasePanel {
 		JButton btnBack = new JButton("Back");
 
 		btnBack.setName("back");
-		btnBack.setBounds(0, 270, 223, 58);
+		btnBack.setBounds(0, 270, 223, 90);
 
 		add(btnBack);
 		JButton btnClose = new JButton("Close");
@@ -95,7 +97,7 @@ public class BaseConverterGui extends BasePanel {
 			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
 			ancestor.dispose();
 		});
-		btnClose.setBounds(225, 270, 223, 58);
+		btnClose.setBounds(225, 270, 223, 90);
 
 		JLabel lblEnterTheNumber = new JLabel("Enter the number to convert");
 		lblEnterTheNumber.setName("enterTheNumber");
@@ -154,7 +156,7 @@ public class BaseConverterGui extends BasePanel {
 
 		btnBack.addActionListener(arg0 -> {
 			MakeChoiseGui p1 = new MakeChoiseGui();
-			setAncestorPanel(btnBack,p1,null);
+			setAncestorPanel(btnBack,p1);
 			
 		});
 
