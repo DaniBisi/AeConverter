@@ -79,14 +79,14 @@
 				<version>1.2.2</version>
 				<configuration>
 					<targetClasses>
-						<param>tapaeconverter.aeconverter.*</param>
+						<param>tapaeconverter.aeconverter.*Core</param>
 					</targetClasses>
 					<targetTests>
-						<param>tapaeconverter.aeconverter.*</param>
+						<param>tapaeconverter.aeconverter.*Core</param>
 					</targetTests>
-					<!-- <excludedClasses>
-						<param>*Gui</param>
-					</excludedClasses> -->
+					<excludedClasses>
+						<param>tapaeconverter.aeconverter.*Gui</param>
+					</excludedClasses>
 					<skip>false</skip>
 					<reportsDirectory>${project.build.directory}/pit-custom-output-dir</reportsDirectory>
 					<sourceDataFormats>
@@ -119,13 +119,14 @@
 						<configuration>
 							<dataFile>${jacoco.data.file}</dataFile>
 							<outputDirectory>${jacoco.report.path}</outputDirectory>
-							<exclude>**/AeConverter.java</exclude>
-							<!-- <excludes>
-								<exclude>AeConverterGui.java</exclude>
-							</excludes> -->
 						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<excludes>
+						<exclude>**/AeConverterGui.*</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
