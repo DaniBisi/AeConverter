@@ -1,12 +1,15 @@
 package tapaeconverter.aeconverter;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
 import tapaeconverter.aeconverter.CheckSymbolCore;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Map;
 
 public class TestCheckSymbolCore {
@@ -16,23 +19,8 @@ public class TestCheckSymbolCore {
 	private int base;
 
 	public TestCheckSymbolCore() {
-		DictionarySym = new HashMap<String, Integer>();
-		DictionarySym.put("0", 0);
-		DictionarySym.put("1", 1);
-		DictionarySym.put("2", 2);
-		DictionarySym.put("3", 3);
-		DictionarySym.put("4", 4);
-		DictionarySym.put("5", 5);
-		DictionarySym.put("6", 6);
-		DictionarySym.put("7", 7);
-		DictionarySym.put("8", 8);
-		DictionarySym.put("9", 9);
-		DictionarySym.put("A", 10);
-		DictionarySym.put("B", 11);
-		DictionarySym.put("C", 12);
-		DictionarySym.put("D", 13);
-		DictionarySym.put("E", 14);
-		DictionarySym.put("F", 15);
+
+		DictionarySym = mock(Map.class);
 		s1 = new CheckSymbolCore(DictionarySym);
 	}
 
@@ -40,6 +28,7 @@ public class TestCheckSymbolCore {
 	public void test0() {
 		strToCheck = "0";
 		base = 2;
+		when(DictionarySym.get(anyString())).thenReturn(0);
 		assertEquals(true, s1.checkDigit(strToCheck, base));
 	}
 
@@ -47,6 +36,7 @@ public class TestCheckSymbolCore {
 	public void testSymbol() {
 		strToCheck = "2";
 		base = 2;
+		when(DictionarySym.get(anyString())).thenReturn(2);
 		assertEquals(false, s1.checkDigit(strToCheck, base));
 	}
 
@@ -54,6 +44,7 @@ public class TestCheckSymbolCore {
 	public void testSymbolMoreThanOneDigit() {
 		strToCheck = "24";
 		base = 5;
+		when(DictionarySym.get(anyString())).thenReturn(2, 4);
 		assertEquals(true, s1.checkDigit(strToCheck, base));
 	}
 
@@ -61,6 +52,32 @@ public class TestCheckSymbolCore {
 	public void testExcedeLimitMoreThanOneChar() {
 		strToCheck = "0W";
 		base = 16;
+		when(DictionarySym.get(anyString())).thenReturn(0);
+		when(DictionarySym.get(anyString())).thenReturn(null);
+		assertEquals(false, s1.checkSymbols(strToCheck, base));
+	}
+
+	@Test
+	public void testCheckSymbolOk() {
+		strToCheck = "5";
+		base = 16;
+		when(DictionarySym.get(anyString())).thenReturn(5);
+		assertEquals(true, s1.checkSymbols(strToCheck, base));
+	}
+
+	@Test
+	public void testCheckSymbolWrongBase() {
+		strToCheck = "5";
+		base = 17;
+		when(DictionarySym.get(anyString())).thenReturn(5);
+		assertEquals(false, s1.checkSymbols(strToCheck, base));
+	}
+
+	@Test
+	public void testCheckSymbolWrongString() {
+		strToCheck = "6";
+		base = 5;
+		when(DictionarySym.get(anyString())).thenReturn(6);
 		assertEquals(false, s1.checkSymbols(strToCheck, base));
 	}
 
@@ -88,23 +105,5 @@ public class TestCheckSymbolCore {
 		base = 1;
 		assertEquals(true, s1.checkBase(base));
 	}
-
-	@Test
-	public void testCheckSymbolOk() {
-		strToCheck = "5";
-		base = 16;
-		assertEquals(true, s1.checkSymbols(strToCheck, base));
-	}
-	@Test
-	public void testCheckSymbolWrongBase() {
-		strToCheck = "5";
-		base = 17;
-		assertEquals(false, s1.checkSymbols(strToCheck, base));
-	}
-	@Test
-	public void testCheckSymbolWrongString() {
-		strToCheck = "6";
-		base = 5;
-		assertEquals(false, s1.checkSymbols(strToCheck, base));
-	}
+	// ################# End Test CheckBase ####################
 }

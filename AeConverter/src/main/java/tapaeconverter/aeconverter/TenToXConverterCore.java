@@ -4,6 +4,7 @@ public class TenToXConverterCore extends ConverterCore {
 	StringBuilder r;
 	StringBuilder stepsB;
 	int startIndex;
+
 	public TenToXConverterCore(int base) {
 		super(base);
 		r= new StringBuilder();
@@ -21,7 +22,7 @@ public class TenToXConverterCore extends ConverterCore {
 			}
 		if (n == 0) {
 			r.insert(0, 0);
-			stepsB.setLength(0);
+//			stepsB.setLength(0);
 			stepsB.append(n);
 			stepsB.append("%");
 			stepsB.append(base);

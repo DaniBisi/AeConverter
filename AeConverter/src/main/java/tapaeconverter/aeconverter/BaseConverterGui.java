@@ -2,7 +2,6 @@ package tapaeconverter.aeconverter;
 
 import java.awt.Color;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,7 +27,6 @@ public class BaseConverterGui extends BasePanel {
 	 * Create the panel.
 	 */
 	public BaseConverterGui() {
-
 
 		setBounds(100, 100, 450, 430);
 		dictionarySym = new HashMap<>();
@@ -80,7 +78,7 @@ public class BaseConverterGui extends BasePanel {
 		btnStepByStep.setName("btnStepByStep");
 		btnStepByStep.addActionListener(arg0 -> {
 			StepByStepGui p1 = new StepByStepGui(xToTenConverter, tenToXConverter);
-			setAncestorPanel(btnStepByStep,p1);
+			setAncestorPanel(btnStepByStep, p1);
 		});
 		btnStepByStep.setBounds(0, 205, 450, 53);
 		btnStepByStep.setEnabled(false);
@@ -156,8 +154,8 @@ public class BaseConverterGui extends BasePanel {
 
 		btnBack.addActionListener(arg0 -> {
 			MakeChoiseGui p1 = new MakeChoiseGui();
-			setAncestorPanel(btnBack,p1);
-			
+			setAncestorPanel(btnBack, p1);
+
 		});
 
 		add(lblBaseEnd);
