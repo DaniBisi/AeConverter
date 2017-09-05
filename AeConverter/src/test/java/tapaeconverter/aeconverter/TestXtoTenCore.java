@@ -19,11 +19,6 @@ public class TestXtoTenCore {
 		this.c1 = mock(CheckSymbolCore.class);
 	}
 
-	/*
-	 * @Test(expected=IllegalArgumentException.class) public void
-	 * testConstructor() { setUpBaseConverter(1,true); assertEquals(1,
-	 * b1.getBase()); }
-	 */
 	@Test
 	public void testBase2Zero() {
 		setUpBaseConverter(2, true);

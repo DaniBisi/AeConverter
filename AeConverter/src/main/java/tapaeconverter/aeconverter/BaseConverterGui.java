@@ -52,7 +52,6 @@ public class BaseConverterGui extends BasePanel {
 		setLayout(null);
 		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 		JComboBox<Integer> bcBaseStart = new JComboBox<>(baseAvailable);
-
 		bcBaseStart.setSelectedIndex(0);
 		bcBaseStart.setName("baseStart");
 		bcBaseStart.setBounds(12, 37, 65, 24);
@@ -67,8 +66,8 @@ public class BaseConverterGui extends BasePanel {
 
 		JButton btnCalc = new JButton("Calculate");
 		btnCalc.setName("calc");
-		btnCalc.setEnabled(false);
 		btnCalc.setBounds(0, 85, 450, 51);
+		btnCalc.setEnabled(false);
 
 		JTextPane tpResult = new JTextPane();
 		tpResult.setName("tpResult");
@@ -76,12 +75,12 @@ public class BaseConverterGui extends BasePanel {
 
 		JButton btnStepByStep = new JButton("StepByStep");
 		btnStepByStep.setName("btnStepByStep");
+		btnStepByStep.setBounds(0, 205, 450, 53);
+		btnStepByStep.setEnabled(false);
 		btnStepByStep.addActionListener(arg0 -> {
 			StepByStepGui p1 = new StepByStepGui(xToTenConverter, tenToXConverter);
 			setAncestorPanel(btnStepByStep, p1);
 		});
-		btnStepByStep.setBounds(0, 205, 450, 53);
-		btnStepByStep.setEnabled(false);
 
 		JButton btnBack = new JButton("Back");
 

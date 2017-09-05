@@ -16,18 +16,35 @@ import tapaeconverter.aeconverter.XtoTenConverterCore;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class TestStepByStepGui {
+public class IntegrationTest {
 
 	private FrameFixture frameFix;
 	private XtoTenConverterCore x1;
 	private TenToXConverterCore t1;
-	private ArrayList<String> r1;
+	private Map<String, Integer> dictionarySym;
 
-	public TestStepByStepGui() {
+	public IntegrationTest() {
+		dictionarySym = new HashMap<String, Integer>();
+		dictionarySym.put("0", 0);
+		dictionarySym.put("1", 1);
+		dictionarySym.put("2", 2);
+		dictionarySym.put("3", 3);
+		dictionarySym.put("4", 4);
+		dictionarySym.put("5", 5);
+		dictionarySym.put("6", 6);
+		dictionarySym.put("7", 7);
+		dictionarySym.put("8", 8);
+		dictionarySym.put("9", 9);
+		dictionarySym.put("A", 10);
+		dictionarySym.put("B", 11);
+		dictionarySym.put("C", 12);
+		dictionarySym.put("D", 13);
+		dictionarySym.put("E", 14);
+		dictionarySym.put("F", 15);
 
-		x1 = mock(XtoTenConverterCore.class);
-		t1 = mock(TenToXConverterCore.class);
 	}
 
 	@BeforeClass
@@ -35,12 +52,33 @@ public class TestStepByStepGui {
 		FailOnThreadViolationRepaintManager.install();
 	}
 
-	@Before
-	public void setUp() throws Exception {
+	private void initWithXConverter(int baseStart, String number) {
+
+		x1 = new XtoTenConverterCore(baseStart, new CheckSymbolCore(dictionarySym));
+		number = x1.deConvert(number);
+
 		int bounds[] = new int[] { 100, 180, 450, 410 };
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, t1), bounds, true));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, null), bounds, true));
 		frameFix = new FrameFixture(frame);
-		r1 = new ArrayList<String>();
+
+	}
+
+	private void initWithTConverter(int baseDest, int number) {
+
+		t1 = new TenToXConverterCore(baseDest);
+		t1.convert(number);
+
+		int bounds[] = new int[] { 100, 180, 450, 410 };
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, t1), bounds, true));
+		frameFix = new FrameFixture(frame);
+
+	}
+
+	private void initWithNoConverter() {
+		int bounds[] = new int[] { 100, 180, 450, 410 };
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, null), bounds, true));
+		frameFix = new FrameFixture(frame);
+
 	}
 
 	@After
@@ -50,12 +88,14 @@ public class TestStepByStepGui {
 
 	@Test
 	public void TestStepByStepBackButton() {
+		initWithNoConverter();
 		frameFix.button("back").click();
 		frameFix.panel("baseConverter").requireEnabled();
 	}
 
 	@Test
 	public void TestStepByStepCloseButton() {
+		initWithNoConverter();
 		frameFix.button("close").click();
 		frameFix.requireNotVisible();
 	}
@@ -63,47 +103,44 @@ public class TestStepByStepGui {
 	// ###################### XtoTen Part ############################
 	@Test
 	public void testBtnBackDisabletAtStart() {
+		initWithNoConverter();
 		frameFix.button("btnBackX").requireDisabled();
 	}
 
 	@Test
 	public void testForwardButtonChangeBackButtonState() {
-		r1.add("boh");
-		when(x1.getStepByStep()).thenReturn(r1);
+		initWithXConverter(2, "1");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").requireEnabled();
 	}
 
 	@Test
 	public void testForwardXButtonChangeTextPane() {
-		r1.add("simple text");
-		when(x1.getStepByStep()).thenReturn(r1);
+		initWithXConverter(2, "1");
 		frameFix.button("btnForwardX").click();
-		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\n");
+		frameFix.textBox("textPaneXtoTenResult").requireText("1*(2^0)\n");
 	}
 
 	@Test
 	public void testForwardXButtonChangeTextPaneTwoString() {
-		r1.add("simple text");
-		r1.add("second simple text");
-		when(x1.getStepByStep()).thenReturn(r1);
+		initWithXConverter(2, "10");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnForwardX").click();
-		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\nsecond simple text\n");
+		frameFix.textBox("textPaneXtoTenResult").requireText("0*(2^0)\n1*(2^1)\n");
 	}
 
 	@Test
 	public void testForwardXButtonDisabledAfterShowAllSteps() {
-		r1.add("simple text");
-		when(x1.getStepByStep()).thenReturn(r1);
+
+		initWithXConverter(2, "1");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnForwardX").requireDisabled();
 	}
 
 	@Test
 	public void testBackButtonChangeTextPane() {
-		r1.add("simple text");
-		when(x1.getStepByStep()).thenReturn(r1);
+
+		initWithXConverter(2, "1");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
 		frameFix.textBox("textPaneXtoTenResult").requireText("");
@@ -112,9 +149,8 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testForwardXButtonDisabledMoreStep() {
-		r1.add("simple text");
-		r1.add("simple text2");
-		when(x1.getStepByStep()).thenReturn(r1);
+
+		initWithXConverter(2, "10");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnForwardX").requireDisabled();
@@ -122,9 +158,8 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testForwardXButtonAfterBackButtonx() {
-		r1.add("simple text");
-		r1.add("simple text2");
-		when(x1.getStepByStep()).thenReturn(r1);
+
+		initWithXConverter(2, "10");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
@@ -134,9 +169,8 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testBackXButtonEnabledAfterOneStep() {
-		r1.add("simple text");
-		r1.add("simple text2");
-		when(x1.getStepByStep()).thenReturn(r1);
+
+		initWithXConverter(2, "10");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
@@ -145,20 +179,18 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testBackButtonChangeTextPaneTwoString() {
-		r1.add("simple text");
-		r1.add("second simple text");
-		when(x1.getStepByStep()).thenReturn(r1);
+
+		initWithXConverter(2, "10");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
-		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\n");
+		frameFix.textBox("textPaneXtoTenResult").requireText("0*(2^0)\n");
 	}
 
 	@Test
 	public void testBackButtonChangeForwardStatus() {
-		r1.add("simple text");
-		r1.add("second simple text");
-		when(x1.getStepByStep()).thenReturn(r1);
+
+		initWithXConverter(2, "10");
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnForwardX").click();
 		frameFix.button("btnBackX").click();
@@ -167,21 +199,22 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testAllStep() {
-		r1.add("simple text");
-		r1.add("second simple text");
-		when(x1.getStepByStep()).thenReturn(r1);
+
+		initWithXConverter(2, "10");
 		frameFix.button("allStep").click();
-		frameFix.textBox("textPaneXtoTenResult").requireText("simple text\nsecond simple text\n");
+		frameFix.textBox("textPaneXtoTenResult").requireText("0*(2^0)\n1*(2^1)\n");
 	}
 
 	@Test
 	public void TestAllXStepChangeBtnBackStatus() {
+		initWithXConverter(2, "10");
 		frameFix.button("allStep").click();
 		frameFix.button("btnBackX").requireEnabled();
 	}
 
 	@Test
 	public void TestAllStepChangeBtnForwardStatus() {
+		initWithXConverter(2, "10");
 		frameFix.button("allStep").click();
 		frameFix.button("btnForwardX").requireDisabled();
 	}
@@ -192,47 +225,45 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testBtnBackTDisabletAtStart() {
+		initWithTConverter(5, 1);
 		frameFix.button("btnBackT").requireDisabled();
 	}
 
 	@Test
 	public void testForwardTButtonChangeBackButtonState() {
-		r1.add("boh");
-		when(t1.getStepByStep()).thenReturn(r1);
+
+		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").requireEnabled();
 	}
 
 	@Test
 	public void testForwardTButtonChangeTextPane() {
-		r1.add("simple text");
-		when(t1.getStepByStep()).thenReturn(r1);
+
+		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
-		frameFix.textBox("textPaneTenToXResult").requireText("simple text\n");
+		frameFix.textBox("textPaneTenToXResult").requireText("1%5 = 1\n");
 	}
 
 	@Test
 	public void testForwardTButtonChangeTextPaneTwoString() {
-		r1.add("simple text");
-		r1.add("second simple text");
-		when(t1.getStepByStep()).thenReturn(r1);
+
+		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
-		frameFix.textBox("textPaneTenToXResult").requireText("simple text\nsecond simple text\n");
+		frameFix.textBox("textPaneTenToXResult").requireText("10%5 = 0\n2%5 = 2\n");
 	}
 
 	@Test
 	public void testForwardTButtonDisabledAfterShowAllSteps() {
-		r1.add("simple text");
-		when(t1.getStepByStep()).thenReturn(r1);
+		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").requireDisabled();
 	}
 
 	@Test
 	public void testBackTButtonChangeTextPane() {
-		r1.add("simple text");
-		when(t1.getStepByStep()).thenReturn(r1);
+		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("");
@@ -241,9 +272,7 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testForwardTButtonDisabledMoreStep() {
-		r1.add("simple text");
-		r1.add("simple text2");
-		when(t1.getStepByStep()).thenReturn(r1);
+		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").requireDisabled();
@@ -251,9 +280,7 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testForwardTButtonAfterBackButtonx() {
-		r1.add("simple text");
-		r1.add("simple text2");
-		when(t1.getStepByStep()).thenReturn(r1);
+		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
@@ -263,9 +290,7 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testBackTButtonEnabledAfterOneStep() {
-		r1.add("simple text");
-		r1.add("simple text2");
-		when(t1.getStepByStep()).thenReturn(r1);
+		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
@@ -274,20 +299,16 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testBackTButtonChangeTextPaneTwoString() {
-		r1.add("simple text");
-		r1.add("second simple text");
-		when(t1.getStepByStep()).thenReturn(r1);
+		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
-		frameFix.textBox("textPaneTenToXResult").requireText("simple text\n");
+		frameFix.textBox("textPaneTenToXResult").requireText("10%5 = 0\n");
 	}
 
 	@Test
 	public void testBackTButtonChangeForwardStatus() {
-		r1.add("simple text");
-		r1.add("second simple text");
-		when(t1.getStepByStep()).thenReturn(r1);
+		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
@@ -296,21 +317,21 @@ public class TestStepByStepGui {
 
 	@Test
 	public void testAllStepT() {
-		r1.add("simple text");
-		r1.add("second simple text");
-		when(t1.getStepByStep()).thenReturn(r1);
+		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
-		frameFix.textBox("textPaneTenToXResult").requireText("simple text\nsecond simple text\n");
+		frameFix.textBox("textPaneTenToXResult").requireText("10%5 = 0\n2%5 = 2\n");
 	}
 
 	@Test
 	public void TestAllTStepChangeBtnBackStatus() {
+		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
 		frameFix.button("btnBackT").requireEnabled();
 	}
 
 	@Test
 	public void TestAllStepChangebtnForwardTStatus() {
+		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
 		frameFix.button("btnForwardT").requireDisabled();
 	}

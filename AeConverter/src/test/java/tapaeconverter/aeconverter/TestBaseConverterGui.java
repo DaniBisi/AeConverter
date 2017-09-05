@@ -1,69 +1,44 @@
 package tapaeconverter.aeconverter;
 
-//import org.assertj.swing.*;
-//
-//import javax.swing.SwingUtilities;
-//
-//import org.assertj.swing.core.BasicRobot;
-//import org.assertj.swing.core.Robot;
-//import org.assertj.swing.core.Settings;
+import java.awt.Color;
+
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
-//import org.assertj.swing.security.ExitCallHook;
-//import org.assertj.swing.security.NoExitSecurityManager;
-//import org.assertj.swing.security.NoExitSecurityManagerInstaller;
 import org.junit.After;
-//import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-//import org.junit.Ignore;
-//import org.junit.Rule;
 import org.junit.Test;
+
 import tapaeconverter.aeconverter.BaseConverterGui;
 import tapaeconverter.aeconverter.FrameGui;
 
-//import static org.junit.Assert.assertEquals;
-
-public class TestBaseConverterGui{
-	//private static NoExitSecurityManagerInstaller noExitSecurityManagerInstaller;
+public class TestBaseConverterGui {
 	private FrameFixture frameFix;
-	
+
 	@BeforeClass
 	public static void setUpOnce() {
-//		ehwf = new exitHookWithFeedBack();
-//		noExitSecurityManagerInstaller = NoExitSecurityManagerInstaller
-//				.installNoExitSecurityManager(ehwf);
 		FailOnThreadViolationRepaintManager.install();
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		// Robot robot = BasicRobot.robotWithNewAwtHierarchy();
-		// robot.settings().delayBetweenEvents(100);
-		int bounds[] = new int[] {100,180,450,390};
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(),bounds,true));
-		// frameFix = new FrameFixture(robot, frame);
+		int bounds[] = new int[] { 100, 180, 450, 390 };
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(), bounds, true));
 		frameFix = new FrameFixture(frame);
-
-		// frameFix.button("base_converter").click();
-		// frameFix.textBox("number").deleteText();
-		// frameFix.show();
-		// frameFix.show();
 
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		frameFix.cleanUp();
-	//	noExitSecurityManagerInstaller.uninstall();
 	}
 
 	@Test
 	public void testBaseConverterButtonChangePanel() {
 		frameFix.panel("baseConverter");
 	}
-	
+
 	@Test
 	public void testBaseConverterCalcDisabledDefault() {
 		frameFix.button("calc").requireDisabled();
@@ -85,7 +60,6 @@ public class TestBaseConverterGui{
 
 	@Test
 	public void TestBase_ConverterConversion() {
-		// frameFix.show();
 		frameFix.panel("baseConverter");
 		frameFix.textBox("number").enterText("101");
 		frameFix.button("calc").click();
@@ -127,8 +101,6 @@ public class TestBaseConverterGui{
 
 	@Test
 	public void TestBase_ConverterBase() {
-
-		// frameFix.panel("baseConverter");
 		frameFix.textBox("number").enterText("10");
 		frameFix.button("calc").requireEnabled();
 		frameFix.button("calc").click();
@@ -148,15 +120,41 @@ public class TestBaseConverterGui{
 
 	@Test
 	public void TestBase_converterBackButton() {
-		// System.out.println(frameFix.panel("baseConverter").getClass());
-		// System.out.println(frameFix.panel("baseConverter"));
 		frameFix.button("back").click();
 		frameFix.panel("makeChoise").requireEnabled();
 	}
-//
-	@Test//(expected=org.junit.contrib.java.lang.system.internal.CheckExitCalled.class)
+
+	@Test
 	public void TestBase_converterChiudiButton() {
 		frameFix.button("close").click();
 		frameFix.requireNotVisible();
 	}
+
+	// ##################### INTERACTION WITH LABEL ######################
+	@Test
+	public void TestLabelChangeColorIfError() {
+		frameFix.textBox("number").enterText("5");
+		frameFix.label("enterTheNumber").foreground().requireEqualTo(new Color(255, 0, 0));
+	}
+
+	@Test
+	public void TestLabelChangeTextIfError() {
+		frameFix.textBox("number").enterText("5");
+		frameFix.label("enterTheNumber").requireText("Number is not valid in selected base.");
+	}
+
+	@Test
+	public void TestLabelTextReturnNormalIfErrorIsCorrected() {
+		frameFix.textBox("number").enterText("5");
+		frameFix.textBox("number").pressAndReleaseKeys(8, 8, 8);
+		frameFix.label("enterTheNumber").requireText("Enter the number to convert");
+	}
+
+	@Test
+	public void TestLabelColorReturnNormalIfErrorIsCorrected() {
+		frameFix.textBox("number").enterText("5");
+		frameFix.textBox("number").pressAndReleaseKeys(8, 8, 8);
+		frameFix.label("enterTheNumber").foreground().requireEqualTo(new Color(0, 0, 0));
+	}
+
 }

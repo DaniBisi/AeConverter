@@ -1,0 +1,17 @@
+//		DictionarySym = new HashMap<String, Integer>();
+//		DictionarySym.put("0", 0);
+//		DictionarySym.put("1", 1);
+//		DictionarySym.put("2", 2);
+//		DictionarySym.put("3", 3);
+//		DictionarySym.put("4", 4);
+//		DictionarySym.put("5", 5);
+//		DictionarySym.put("6", 6);
+//		DictionarySym.put("7", 7);
+//		DictionarySym.put("8", 8);
+//		DictionarySym.put("9", 9);
+//		DictionarySym.put("A", 10);
+//		DictionarySym.put("B", 11);
+//		DictionarySym.put("C", 12);
+//		DictionarySym.put("D", 13);
+//		DictionarySym.put("E", 14);
+//		DictionarySym.put("F", 15);
