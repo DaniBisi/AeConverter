@@ -118,7 +118,6 @@ public class BaseConverterGui extends BasePanel {
 					lblEnterTheNumber.setForeground(new Color(0, 0, 0));
 					lblEnterTheNumber.setText("Click convert to continue...");
 				} else {
-
 					lblEnterTheNumber.setText("Number is not valid in selected base.");
 					lblEnterTheNumber.setForeground(new Color(255, 0, 0));
 					btnCalc.setEnabled(false);

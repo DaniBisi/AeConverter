@@ -156,5 +156,17 @@ public class TestBaseConverterGui {
 		frameFix.textBox("number").pressAndReleaseKeys(8, 8, 8);
 		frameFix.label("enterTheNumber").foreground().requireEqualTo(new Color(0, 0, 0));
 	}
+	@Test
+	public void TestLabelTextChangeWhenInsertNumber() {
+		frameFix.textBox("number").enterText("1001");
+		frameFix.label("enterTheNumber").requireText("Click convert to continue...");
+	}
+
+	@Test
+	public void TestLabelTextChangeAfterChangingBaseStart() {
+		frameFix.textBox("number").enterText("2002");
+		frameFix.comboBox("baseStart").selectItem(2);
+		frameFix.label("enterTheNumber").requireText("Click convert to continue...");
+	}
 
 }

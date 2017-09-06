@@ -4,7 +4,6 @@ import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,20 +12,17 @@ import tapaeconverter.aeconverter.StepByStepGui;
 import tapaeconverter.aeconverter.TenToXConverterCore;
 import tapaeconverter.aeconverter.XtoTenConverterCore;
 
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IntegrationTest {
+public class TestIntegration {
 
 	private FrameFixture frameFix;
 	private XtoTenConverterCore x1;
 	private TenToXConverterCore t1;
 	private Map<String, Integer> dictionarySym;
 
-	public IntegrationTest() {
+	public TestIntegration() {
 		dictionarySym = new HashMap<String, Integer>();
 		dictionarySym.put("0", 0);
 		dictionarySym.put("1", 1);
