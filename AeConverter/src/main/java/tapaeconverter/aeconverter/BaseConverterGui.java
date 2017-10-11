@@ -12,6 +12,9 @@ import javax.swing.SwingUtilities;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class BaseConverterGui extends BasePanel {
 
@@ -28,7 +31,7 @@ public class BaseConverterGui extends BasePanel {
 	 */
 	public BaseConverterGui() {
 
-		setBounds(100, 100, 450, 430);
+		setBounds(100, 100, 773, 170);
 		dictionarySym = new HashMap<>();
 		dictionarySym.put("0", 0);
 		dictionarySym.put("1", 1);
@@ -49,65 +52,41 @@ public class BaseConverterGui extends BasePanel {
 
 		checkSymbol = new CheckSymbolCore(dictionarySym);
 		this.setName("baseConverter");
-		setLayout(null);
 		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-		JComboBox<Integer> bcBaseStart = new JComboBox<>(baseAvailable);
+		JComboBox<Integer> bcBaseStart = new JComboBox(baseAvailable);
 		bcBaseStart.setSelectedIndex(0);
 		bcBaseStart.setName("baseStart");
-		bcBaseStart.setBounds(12, 37, 65, 24);
 
-		JComboBox<Integer> bcBaseDest = new JComboBox<>(baseAvailable);
+		JComboBox<Integer> bcBaseDest = new JComboBox(baseAvailable);
 		bcBaseDest.setSelectedIndex(8);
-		bcBaseDest.setBounds(373, 37, 65, 24);
 
 		JTextPane tpNumber = new JTextPane();
 		tpNumber.setName("number");
-		tpNumber.setBounds(99, 37, 248, 24);
 
 		JButton btnCalc = new JButton("Calculate");
 		btnCalc.setName("calc");
-		btnCalc.setBounds(0, 85, 450, 51);
 		btnCalc.setEnabled(false);
 
 		JTextPane tpResult = new JTextPane();
 		tpResult.setName("tpResult");
-		tpResult.setBounds(0, 148, 450, 45);
 
 		JButton btnStepByStep = new JButton("StepByStep");
 		btnStepByStep.setName("btnStepByStep");
-		btnStepByStep.setBounds(0, 205, 450, 53);
 		btnStepByStep.setEnabled(false);
 		btnStepByStep.addActionListener(arg0 -> {
 			StepByStepGui p1 = new StepByStepGui(xToTenConverter, tenToXConverter);
 			setAncestorPanel(btnStepByStep, p1);
 		});
 
-		JButton btnBack = new JButton("Back");
-
-		btnBack.setName("back");
-		btnBack.setBounds(0, 270, 223, 90);
-
-		add(btnBack);
-		JButton btnClose = new JButton("Close");
-		btnClose.setName("close");
-		btnClose.addActionListener(arg0 -> {
-			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
-			ancestor.dispose();
-		});
-		btnClose.setBounds(225, 270, 223, 90);
-
 		JLabel lblEnterTheNumber = new JLabel("Enter the number to convert");
 		lblEnterTheNumber.setName("enterTheNumber");
-		lblEnterTheNumber.setBounds(99, 12, 223, 25);
 
 		JLabel lblBaseStart = new JLabel("Base Start");
 		lblBaseStart.setForeground(Color.BLACK);
 		lblBaseStart.setName("baseStart");
-		lblBaseStart.setBounds(12, 14, 81, 20);
 
 		JLabel lblBaseEnd = new JLabel("Base End");
 		lblBaseEnd.setName("baseEnd");
-		lblBaseEnd.setBounds(373, 14, 70, 20);
 
 		ComponentInteract interactWithbtnCalcola = () -> {
 			if (!"".equals(tpNumber.getText())) {
@@ -149,23 +128,60 @@ public class BaseConverterGui extends BasePanel {
 			tpResult.setText(number);
 			btnStepByStep.setEnabled(true);
 		});
-
-		btnBack.addActionListener(arg0 -> {
-			MakeChoiseGui p1 = new MakeChoiseGui();
-			setAncestorPanel(btnBack, p1);
-
-		});
-
-		add(lblBaseEnd);
-		add(lblBaseStart);
-		add(lblEnterTheNumber);
-		add(btnClose);
-		add(btnStepByStep);
-		add(tpResult);
-		add(btnCalc);
-		add(tpNumber);
-		add(bcBaseDest);
-		add(bcBaseStart);
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(12)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addComponent(lblBaseStart, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+									.addGap(6)
+									.addComponent(lblEnterTheNumber, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblBaseEnd, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addComponent(bcBaseStart, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+									.addGap(22)
+									.addComponent(tpNumber, GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(bcBaseDest, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(tpResult)))
+					.addGap(12)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnCalc, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnStepByStep, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(12)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnCalc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(2)
+									.addComponent(lblBaseStart, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(lblEnterTheNumber, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblBaseEnd, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(bcBaseStart)
+								.addComponent(bcBaseDest)
+								.addComponent(tpNumber, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))))
+					.addGap(33)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(tpResult)
+						.addComponent(btnStepByStep, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+					.addContainerGap(42, Short.MAX_VALUE))
+		);
+		setLayout(groupLayout);
 
 		revalidate();
 		repaint();

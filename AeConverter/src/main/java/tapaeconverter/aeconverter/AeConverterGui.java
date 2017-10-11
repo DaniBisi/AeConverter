@@ -42,7 +42,7 @@ public class AeConverterGui {
 	 */
 	private void initialize() {
 		int[] bounds = { 100, 100, 450, 390 };
-		frame = new FrameGui(new MakeChoiseGui(), bounds, true);
+		frame = new FrameGui(new HomeGui(), true);
 	}
 
 }

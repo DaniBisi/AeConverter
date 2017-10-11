@@ -17,15 +17,14 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 
-public class TestStepByStepGui {
+public class TestStepByStepGui extends TestBaseFrame {
 
-	private FrameFixture frameFix;
 	private XtoTenConverterCore x1;
 	private TenToXConverterCore t1;
 	private ArrayList<String> r1;
 
 	public TestStepByStepGui() {
-
+		super();
 		x1 = mock(XtoTenConverterCore.class);
 		t1 = mock(TenToXConverterCore.class);
 	}
@@ -37,8 +36,7 @@ public class TestStepByStepGui {
 
 	@Before
 	public void setUp() throws Exception {
-		int bounds[] = new int[] { 100, 180, 450, 410 };
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, t1), bounds, true));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, t1), true));
 		frameFix = new FrameFixture(frame);
 		r1 = new ArrayList<String>();
 	}
@@ -46,18 +44,6 @@ public class TestStepByStepGui {
 	@After
 	public void tearDown() throws Exception {
 		frameFix.cleanUp();
-	}
-
-	@Test
-	public void TestStepByStepBackButton() {
-		frameFix.button("back").click();
-		frameFix.panel("baseConverter").requireEnabled();
-	}
-
-	@Test
-	public void TestStepByStepCloseButton() {
-		frameFix.button("close").click();
-		frameFix.requireNotVisible();
 	}
 
 	// ###################### XtoTen Part ############################

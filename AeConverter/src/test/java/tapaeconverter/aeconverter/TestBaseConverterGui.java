@@ -13,9 +13,12 @@ import org.junit.Test;
 import tapaeconverter.aeconverter.BaseConverterGui;
 import tapaeconverter.aeconverter.FrameGui;
 
-public class TestBaseConverterGui {
-	private FrameFixture frameFix;
-
+public class TestBaseConverterGui extends TestBaseFrame{
+	
+	public TestBaseConverterGui() {
+	super();
+	}
+	
 	@BeforeClass
 	public static void setUpOnce() {
 		FailOnThreadViolationRepaintManager.install();
@@ -23,8 +26,7 @@ public class TestBaseConverterGui {
 
 	@Before
 	public void setUp() throws Exception {
-		int bounds[] = new int[] { 100, 180, 450, 390 };
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(), bounds, true));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(), true));
 		frameFix = new FrameFixture(frame);
 
 	}
@@ -118,18 +120,7 @@ public class TestBaseConverterGui {
 
 	}
 
-	@Test
-	public void TestBase_converterBackButton() {
-		frameFix.button("back").click();
-		frameFix.panel("makeChoise").requireEnabled();
-	}
-
-	@Test
-	public void TestBase_converterChiudiButton() {
-		frameFix.button("close").click();
-		frameFix.requireNotVisible();
-	}
-
+	
 	// ##################### INTERACTION WITH LABEL ######################
 	@Test
 	public void TestLabelChangeColorIfError() {
