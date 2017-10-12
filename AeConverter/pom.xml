@@ -17,11 +17,11 @@
 		<sonar.language>java</sonar.language>
 		<sonar.jacoco.reportPath>${jacoco.data.file}</sonar.jacoco.reportPath>
 		<sonar.jacoco.itReportPath>${jacoco.data.it.file}</sonar.jacoco.itReportPath>
+		<sonar.coverage.exclusions>**/AeConverterGui*.*</sonar.coverage.exclusions>
 	</properties>
 	<build>
 		<pluginManagement>
 			<plugins>
-
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>

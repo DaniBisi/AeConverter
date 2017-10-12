@@ -5,10 +5,8 @@ import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -53,11 +51,11 @@ public class BaseConverterGui extends BasePanel {
 		checkSymbol = new CheckSymbolCore(dictionarySym);
 		this.setName("baseConverter");
 		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-		JComboBox<Integer> bcBaseStart = new JComboBox(baseAvailable);
+		JComboBox<Integer> bcBaseStart = new JComboBox<>(baseAvailable);
 		bcBaseStart.setSelectedIndex(0);
 		bcBaseStart.setName("baseStart");
 
-		JComboBox<Integer> bcBaseDest = new JComboBox(baseAvailable);
+		JComboBox<Integer> bcBaseDest = new JComboBox<>(baseAvailable);
 		bcBaseDest.setSelectedIndex(8);
 
 		JTextPane tpNumber = new JTextPane();

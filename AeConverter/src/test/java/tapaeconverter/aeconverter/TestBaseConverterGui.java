@@ -13,12 +13,12 @@ import org.junit.Test;
 import tapaeconverter.aeconverter.BaseConverterGui;
 import tapaeconverter.aeconverter.FrameGui;
 
-public class TestBaseConverterGui extends TestBaseFrame{
-	
+public class TestBaseConverterGui extends TestBaseFrame {
+
 	public TestBaseConverterGui() {
-	super();
+		super();
 	}
-	
+
 	@BeforeClass
 	public static void setUpOnce() {
 		FailOnThreadViolationRepaintManager.install();
@@ -120,7 +120,6 @@ public class TestBaseConverterGui extends TestBaseFrame{
 
 	}
 
-	
 	// ##################### INTERACTION WITH LABEL ######################
 	@Test
 	public void TestLabelChangeColorIfError() {
@@ -147,6 +146,7 @@ public class TestBaseConverterGui extends TestBaseFrame{
 		frameFix.textBox("number").pressAndReleaseKeys(8, 8, 8);
 		frameFix.label("enterTheNumber").foreground().requireEqualTo(new Color(0, 0, 0));
 	}
+
 	@Test
 	public void TestLabelTextChangeWhenInsertNumber() {
 		frameFix.textBox("number").enterText("1001");

@@ -1,9 +1,7 @@
 package tapaeconverter.aeconverter;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
