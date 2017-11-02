@@ -38,12 +38,6 @@ public class TestStepByStepGui extends TestBaseFrame {
 	public void setUp() throws Exception {
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, t1), true));
 		frameFix = new FrameFixture(frame);
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		r1 = new ArrayList<String>();
 	}
 
