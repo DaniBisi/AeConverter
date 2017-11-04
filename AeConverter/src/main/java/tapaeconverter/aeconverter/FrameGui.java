@@ -45,7 +45,7 @@ public class FrameGui extends JFrame {
 		file.add(mntmClose);
 
 		mntmBaseConversion.addActionListener(arg0 -> {
-			BaseConverterGui panelBaseConverter = new BaseConverterGui();
+			BaseConverterGui panelBaseConverter = new BaseConverterGui(new CheckSymbolCore(null), new XtoTenConverterCore(), new TenToXConverterCore());
 			getContentPane().remove(1);
 			getContentPane().add(panelBaseConverter);
 			resizeWindows(panelBaseConverter);

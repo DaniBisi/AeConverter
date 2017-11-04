@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import tapaeconverter.aeconverter.CheckSymbolCore;
 
+import java.util.HashMap;
 //import java.util.HashMap;
 import java.util.Map;
 
@@ -105,5 +106,17 @@ public class TestCheckSymbolCore {
 		base = 1;
 		assertEquals(true, s1.checkBase(base));
 	}
+	
+	
 	// ################# End Test CheckBase ####################
+	
+
+	@Test
+	public void testSetDictionary(){
+		Map<String, Integer> dS;
+		dS = new HashMap<>();
+		dS.put("test", 1);
+		s1.setDictionarySym(dS);
+		assertEquals(dS, s1.dictionarySym);
+	}
 }

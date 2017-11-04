@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class CheckSymbolCore {
 
-	private Map<String, Integer> dictionarySym;
+	protected Map<String, Integer> dictionarySym;
 
 	public CheckSymbolCore(Map<String, Integer> dictionarySym) {
 		this.dictionarySym = dictionarySym;
@@ -26,6 +26,10 @@ public class CheckSymbolCore {
 		return true;
 	}
 
+	public void setDictionarySym(Map<String, Integer> dS){
+		dictionarySym = dS;
+		
+	}
 	protected boolean checkBase(int base) {
 		return base > 0 && base < 17;
 	}

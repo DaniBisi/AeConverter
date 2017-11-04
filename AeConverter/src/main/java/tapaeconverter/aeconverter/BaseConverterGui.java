@@ -27,7 +27,7 @@ public class BaseConverterGui extends BasePanel {
 	/**
 	 * Create the panel.
 	 */
-	public BaseConverterGui() {
+	public BaseConverterGui(CheckSymbolCore cs, XtoTenConverterCore x1,TenToXConverterCore t1 ) {
 
 		setBounds(100, 100, 773, 170);
 		dictionarySym = new HashMap<>();
@@ -48,7 +48,12 @@ public class BaseConverterGui extends BasePanel {
 		dictionarySym.put("E", 14);
 		dictionarySym.put("F", 15);
 
-		checkSymbol = new CheckSymbolCore(dictionarySym);
+		checkSymbol = cs;
+		checkSymbol.setDictionarySym(dictionarySym);
+		xToTenConverter = x1;
+		tenToXConverter = t1;
+		
+		
 		this.setName("baseConverter");
 		Integer[] baseAvailable = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 		JComboBox<Integer> bcBaseStart = new JComboBox<>(baseAvailable);
@@ -119,8 +124,8 @@ public class BaseConverterGui extends BasePanel {
 			baseStart = (Integer) bcBaseStart.getSelectedItem();
 			baseDest = (Integer) bcBaseDest.getSelectedItem();
 			String number = tpNumber.getText().toUpperCase();
-			xToTenConverter = new XtoTenConverterCore(baseStart, checkSymbol);
-			tenToXConverter = new TenToXConverterCore(baseDest);
+			xToTenConverter.setField(baseStart, cs);
+			tenToXConverter.setBase(baseDest); 
 			number = xToTenConverter.deConvert(number);
 			number = tenToXConverter.convert(Integer.parseInt(number));
 			tpResult.setText(number);

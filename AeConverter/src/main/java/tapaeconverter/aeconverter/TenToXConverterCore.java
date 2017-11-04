@@ -11,6 +11,12 @@ public class TenToXConverterCore extends ConverterCore {
 		stepsB= new StringBuilder();
 		startIndex = 0;
 	}
+	
+	public TenToXConverterCore(){
+		r= new StringBuilder();
+		stepsB= new StringBuilder();
+		startIndex = 0;
+	}
 
 	public String convert(int n) {
 		int number = n;
