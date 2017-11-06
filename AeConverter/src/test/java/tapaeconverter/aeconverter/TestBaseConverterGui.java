@@ -112,7 +112,7 @@ public class TestBaseConverterGui extends TestBaseFrame {
 		frameFix.button("calc").requireEnabled();
 		frameFix.button("calc").click();
 		frameFix.button("btnStepByStep").click();
-		frameFix.panel("stepByStep").requireEnabled();
+		frameFix.panel("stepByStep").requireVisible();
 
 	}
 
