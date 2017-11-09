@@ -36,5 +36,10 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/passwdVNC.sh</locationURI>
 		</link>
+		<link>
+			<name>pit-custom-output-dir</name>
+			<type>2</type>
+			<location>/home/daniele/git/AeConverter/AeConverter/target/pit-custom-output-dir</location>
+		</link>
 	</linkedResources>
 </projectDescription>

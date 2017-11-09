@@ -1,5 +1,6 @@
 package tapaeconverter.aeconverter;
 
+import org.assertj.swing.core.Settings;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
@@ -32,12 +33,16 @@ public class TestStepByStepGui extends TestBaseFrame {
 	@BeforeClass
 	public static void setUpOnce() {
 		FailOnThreadViolationRepaintManager.install();
+//	    Settings s1 = new Settings();
+//	    s1.delayBetweenEvents(1000); //default change this to change time between events
+//	    s1.timeoutToBeVisible(500);
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, t1), true));
 		frameFix = new FrameFixture(frame);
+		frameFix.show();
 		r1 = new ArrayList<String>();
 	}
 
