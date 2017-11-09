@@ -1,2 +1,12 @@
-/target/
-!/target/pit-custom-output-dir/
+/target/archive-tmp/
+/target/classes/
+/target/coveragereports/
+/target/generated-sources/
+/target/generated-test-sources/
+/target/jacocout/
+/target/maven-archiver/
+/target/maven-status/
+/target/surefire-reports/
+/target/test-classes/
+/target/AeConverter-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+/target/AeConverter-0.0.1-SNAPSHOT.jar
