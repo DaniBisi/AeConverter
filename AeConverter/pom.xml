@@ -89,6 +89,7 @@
 					</excludedClasses>
 					<skip>false</skip>
 					<reportsDirectory>${project.build.directory}/pit-custom-output-dir</reportsDirectory>
+					<timestampedReports>false</timestampedReports>
 					<sourceDataFormats>
 						<sourceDataFormat>HTML</sourceDataFormat>
 					</sourceDataFormats>
