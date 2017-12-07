@@ -11,10 +11,11 @@ import tapaeconverter.aeconverter.TenToXConverterCore;
 public class TestTenToXCore extends TestConverterCore {
 
 	@Test
-	public void testContructorWithNoParam(){//questo test specifica che il costruttore non generi errori
+	public void testContructorWithNoParam() {// questo test specifica che il costruttore non generi errori
 		TenToXConverterCore b1 = new TenToXConverterCore();
-		assert(true);
+		assert (true);
 	}
+
 	@Test
 	public void testConverter0() {
 		int n = 0;
@@ -31,7 +32,6 @@ public class TestTenToXCore extends TestConverterCore {
 		assertEquals("0", b1.convert(n));
 	}
 
-	
 	@Test
 	public void testConverter1() {
 		int n = 1;

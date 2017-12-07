@@ -11,14 +11,16 @@ public abstract class ConverterCore {
 		steps = new ArrayList<>();
 		setBase(base);
 	}
+
 	public ConverterCore() {
 		steps = new ArrayList<>();
 	}
 
-	public void setBase(int base ){
+	public void setBase(int base) {
 		checkBase(base);
 		this.base = base;
 	}
+
 	protected void checkBase(int base) {
 		if (base < 1) {
 			throw new IllegalArgumentException();

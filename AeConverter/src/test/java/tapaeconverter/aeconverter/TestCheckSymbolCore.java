@@ -106,13 +106,11 @@ public class TestCheckSymbolCore {
 		base = 1;
 		assertEquals(true, s1.checkBase(base));
 	}
-	
-	
+
 	// ################# End Test CheckBase ####################
-	
 
 	@Test
-	public void testSetDictionary(){
+	public void testSetDictionary() {
 		Map<String, Integer> dS;
 		dS = new HashMap<>();
 		dS.put("test", 1);

@@ -131,61 +131,62 @@ public class StepByStepGui extends BasePanel {
 
 		JLabel lblSecondStepConvert = new JLabel("Second step: Convert Number in Destination Base");
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap()
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout
+								.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(textPaneXtT, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-									.addGap(12)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnAllStepsXtT, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnForwardXtT, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnBackX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(textPaneXtT, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+										.addGap(12)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(btnAllStepsXtT, GroupLayout.PREFERRED_SIZE, 129,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnForwardXtT, GroupLayout.PREFERRED_SIZE, 129,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnBackX, GroupLayout.PREFERRED_SIZE, 129,
+														GroupLayout.PREFERRED_SIZE)))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(textPaneTtX, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnAllStepsTtX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnForwardTtX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnBackT, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))))
-							.addGap(28))
+										.addComponent(textPaneTtX, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(btnAllStepsTtX, GroupLayout.PREFERRED_SIZE, 129,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnForwardTtX, GroupLayout.PREFERRED_SIZE, 129,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(btnBackT, GroupLayout.PREFERRED_SIZE, 129,
+														GroupLayout.PREFERRED_SIZE))))
+								.addGap(28))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblFirstStepConvert, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(230, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblSecondStepConvert, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(95, Short.MAX_VALUE))))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblFirstStepConvert, GroupLayout.PREFERRED_SIZE, 291,
+										GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(230, Short.MAX_VALUE))
+						.addGroup(
+								groupLayout
+										.createSequentialGroup().addComponent(lblSecondStepConvert,
+												GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(95, Short.MAX_VALUE)))));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(lblFirstStepConvert, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnBackX)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnForwardXtT)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnAllStepsXtT))
-						.addComponent(textPaneXtT, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-					.addGap(18)
-					.addComponent(lblSecondStepConvert, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnBackT)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnForwardTtX)
-							.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-							.addComponent(btnAllStepsTtX))
-						.addComponent(textPaneTtX))
-					.addGap(34))
-		);
+						.addComponent(lblFirstStepConvert, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addComponent(btnBackX)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnForwardXtT)
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(btnAllStepsXtT))
+								.addComponent(textPaneXtT, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+						.addGap(18)
+						.addComponent(lblSecondStepConvert, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addComponent(btnBackT)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnForwardTtX)
+										.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+										.addComponent(btnAllStepsTtX))
+								.addComponent(textPaneTtX))
+						.addGap(34)));
 		setLayout(groupLayout);
 		setVisible(true);
 	}

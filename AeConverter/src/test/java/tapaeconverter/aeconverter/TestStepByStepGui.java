@@ -33,9 +33,6 @@ public class TestStepByStepGui extends TestBaseFrame {
 	@BeforeClass
 	public static void setUpOnce() {
 		FailOnThreadViolationRepaintManager.install();
-//	    Settings s1 = new Settings();
-//	    s1.delayBetweenEvents(1000); //default change this to change time between events
-//	    s1.timeoutToBeVisible(500);
 	}
 
 	@Before

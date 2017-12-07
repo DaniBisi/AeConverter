@@ -13,7 +13,6 @@ import tapaeconverter.aeconverter.HomeGui;
 
 public class TestHomeGui extends TestBaseFrame {
 
-
 	public TestHomeGui() {
 		super();
 	}

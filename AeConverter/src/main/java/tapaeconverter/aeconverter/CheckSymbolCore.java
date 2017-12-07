@@ -19,17 +19,18 @@ public class CheckSymbolCore {
 		for (int i = 0; i < strToCheck.length(); i++) {
 			digit = strToCheck.substring(i, i + 1);
 			Integer result = dictionarySym.get(digit);
-			if ((/* (!"0".equals(digit)) && */ result == null) || result >= base) {
+			if ((result == null) || result >= base) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	public void setDictionarySym(Map<String, Integer> dS){
+	public void setDictionarySym(Map<String, Integer> dS) {
 		dictionarySym = dS;
-		
+
 	}
+
 	protected boolean checkBase(int base) {
 		return base > 0 && base < 17;
 	}

@@ -77,8 +77,6 @@ public class TestIntegration {
 		frameFix.cleanUp();
 	}
 
-
-	
 	// ###################### XtoTen Part ############################
 	@Test
 	public void testBtnBackDisabletAtStart() {

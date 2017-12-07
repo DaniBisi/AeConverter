@@ -39,13 +39,12 @@ public class FrameGui extends JFrame {
 
 		JMenuItem mntmClose = new JMenuItem("Close");
 		mntmClose.setName("close");
-		mntmClose.addActionListener(arg0 -> 
-			dispose()
-		);
+		mntmClose.addActionListener(arg0 -> dispose());
 		file.add(mntmClose);
 
 		mntmBaseConversion.addActionListener(arg0 -> {
-			BaseConverterGui panelBaseConverter = new BaseConverterGui(new CheckSymbolCore(null), new XtoTenConverterCore(), new TenToXConverterCore());
+			BaseConverterGui panelBaseConverter = new BaseConverterGui(new CheckSymbolCore(null),
+					new XtoTenConverterCore(), new TenToXConverterCore());
 			getContentPane().remove(1);
 			getContentPane().add(panelBaseConverter);
 			resizeWindows(panelBaseConverter);

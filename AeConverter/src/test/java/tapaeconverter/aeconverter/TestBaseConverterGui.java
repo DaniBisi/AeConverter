@@ -6,7 +6,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
@@ -24,8 +23,6 @@ public class TestBaseConverterGui extends TestBaseFrame {
 	private TenToXConverterCore t1;
 	private CheckSymbolCore c1;
 
-		
-	
 	public TestBaseConverterGui() {
 		super();
 		x1 = mock(XtoTenConverterCore.class);
@@ -40,7 +37,7 @@ public class TestBaseConverterGui extends TestBaseFrame {
 
 	@Before
 	public void setUp() throws Exception {
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(c1,x1,t1), true));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(c1, x1, t1), true));
 		frameFix = new FrameFixture(frame);
 
 	}
@@ -67,11 +64,10 @@ public class TestBaseConverterGui extends TestBaseFrame {
 		frameFix.button("calc").requireDisabled();
 	}
 
-
 	@Test
 	public void testConversion() {
 
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(true,true,true);
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(true, true, true);
 		when(x1.deConvert(anyString())).thenReturn("5");
 		when(t1.convert(anyInt())).thenReturn("5");
 		frameFix.panel("baseConverter");
@@ -83,7 +79,7 @@ public class TestBaseConverterGui extends TestBaseFrame {
 	@Test
 	public void testClearTextPaneDisabledButton() {
 
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(true,true,true);
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(true, true, true);
 		frameFix.panel("baseConverter");
 		frameFix.textBox("number").enterText("103");
 		frameFix.textBox("number").pressAndReleaseKeys(8, 8, 8);
@@ -91,21 +87,19 @@ public class TestBaseConverterGui extends TestBaseFrame {
 		frameFix.button("calc").requireDisabled();
 	}
 
-
 	@Test
 	public void testEnabledButtonTextAfterChangeBase() {
 
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(false,false,false,false,true);
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(false, false, false, false, true);
 		frameFix.panel("baseConverter");
 		frameFix.textBox("number").enterText("FFFF");
 		frameFix.comboBox("baseStart").selectItem(14);
 		frameFix.button("calc").requireEnabled();
 	}
 
-
 	@Test
 	public void testStepByStepButtonChangePanel() {
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(true,true);	
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(true, true);
 		when(x1.deConvert(anyString())).thenReturn("2");
 		when(t1.convert(anyInt())).thenReturn("2");
 		frameFix.textBox("number").enterText("10");
@@ -119,21 +113,21 @@ public class TestBaseConverterGui extends TestBaseFrame {
 	// ##################### INTERACTION WITH LABEL ######################
 	@Test
 	public void testLabelChangeColorIfError() {
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(false);	
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(false);
 		frameFix.textBox("number").enterText("5");
 		frameFix.label("enterTheNumber").foreground().requireEqualTo(new Color(255, 0, 0));
 	}
 
 	@Test
 	public void testLabelChangeTextIfError() {
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(false);	
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(false);
 		frameFix.textBox("number").enterText("5");
 		frameFix.label("enterTheNumber").requireText("Number is not valid in selected base.");
 	}
 
 	@Test
 	public void testLabelTextReturnNormalIfErrorIsCorrected() {
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(false,true);	
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(false, true);
 		frameFix.textBox("number").enterText("5");
 		frameFix.textBox("number").pressAndReleaseKeys(8, 8, 8);
 		frameFix.label("enterTheNumber").requireText("Enter the number to convert");
@@ -141,7 +135,7 @@ public class TestBaseConverterGui extends TestBaseFrame {
 
 	@Test
 	public void testLabelColorReturnNormalIfErrorIsCorrected() {
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(false);	
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(false);
 		frameFix.textBox("number").enterText("5");
 		frameFix.textBox("number").pressAndReleaseKeys(8, 8, 8);
 		frameFix.label("enterTheNumber").foreground().requireEqualTo(new Color(0, 0, 0));
@@ -149,14 +143,14 @@ public class TestBaseConverterGui extends TestBaseFrame {
 
 	@Test
 	public void testLabelTextChangeWhenInsertNumber() {
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(true,true,true,true);	
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(true, true, true, true);
 		frameFix.textBox("number").enterText("1001");
 		frameFix.label("enterTheNumber").requireText("Click convert to continue...");
 	}
 
 	@Test
 	public void testLabelTextChangeAfterChangingBaseStart() {
-		when(c1.checkSymbols(anyString(),anyInt())).thenReturn(false,false,false,false,true);	
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(false, false, false, false, true);
 		frameFix.textBox("number").enterText("2002");
 		frameFix.comboBox("baseStart").selectItem(2);
 		frameFix.label("enterTheNumber").requireText("Click convert to continue...");
