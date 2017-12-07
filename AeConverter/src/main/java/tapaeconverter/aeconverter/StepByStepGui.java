@@ -1,10 +1,11 @@
 package tapaeconverter.aeconverter;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class StepByStepGui extends BasePanel {
 
@@ -19,30 +20,25 @@ public class StepByStepGui extends BasePanel {
 	 */
 	public StepByStepGui(XtoTenConverterCore x1, TenToXConverterCore t1) {
 		super();
+		setBounds(100, 100, 533, 347);
 		contStepByStep = 0;
 		contStepByStep2 = 0;
 		this.xToTen = x1;
 		this.tenToX = t1;
 		setName("stepByStep");
-		setLayout(null);
 
 		JButton btnBackX = new JButton("<<");
 		btnBackX.setName("btnBackX");
 		btnBackX.setEnabled(false);
-		btnBackX.setBounds(0, 33, 129, 25);
 
 		JButton btnForwardXtT = new JButton(">>");
-		btnForwardXtT.setBounds(157, 33, 129, 25);
 		btnForwardXtT.setName("btnForwardX");
 
 		JButton btnAllStepsXtT = new JButton("All Steps");
-		btnAllStepsXtT.setBounds(315, 33, 129, 25);
 		btnAllStepsXtT.setName("allStep");
 
 		JTextPane textPaneXtT = new JTextPane();
-		add(textPaneXtT);
 		textPaneXtT.setName("textPaneXtoTenResult");
-		textPaneXtT.setBounds(0, 61, 445, 82);
 		textPaneXtT.setAutoscrolls(true);
 
 		btnForwardXtT.addActionListener(arg0 -> {
@@ -56,35 +52,21 @@ public class StepByStepGui extends BasePanel {
 			btnBackX.setEnabled(true);
 		});
 
-		add(btnAllStepsXtT);
-		add(btnBackX);
-		add(btnForwardXtT);
-
 		JLabel lblFirstStepConvert = new JLabel("First step: Convert Number in base 10");
-		lblFirstStepConvert.setBounds(10, 0, 291, 25);
-		add(lblFirstStepConvert);
 
 		JButton btnBackT = new JButton("<<");
 
 		btnBackT.setName("btnBackT");
-		btnBackT.setBounds(0, 169, 129, 25);
 		btnBackT.setEnabled(false);
-		add(btnBackT);
 
 		JButton btnForwardTtX = new JButton(">>");
 		btnForwardTtX.setName("btnForwardT");
-		btnForwardTtX.setBounds(157, 169, 129, 25);
 
 		JButton btnAllStepsTtX = new JButton("All Steps");
-
-		btnAllStepsTtX.setBounds(315, 169, 129, 25);
 		btnAllStepsTtX.setName("allStepT");
-		add(btnAllStepsTtX);
 
 		JTextPane textPaneTtX = new JTextPane();
 		textPaneTtX.setName("textPaneTenToXResult");
-		textPaneTtX.setBounds(0, 198, 444, 82);
-		add(textPaneTtX);
 
 		btnBackT.addActionListener(arg0 -> {
 			String msg = textPaneTtX.getText();
@@ -135,8 +117,6 @@ public class StepByStepGui extends BasePanel {
 			btnBackX.setEnabled(true);
 			btnForwardXtT.setEnabled(false);
 		});
-
-		add(btnForwardTtX);
 		btnAllStepsTtX.addActionListener(arg0 -> {
 			StringBuilder s1 = new StringBuilder();
 			for (int i = 0; i < t1.getStepByStep().size(); i++) {
@@ -150,26 +130,63 @@ public class StepByStepGui extends BasePanel {
 		});
 
 		JLabel lblSecondStepConvert = new JLabel("Second step: Convert Number in Destination Base");
-		lblSecondStepConvert.setBounds(10, 138, 426, 25);
-		add(lblSecondStepConvert);
-
-		JButton btnBack = new JButton("Back");
-		btnBack.setName("back");
-		btnBack.addActionListener(arg0 -> {
-			BaseConverterGui p1 = new BaseConverterGui();
-			setAncestorPanel(btnBack, p1);
-		});
-		btnBack.setBounds(0, 283, 220, 77);
-		add(btnBack);
-
-		JButton btnClose = new JButton("Close");
-		btnClose.setName("close");
-		btnClose.addActionListener(arg0 -> {
-			JFrame ancestor = (JFrame) SwingUtilities.getWindowAncestor(btnClose);
-			ancestor.dispose();
-		});
-		btnClose.setBounds(224, 283, 220, 77);
-		add(btnClose);
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(textPaneXtT, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+									.addGap(12)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnAllStepsXtT, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnForwardXtT, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnBackX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(textPaneTtX, GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnAllStepsTtX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnForwardTtX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnBackT, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))))
+							.addGap(28))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblFirstStepConvert, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(230, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblSecondStepConvert, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(95, Short.MAX_VALUE))))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(lblFirstStepConvert, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnBackX)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnForwardXtT)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnAllStepsXtT))
+						.addComponent(textPaneXtT, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(lblSecondStepConvert, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnBackT)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnForwardTtX)
+							.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+							.addComponent(btnAllStepsTtX))
+						.addComponent(textPaneTtX))
+					.addGap(34))
+		);
+		setLayout(groupLayout);
 		setVisible(true);
 	}
 }

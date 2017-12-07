@@ -53,8 +53,7 @@ public class TestIntegration {
 		x1 = new XtoTenConverterCore(baseStart, new CheckSymbolCore(dictionarySym));
 		number = x1.deConvert(number);
 
-		int bounds[] = new int[] { 100, 180, 450, 410 };
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, null), bounds, true));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, null), true));
 		frameFix = new FrameFixture(frame);
 
 	}
@@ -64,17 +63,13 @@ public class TestIntegration {
 		t1 = new TenToXConverterCore(baseDest);
 		t1.convert(number);
 
-		int bounds[] = new int[] { 100, 180, 450, 410 };
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, t1), bounds, true));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, t1), true));
 		frameFix = new FrameFixture(frame);
-
 	}
 
 	private void initWithNoConverter() {
-		int bounds[] = new int[] { 100, 180, 450, 410 };
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, null), bounds, true));
+		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, null), true));
 		frameFix = new FrameFixture(frame);
-
 	}
 
 	@After
@@ -82,20 +77,8 @@ public class TestIntegration {
 		frameFix.cleanUp();
 	}
 
-	@Test
-	public void TestStepByStepBackButton() {
-		initWithNoConverter();
-		frameFix.button("back").click();
-		frameFix.panel("baseConverter").requireEnabled();
-	}
 
-	@Test
-	public void TestStepByStepCloseButton() {
-		initWithNoConverter();
-		frameFix.button("close").click();
-		frameFix.requireNotVisible();
-	}
-
+	
 	// ###################### XtoTen Part ############################
 	@Test
 	public void testBtnBackDisabletAtStart() {
@@ -218,10 +201,9 @@ public class TestIntegration {
 	// ###################### END XtoTen Part ############################
 
 	// ####################### TenToX Part ###############################
-
 	@Test
 	public void testBtnBackTDisabletAtStart() {
-		initWithTConverter(5, 1);
+		initWithNoConverter();
 		frameFix.button("btnBackT").requireDisabled();
 	}
 

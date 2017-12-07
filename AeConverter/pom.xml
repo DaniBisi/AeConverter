@@ -17,11 +17,11 @@
 		<sonar.language>java</sonar.language>
 		<sonar.jacoco.reportPath>${jacoco.data.file}</sonar.jacoco.reportPath>
 		<sonar.jacoco.itReportPath>${jacoco.data.it.file}</sonar.jacoco.itReportPath>
+		<sonar.coverage.exclusions>**/AeConverterGui*.*</sonar.coverage.exclusions>
 	</properties>
 	<build>
 		<pluginManagement>
 			<plugins>
-
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
@@ -89,6 +89,7 @@
 					</excludedClasses>
 					<skip>false</skip>
 					<reportsDirectory>${project.build.directory}/pit-custom-output-dir</reportsDirectory>
+					<timestampedReports>false</timestampedReports>
 					<sourceDataFormats>
 						<sourceDataFormat>HTML</sourceDataFormat>
 					</sourceDataFormats>
@@ -166,6 +167,7 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>2.7.10</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.assertj</groupId>

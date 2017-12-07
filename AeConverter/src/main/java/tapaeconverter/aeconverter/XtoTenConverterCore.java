@@ -17,6 +17,16 @@ public class XtoTenConverterCore extends ConverterCore {
 		BasicConfigurator.resetConfiguration();
 		BasicConfigurator.configure();
 	}
+	public XtoTenConverterCore(){
+		resultsB= new StringBuilder();
+		BasicConfigurator.resetConfiguration();
+		BasicConfigurator.configure();
+	}
+	
+	public void setField(int base, CheckSymbolCore c1){
+		setBase(base);
+		checkSymbol = c1;
+	}
 
 	public int getBase() {
 		return base;

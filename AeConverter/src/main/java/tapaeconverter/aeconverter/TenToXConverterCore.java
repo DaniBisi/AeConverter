@@ -11,6 +11,12 @@ public class TenToXConverterCore extends ConverterCore {
 		stepsB= new StringBuilder();
 		startIndex = 0;
 	}
+	
+	public TenToXConverterCore(){
+		r= new StringBuilder();
+		stepsB= new StringBuilder();
+		startIndex = 0;
+	}
 
 	public String convert(int n) {
 		int number = n;
@@ -22,7 +28,6 @@ public class TenToXConverterCore extends ConverterCore {
 			}
 		if (n == 0) {
 			r.insert(0, 0);
-//			stepsB.setLength(0);
 			stepsB.append(n);
 			stepsB.append("%");
 			stepsB.append(base);

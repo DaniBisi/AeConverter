@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 
-public class TestXtoTenCore {
+public class TestXtoTenCore extends TestConverterCore{
 	private XtoTenConverterCore b1;
 	private CheckSymbolCore c1;
 
@@ -95,9 +95,20 @@ public class TestXtoTenCore {
 	}
 
 	@Test
+	public void testSetFields(){
+		when(c1.checkSymbols(anyString(), anyInt())).thenReturn(true);
+		
+		this.b1 = new XtoTenConverterCore();
+		b1.setField(2, c1);
+		assertEquals(2, b1.getBase());
+	}
+	
+	
+	@Test
 	public void testGetBase() {
 		setUpBaseConverter(13, true);
 		assertEquals(13, b1.getBase());
-
 	}
+	
+	
 }
