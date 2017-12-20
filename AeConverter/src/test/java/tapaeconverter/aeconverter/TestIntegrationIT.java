@@ -1,5 +1,7 @@
 package tapaeconverter.aeconverter;
 
+import org.assertj.swing.core.BasicRobot;
+import org.assertj.swing.core.Robot;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
@@ -15,14 +17,14 @@ import tapaeconverter.aeconverter.XtoTenConverterCore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestIntegration {
+public class TestIntegrationIT {
 
 	private FrameFixture frameFix;
 	private XtoTenConverterCore x1;
 	private TenToXConverterCore t1;
 	private Map<String, Integer> dictionarySym;
 
-	public TestIntegration() {
+	public TestIntegrationIT() {
 		dictionarySym = new HashMap<String, Integer>();
 		dictionarySym.put("0", 0);
 		dictionarySym.put("1", 1);
@@ -47,13 +49,16 @@ public class TestIntegration {
 	public static void setUpOnce() {
 		FailOnThreadViolationRepaintManager.install();
 	}
-
+	
 	private void initWithXConverter(int baseStart, String number) {
 
 		x1 = new XtoTenConverterCore(baseStart, new CheckSymbolCore(dictionarySym));
 		number = x1.deConvert(number);
-
+//		Robot robot = BasicRobot.robotWithNewAwtHierarchy();
+//		robot.settings().delayBetweenEvents(100);
+//				
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, null), true));
+//		frameFix = new FrameFixture(robot, frame);
 		frameFix = new FrameFixture(frame);
 
 	}
