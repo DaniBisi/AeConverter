@@ -69,11 +69,13 @@ public class TestIntegrationIT {
 		t1.convert(number);
 
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, t1), true));
+		frame.setAlwaysOnTop(true);
 		frameFix = new FrameFixture(frame);
 	}
 
 	private void initWithNoConverter() {
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, null), true));
+		frame.setAlwaysOnTop(true);
 		frameFix = new FrameFixture(frame);
 	}
 

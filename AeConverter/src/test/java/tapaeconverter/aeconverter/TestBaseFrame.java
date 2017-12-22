@@ -7,6 +7,7 @@ public abstract class TestBaseFrame {
 
 	protected FrameFixture frameFix;
 
+	
 	@Test
 	public void testMenuFile() {
 		frameFix.menuItem("File").requireEnabled();

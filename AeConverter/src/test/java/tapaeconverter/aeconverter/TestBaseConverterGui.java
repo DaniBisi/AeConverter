@@ -38,6 +38,7 @@ public class TestBaseConverterGui extends TestBaseFrame {
 	@Before
 	public void setUp() throws Exception {
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new BaseConverterGui(c1, x1, t1), true));
+		frame.setAlwaysOnTop(true);
 		frameFix = new FrameFixture(frame);
 
 	}

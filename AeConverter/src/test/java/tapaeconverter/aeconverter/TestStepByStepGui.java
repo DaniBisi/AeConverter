@@ -38,6 +38,7 @@ public class TestStepByStepGui extends TestBaseFrame {
 	@Before
 	public void setUp() throws Exception {
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, t1), true));
+		frame.setAlwaysOnTop(true);
 		frameFix = new FrameFixture(frame);
 		frameFix.show();
 		r1 = new ArrayList<String>();
