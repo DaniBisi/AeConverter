@@ -17,12 +17,14 @@ import tapaeconverter.aeconverter.XtoTenConverterCore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestIntegrationIT {
 
+public class TestIntegrationIT {
+	private FrameGui frame;
 	private FrameFixture frameFix;
 	private XtoTenConverterCore x1;
 	private TenToXConverterCore t1;
 	private Map<String, Integer> dictionarySym;
+	private Robot robot;
 
 	public TestIntegrationIT() {
 		dictionarySym = new HashMap<String, Integer>();
@@ -42,25 +44,25 @@ public class TestIntegrationIT {
 		dictionarySym.put("D", 13);
 		dictionarySym.put("E", 14);
 		dictionarySym.put("F", 15);
-
+		robot = BasicRobot.robotWithNewAwtHierarchy();
+		robot.settings().eventPostingDelay(240);
+		robot.settings().delayBetweenEvents(240);
+		robot.finder().includeHierarchyIfComponentNotFound(false);
 	}
 
 	@BeforeClass
 	public static void setUpOnce() {
 		FailOnThreadViolationRepaintManager.install();
 	}
-	
+
 	private void initWithXConverter(int baseStart, String number) {
 
 		x1 = new XtoTenConverterCore(baseStart, new CheckSymbolCore(dictionarySym));
 		number = x1.deConvert(number);
-//		Robot robot = BasicRobot.robotWithNewAwtHierarchy();
-//		robot.settings().delayBetweenEvents(100);
-//				
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, null), true));
-//		frameFix = new FrameFixture(robot, frame);
-		frameFix = new FrameFixture(frame);
 
+		frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, null), true));
+		frame.setAlwaysOnTop(true);
+		frameFix = new FrameFixture(robot, frame);
 	}
 
 	private void initWithTConverter(int baseDest, int number) {
@@ -68,19 +70,20 @@ public class TestIntegrationIT {
 		t1 = new TenToXConverterCore(baseDest);
 		t1.convert(number);
 
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, t1), true));
+		frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, t1), true));
 		frame.setAlwaysOnTop(true);
-		frameFix = new FrameFixture(frame);
+		frameFix = new FrameFixture(robot, frame);
 	}
 
 	private void initWithNoConverter() {
-		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, null), true));
+		frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, null), true));
 		frame.setAlwaysOnTop(true);
-		frameFix = new FrameFixture(frame);
+		frameFix = new FrameFixture(robot, frame);
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		robot.cleanUp();
 		frameFix.cleanUp();
 	}
 
@@ -208,8 +211,10 @@ public class TestIntegrationIT {
 	// ####################### TenToX Part ###############################
 	@Test
 	public void testBtnBackTDisabletAtStart() {
+
 		initWithNoConverter();
 		frameFix.button("btnBackT").requireDisabled();
+
 	}
 
 	@Test
@@ -218,6 +223,7 @@ public class TestIntegrationIT {
 		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").requireEnabled();
+
 	}
 
 	@Test
@@ -226,6 +232,7 @@ public class TestIntegrationIT {
 		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("1%5 = 1\n");
+
 	}
 
 	@Test
@@ -235,17 +242,21 @@ public class TestIntegrationIT {
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("10%5 = 0\n2%5 = 2\n");
+
 	}
 
 	@Test
 	public void testForwardTButtonDisabledAfterShowAllSteps() {
+
 		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").requireDisabled();
+
 	}
 
 	@Test
 	public void testBackTButtonChangeTextPane() {
+
 		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
@@ -255,68 +266,84 @@ public class TestIntegrationIT {
 
 	@Test
 	public void testForwardTButtonDisabledMoreStep() {
+
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").requireDisabled();
+
 	}
 
 	@Test
 	public void testForwardTButtonAfterBackButtonx() {
+
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").requireDisabled();
+
 	}
 
 	@Test
 	public void testBackTButtonEnabledAfterOneStep() {
+
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
 		frameFix.button("btnBackT").requireEnabled();
+
 	}
 
 	@Test
 	public void testBackTButtonChangeTextPaneTwoString() {
+
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("10%5 = 0\n");
+
 	}
 
 	@Test
 	public void testBackTButtonChangeForwardStatus() {
+
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnForwardT").click();
 		frameFix.button("btnBackT").click();
 		frameFix.button("btnForwardT").requireEnabled();
+
 	}
 
 	@Test
 	public void testAllStepT() {
+
 		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
 		frameFix.textBox("textPaneTenToXResult").requireText("10%5 = 0\n2%5 = 2\n");
+
 	}
 
 	@Test
 	public void TestAllTStepChangeBtnBackStatus() {
+
 		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
 		frameFix.button("btnBackT").requireEnabled();
+
 	}
 
 	@Test
 	public void TestAllStepChangebtnForwardTStatus() {
+
 		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
 		frameFix.button("btnForwardT").requireDisabled();
+
 	}
 
 }

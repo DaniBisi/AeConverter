@@ -1,6 +1,5 @@
 package tapaeconverter.aeconverter;
 
-import org.assertj.swing.core.Settings;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
