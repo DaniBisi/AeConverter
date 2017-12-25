@@ -1,6 +1,7 @@
 package tapaeconverter.aeconverter;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class TestTenToXCore extends TestConverterCore {
 	@Test
 	public void testContructorWithNoParam() {// questo test specifica che il costruttore non generi errori
 		TenToXConverterCore b1 = new TenToXConverterCore();
-		assert (true);
+		assertNotNull(b1);
 	}
 
 	@Test
