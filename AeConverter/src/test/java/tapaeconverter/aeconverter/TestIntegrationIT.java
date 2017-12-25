@@ -14,7 +14,6 @@ import tapaeconverter.aeconverter.StepByStepGui;
 import tapaeconverter.aeconverter.TenToXConverterCore;
 import tapaeconverter.aeconverter.XtoTenConverterCore;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -211,7 +210,7 @@ public class TestIntegrationIT {
 
 	// ####################### TenToX Part ###############################
 	@Test
-	public void testBtnBackTDisabletAtStart() throws IOException {
+	public void testBtnBackTDisabletAtStart() {
 
 		initWithNoConverter();
 		frameFix.button("btnBackT").requireDisabled();
@@ -219,7 +218,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testForwardTButtonChangeBackButtonState() throws IOException {
+	public void testForwardTButtonChangeBackButtonState() {
 
 		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
@@ -228,7 +227,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testForwardTButtonChangeTextPane() throws IOException {
+	public void testForwardTButtonChangeTextPane() {
 
 		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
@@ -237,7 +236,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testForwardTButtonChangeTextPaneTwoString() throws IOException {
+	public void testForwardTButtonChangeTextPaneTwoString() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
@@ -247,7 +246,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testForwardTButtonDisabledAfterShowAllSteps() throws IOException {
+	public void testForwardTButtonDisabledAfterShowAllSteps() {
 
 		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
@@ -256,7 +255,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testBackTButtonChangeTextPane() throws IOException {
+	public void testBackTButtonChangeTextPane() {
 
 		initWithTConverter(5, 1);
 		frameFix.button("btnForwardT").click();
@@ -266,7 +265,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testForwardTButtonDisabledMoreStep() throws IOException {
+	public void testForwardTButtonDisabledMoreStep() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
@@ -276,7 +275,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testForwardTButtonAfterBackButtonx() throws IOException {
+	public void testForwardTButtonAfterBackButtonx() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
@@ -288,7 +287,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testBackTButtonEnabledAfterOneStep() throws IOException {
+	public void testBackTButtonEnabledAfterOneStep() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
@@ -299,7 +298,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testBackTButtonChangeTextPaneTwoString() throws IOException {
+	public void testBackTButtonChangeTextPaneTwoString() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
@@ -310,7 +309,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testBackTButtonChangeForwardStatus() throws IOException {
+	public void testBackTButtonChangeForwardStatus() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("btnForwardT").click();
@@ -321,7 +320,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void testAllStepT() throws IOException {
+	public void testAllStepT() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
@@ -330,7 +329,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void TestAllTStepChangeBtnBackStatus() throws IOException {
+	public void TestAllTStepChangeBtnBackStatus() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
@@ -339,7 +338,7 @@ public class TestIntegrationIT {
 	}
 
 	@Test
-	public void TestAllStepChangebtnForwardTStatus() throws IOException {
+	public void TestAllStepChangebtnForwardTStatus() {
 
 		initWithTConverter(5, 10);
 		frameFix.button("allStepT").click();
