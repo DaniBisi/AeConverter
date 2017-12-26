@@ -45,8 +45,8 @@ public class TestIntegrationIT {
 		dictionarySym.put("E", 14);
 		dictionarySym.put("F", 15);
 		robot = BasicRobot.robotWithNewAwtHierarchy();
-		robot.settings().eventPostingDelay(240);
-		robot.settings().delayBetweenEvents(240);
+		robot.settings().eventPostingDelay(100);
+		robot.settings().delayBetweenEvents(100);
 		robot.finder().includeHierarchyIfComponentNotFound(false);
 	}
 

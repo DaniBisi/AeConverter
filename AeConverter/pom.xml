@@ -16,7 +16,7 @@
 		<jacoco.report.path>${project.build.directory}/jacocout</jacoco.report.path>
 		<!-- For Integration tests -->
 		<jacoco.data.it.file>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.data.it.file>
-		<jacoco.report.it.path>${project.reporting.outputDirectory}/jacoco-it</jacoco.report.it.path>
+		<jacoco.report.it.path>${project.build.directory}/jacocoout-it</jacoco.report.it.path>
 		<sonar.language>java</sonar.language>
 		<sonar.jacoco.reportPath>${jacoco.data.file}</sonar.jacoco.reportPath>
 		<sonar.jacoco.itReportPath>${jacoco.data.it.file}</sonar.jacoco.itReportPath>
@@ -124,7 +124,8 @@
 							<dataFile>${jacoco.data.file}</dataFile>
 							<outputDirectory>${jacoco.report.path}</outputDirectory>
 						</configuration>
-					</execution><!-- For Integration Test -->
+					</execution>
+					<!-- For Integration Test -->
 					<execution>
 						<id>jacoco-pre-integration-test</id>
 						<phase>pre-integration-test</phase>
