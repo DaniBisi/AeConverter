@@ -21,6 +21,9 @@
 		<sonar.jacoco.reportPath>${jacoco.data.file}</sonar.jacoco.reportPath>
 		<sonar.jacoco.itReportPath>${jacoco.data.it.file}</sonar.jacoco.itReportPath>
 		<sonar.coverage.exclusions>**/AeConverterGui*.*</sonar.coverage.exclusions>
+		<sonar.issue.ignore.multicriteria>e12</sonar.issue.ignore.multicriteria>
+		<sonar.issue.ignore.multicriteria.e12.ruleKey>squid:MaximumInheritanceDepth</sonar.issue.ignore.multicriteria.e12.ruleKey>
+		<sonar.issue.ignore.multicriteria.e12.resourceKey>**/*.java</sonar.issue.ignore.multicriteria.e12.resourceKey>
 	</properties>
 	<build>
 		<pluginManagement>

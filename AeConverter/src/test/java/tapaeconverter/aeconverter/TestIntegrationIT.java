@@ -8,7 +8,6 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static java.util.concurrent.TimeUnit.*;
 
 import tapaeconverter.aeconverter.FrameGui;
 import tapaeconverter.aeconverter.StepByStepGui;
