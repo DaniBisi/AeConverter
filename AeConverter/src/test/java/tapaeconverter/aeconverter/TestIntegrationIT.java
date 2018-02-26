@@ -8,7 +8,6 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.awaitility.Awaitility.*;
 import static java.util.concurrent.TimeUnit.*;
 
 import tapaeconverter.aeconverter.FrameGui;
@@ -65,7 +64,7 @@ public class TestIntegrationIT {
 		frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(x1, null), true));
 		frame.setAlwaysOnTop(true);
 		frameFix = new FrameFixture(robot, frame);
-		await().atMost(5, SECONDS).until(()-> frameFix.isEnabled() == true);
+		frameFix.show();
 	}
 
 	private void initWithTConverter(int baseDest, int number) {
@@ -76,14 +75,14 @@ public class TestIntegrationIT {
 		frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, t1), true));
 		frame.setAlwaysOnTop(true);
 		frameFix = new FrameFixture(robot, frame);
-		await().atMost(5, SECONDS).until(()-> frameFix.isEnabled() == true);
+		frameFix.show();
 	}
 
 	private void initWithNoConverter() {
 		frame = GuiActionRunner.execute(() -> new FrameGui(new StepByStepGui(null, null), true));
 		frame.setAlwaysOnTop(true);
 		frameFix = new FrameFixture(robot, frame);
-		await().atMost(5, SECONDS).until(()-> frameFix.isEnabled() == true);
+		frameFix.show();
 	}
 
 	@After

@@ -27,6 +27,7 @@ public class TestHomeGui extends TestBaseFrame {
 		FrameGui frame = GuiActionRunner.execute(() -> new FrameGui(new HomeGui(), true));
 		frame.setAlwaysOnTop(true);
 		frameFix = new FrameFixture(frame);
+		frameFix.show();
 	}
 
 	@After
